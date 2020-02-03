@@ -92,6 +92,7 @@ public class AdminToolGUI {
         ItemStack adminHead = new ItemStack(PLAYER_HEAD);
         SkullMeta adminHeadM = (SkullMeta) adminHead.getItemMeta();
 
+        assert adminHeadM != null;
         adminHeadM.setOwningPlayer(p);
         adminHead.setItemMeta(adminHeadM);
         return adminHead;

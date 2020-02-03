@@ -38,6 +38,7 @@ public class Utils {
         lore.add("§5De KiipEuro om items in de Shop mee te kopen.");
         lore.add("Officieel KiipCraft Store Item.");
 
+        assert kiipEuroMeta != null;
         kiipEuroMeta.setDisplayName(Utils.chat("&6&l&oKiipEuro"));
         kiipEuroMeta.setLore(lore);
 
@@ -53,6 +54,7 @@ public class Utils {
         lore.add("§5De KiipEuro om items in de Shop mee te kopen.");
         lore.add("Officieel KiipCraft Store Item.");
 
+        assert kiipEuroMeta != null;
         kiipEuroMeta.setDisplayName(Utils.chat("&6&l&oKiipEuro"));
         kiipEuroMeta.setLore(lore);
 
@@ -69,6 +71,7 @@ public class Utils {
         lore.add("§5De Halloween Tokens van 2019.");
         lore.add("Officieel KiipCraft Store Item.");
 
+        assert kiipDollarMeta != null;
         kiipDollarMeta.setDisplayName(Utils.chat("&6&l&oKiipDollar"));
         kiipDollarMeta.setLore(lore);
 
@@ -85,6 +88,7 @@ public class Utils {
         lore.add("§5De Kerst Tokens van 2019.");
         lore.add("Officieel KiipCraft Store Item.");
 
+        assert kiipFrankM != null;
         kiipFrankM.setDisplayName(Utils.chat("&6&l&oKiipse Frank"));
         kiipFrankM.setLore(lore);
 
@@ -99,6 +103,7 @@ public class Utils {
         ArrayList<String> lore = new ArrayList<>();
         lore.add(Utils.chat("&7Opent het Events Menu"));
 
+        assert eventsToolM != null;
         eventsToolM.setDisplayName(Utils.chat("&3&lEvents Tool"));
         eventsToolM.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
         eventsToolM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -115,6 +120,7 @@ public class Utils {
         ArrayList<String> lore = new ArrayList<>();
         lore.add(Utils.chat("&7Opent het Admin Menu"));
 
+        assert adminToolM != null;
         adminToolM.setDisplayName(Utils.chat("&4&lAdmin Tool"));
         adminToolM.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
         adminToolM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -138,6 +144,7 @@ public class Utils {
         Field profileField = null;
 
         try {
+            assert grinchMaskM != null;
             profileField = grinchMaskM.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(grinchMaskM, profile);
@@ -163,6 +170,7 @@ public class Utils {
         Field profileField = null;
 
         try {
+            assert elfMaskM != null;
             profileField = elfMaskM.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(elfMaskM, profile);
@@ -188,6 +196,7 @@ public class Utils {
         Field profileField = null;
 
         try {
+            assert spMaskM != null;
             profileField = spMaskM.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(spMaskM, profile);
@@ -213,6 +222,7 @@ public class Utils {
         Field profileField = null;
 
         try {
+            assert rdMaskM != null;
             profileField = rdMaskM.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(rdMaskM, profile);
@@ -238,6 +248,7 @@ public class Utils {
         Field profileField = null;
 
         try {
+            assert scMaskM != null;
             profileField = scMaskM.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             profileField.set(scMaskM, profile);
@@ -253,6 +264,7 @@ public class Utils {
         ItemStack spleefSchep = new ItemStack(DIAMOND_SHOVEL, 1);
         ItemMeta schepMeta = spleefSchep.getItemMeta();
 
+        assert schepMeta != null;
         schepMeta.setDisplayName(Utils.chat("&b&lSpleefSchep"));
         schepMeta.addEnchant(Enchantment.DIG_SPEED, 50, true);
         schepMeta.addEnchant(Enchantment.DURABILITY, 100, true);
@@ -268,6 +280,7 @@ public class Utils {
         ArrayList<String> lore = new ArrayList<>();
         lore.add(Utils.chat("&7Deze levels zijn door &b" + XpBottleCommand.bottler + "&7 in dit flesje gestopt!"));
 
+        assert xpFlesjeM != null;
         xpFlesjeM.setDisplayName(Utils.chat("&aExperience Bottle &7(&9" + XpBottleCommand.amountGet + " Levels&7)"));
         xpFlesjeM.setColor(Color.fromRGB(128, 255, 32));
         xpFlesjeM.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, false);
@@ -289,6 +302,7 @@ public class Utils {
         item = new ItemStack(materialName, amount);
 
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(Utils.chat(displayName));
 
         item.setItemMeta(meta);
@@ -304,6 +318,7 @@ public class Utils {
         item = new ItemStack(materialName, amount);
 
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(Utils.chat(displayName));
 
         for (String s : loreString) {
@@ -316,13 +331,14 @@ public class Utils {
         return item;
     }
 
-    public static ItemStack createItemHead(Inventory inv, ItemStack stackName, int amount, int invSlot, String displayName, String... loreString) {
+    public static void createItemHead(Inventory inv, ItemStack stackName, int amount, int invSlot, String displayName, String... loreString) {
         ItemStack item;
         ArrayList<String> lore = new ArrayList<>();
 
         item = stackName;
 
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(Utils.chat(displayName));
 
         for (String s : loreString) {
@@ -332,6 +348,5 @@ public class Utils {
         meta.setLore(lore);
         item.setItemMeta(meta);
         inv.setItem(invSlot - 1, item);
-        return item;
     }
 }

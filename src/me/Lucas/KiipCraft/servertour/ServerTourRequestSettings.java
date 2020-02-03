@@ -81,6 +81,7 @@ public class ServerTourRequestSettings {
 
             World w = p.getWorld();
 
+            assert cs != null;
             p.teleport(new Location(w, cs.getDouble("X"), cs.getDouble("Y"), cs.getDouble("Z")));
             p.sendMessage(Utils.prefix + "Je teleporteert naar de locatie van de Warp van: §c" + warpName + "§7!");
         }

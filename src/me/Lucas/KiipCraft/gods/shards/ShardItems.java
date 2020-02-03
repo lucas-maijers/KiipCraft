@@ -13,6 +13,7 @@ public class ShardItems {
         ItemStack shard = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&c&lShard of &4&lFire"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
@@ -25,6 +26,7 @@ public class ShardItems {
         ItemStack shard = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&c&lShard of &1&lWater"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
@@ -37,6 +39,7 @@ public class ShardItems {
         ItemStack shard = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&c&lShard of &f&lAir"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
@@ -49,6 +52,7 @@ public class ShardItems {
         ItemStack shard = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&c&lShard of &6&lEarth"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
@@ -61,6 +65,7 @@ public class ShardItems {
         ItemStack shard = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&c&lShard of &b&lLight&e&lning"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
@@ -73,6 +78,7 @@ public class ShardItems {
         ItemStack shard = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&c&lShard of &e&lLight"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
@@ -85,6 +91,7 @@ public class ShardItems {
         ItemStack shard = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&c&lShard of &5&lDark&0&lness"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
@@ -97,6 +104,7 @@ public class ShardItems {
         ItemStack shard = new ItemStack(Material.PRISMARINE_SHARD);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&c&lShard of &a&lLife"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
