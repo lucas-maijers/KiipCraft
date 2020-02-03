@@ -27,7 +27,7 @@ public class AdminToolClick implements Listener {
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             if (p.getItemInHand().equals(Utils.adminTool()) && p.hasPermission("kiipcraft.admintool.use")) {
-                p.sendMessage(prefix + Utils.chat("Je opent het Admin Tool menu!"));
+                p.sendMessage(prefix + Utils.chat("Je opent het &4&lAdmin Tool Menu&7!"));
                 p.openInventory(AdminToolGUI.adminToolGUI(p));
             } else if (p.getItemInHand().equals(Utils.adminTool()) && !(p.hasPermission("kiipcraft.admintool.use"))) {
                 p.sendMessage(prefix + Utils.chat("Dat is niet de bedoeling, jij mag dit item niet gebruiken, hoe kom je hier eigenlijk aan?!"));

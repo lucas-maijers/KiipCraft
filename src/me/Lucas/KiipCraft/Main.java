@@ -66,8 +66,10 @@ public class Main extends JavaPlugin {
         new TheQuizUI(this);
         new VloerIsLavaUI(this);
         new ServerTourRequestsGUI(this);
+        // Admin Tool
         new AdminToolGUI(this);
         new AdminToolPlayersGUI(this);
+        new AdminToolShardsMenu(this);
 
         MainEventsUI.initialize();
         AnvilDropUI.initialize();
@@ -81,6 +83,7 @@ public class Main extends JavaPlugin {
         ServerTourRequestSettings.initialize();
         AdminToolGUI.initialize();
         AdminToolPlayersGUI.initialize();
+        AdminToolShardsMenu.initialize();
     }
 
     public void onDisable() {

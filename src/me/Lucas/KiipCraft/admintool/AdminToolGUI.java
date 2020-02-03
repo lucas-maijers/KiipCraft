@@ -82,6 +82,11 @@ public class AdminToolGUI {
             p.openInventory(AdminToolPlayersGUI.spelersMenu(p));
         }
 
+        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShards"))) {
+            p.sendMessage(prefix + Utils.chat("Je opent het &c&lShards Menu&7!"));
+            p.openInventory(AdminToolShardsMenu.shardsMenu(p));
+        }
+
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&cSluiten"))) {
             p.closeInventory();
