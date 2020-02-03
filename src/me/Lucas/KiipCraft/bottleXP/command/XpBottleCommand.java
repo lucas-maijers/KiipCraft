@@ -1,4 +1,4 @@
-package me.Lucas.KiipCraft.commands;
+package me.Lucas.KiipCraft.bottleXP.command;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.utils.Utils;

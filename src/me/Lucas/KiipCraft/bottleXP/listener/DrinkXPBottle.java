@@ -1,7 +1,7 @@
-package me.Lucas.KiipCraft.listeners;
+package me.Lucas.KiipCraft.bottleXP.listener;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.commands.XpBottleCommand;
+import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;

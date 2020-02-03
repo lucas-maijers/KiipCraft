@@ -2,8 +2,8 @@ package me.Lucas.KiipCraft.utils;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
 import me.Lucas.KiipCraft.outofuse.commands.KiipEuroCommand;
-import me.Lucas.KiipCraft.commands.XpBottleCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;

@@ -1,4 +1,4 @@
-package me.Lucas.KiipCraft.listeners;
+package me.Lucas.KiipCraft.events.listener;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.events.ui.*;

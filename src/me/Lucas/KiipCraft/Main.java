@@ -1,18 +1,18 @@
 package me.Lucas.KiipCraft;
 
 import me.Lucas.KiipCraft.admintool.*;
+import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
+import me.Lucas.KiipCraft.bottleXP.listener.DrinkXPBottle;
 import me.Lucas.KiipCraft.commands.KiipCraftCommand;
 import me.Lucas.KiipCraft.commands.UpdateCommand;
-import me.Lucas.KiipCraft.commands.XpBottleCommand;
 import me.Lucas.KiipCraft.events.command.EventsToolCommand;
 import me.Lucas.KiipCraft.events.command.GUICommand;
 import me.Lucas.KiipCraft.events.listener.EventsToolClick;
+import me.Lucas.KiipCraft.events.listener.InventoryClickListener;
 import me.Lucas.KiipCraft.events.ui.*;
 import me.Lucas.KiipCraft.roleplay.commands.CloudCommand;
 import me.Lucas.KiipCraft.roleplay.commands.ShardCommand;
 import me.Lucas.KiipCraft.roleplay.listeners.FlyCloud;
-import me.Lucas.KiipCraft.listeners.DrinkXPBottle;
-import me.Lucas.KiipCraft.listeners.InventoryClickListener;
 import me.Lucas.KiipCraft.servertour.ServerTourCommand;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestSettings;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestsGUI;
