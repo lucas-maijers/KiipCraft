@@ -64,11 +64,10 @@ public class TheQuizUI {
         BukkitScheduler scheduler = getServer().getScheduler();
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&1&lBlauw"))) {
-            p.sendMessage(prefix + "Je haalt §4§lRood §7weg.");
             dispatchCommand(getConsoleSender(), "fill -1525 157 -3296 -1550 157 -3271 air replace red_wool");
 
             for (Player plr : getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft §c§lRood §7weggehaald bij §6§lThe Quiz§7!");
                 }
             }
@@ -77,11 +76,10 @@ public class TheQuizUI {
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lRood"))) {
-            p.sendMessage(prefix + "Je haalt §1§lBlauw §7weg.");
             dispatchCommand(getConsoleSender(), "fill -1549 157 -3273 -1524 157 -3284 air replace blue_wool");
 
             for (Player plr : getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft §1§lBlauw §fweggehaald bij §6§lThe Quiz§7!");
                 }
             }

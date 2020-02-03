@@ -60,25 +60,23 @@ public class AnvilDropUI {
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&2&lStart"))) {
-            p.sendMessage(prefix + "Je hebt de §6§lAnvil Drop §agestart§7!");
             dispatchCommand(getConsoleSender(), "clone -1350 51 -3327 -1374 56 -3303 -1412 199 -3281 replace");
             p.closeInventory();
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lAnvil Drop §agestart§7!");
                 }
             }
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lStop"))) {
-            p.sendMessage(prefix + "Je hebt de §6§lAnvil Drop §cgestopt7f!");
             dispatchCommand(getConsoleSender(), "clone -1318 45 -3327 -1294 50 -3303 -1412 199 -3281");
             dispatchCommand(getConsoleSender(), "fill -1411 180 -3281 -1389 187 -3259 air replace chipped_anvil");
             p.closeInventory();
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lAnvil Drop §cgestopt§7!");
                 }
             }

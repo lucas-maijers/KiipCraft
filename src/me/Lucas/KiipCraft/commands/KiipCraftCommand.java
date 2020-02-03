@@ -30,11 +30,11 @@ public class KiipCraftCommand implements CommandExecutor {
             p.sendMessage("§7- §3/shop §7| §fOpent de Events shop.");
             p.sendMessage("§7- §3/eventshop §7| §fZie /shop.");
             // Al heb je Donateurs Permissies
-            if (p.hasPermission("kiipcraft.help.donator") || p.getName().equals("Thunderkookie15")) {
+            if (p.hasPermission("kiipcraft.help.donator")) {
                 p.sendMessage("§7- §3/bottlexp [levels] §7| §fStopt je XP in een flesje.");
             }
             // Staff Permissies
-            if (p.hasPermission("kiipcraft.help.all") || p.getName().equals("Thunderkookie15")) {
+            if (p.hasPermission("kiipcraft.help.all")) {
                 p.sendMessage("§7- §3/events §7| §fOpent het Events menu.");
                 p.sendMessage("§7- §3/eventsadmin §7| §fZie /events.");
                 p.sendMessage("§7- §3/eventstool §7| §fGeeft je de Events Tool.");

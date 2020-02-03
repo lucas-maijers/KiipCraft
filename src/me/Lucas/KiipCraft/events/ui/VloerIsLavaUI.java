@@ -83,26 +83,24 @@ public class VloerIsLavaUI {
 
         // PvP
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lPvP aan"))) {
-            p.sendMessage(prefix + "Je hebt de §6§lVloer Is Lava PvP §aaangezet§7!");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival pvp pvp allow");
             pvp = true;
             p.openInventory(VloerIsLavaUI.vloerislavaGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lVloer Is Lava PvP §aaangezet§7!");
                 }
             }
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lPvP uit"))) {
-            p.sendMessage(prefix + "Je hebt de §6§lVloer Is Lava PvP §cuitgezet§7!");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival pvp pvp deny");
             pvp = false;
             p.openInventory(VloerIsLavaUI.vloerislavaGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lVloer Is Lava PvP §cuitgezet§7!");
                 }
             }
@@ -111,26 +109,24 @@ public class VloerIsLavaUI {
 
         // Chunks
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lChunks aan"))) {
-            p.sendMessage(prefix + "Je hebt de §6§lChunks §aaangezet§f!");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival spawn chunk-unload deny");
             chunks = true;
             p.openInventory(VloerIsLavaUI.vloerislavaGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lChunks §aaangezet§7!");
                 }
             }
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lChunks uit"))) {
-            p.sendMessage(prefix + "Je hebt de §6§lChunks §cuitgezet§7!");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival spawn chunk-unload allow");
             chunks = false;
             p.openInventory(VloerIsLavaUI.vloerislavaGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lChunks §cuitgezet§7!");
                 }
             }
@@ -138,11 +134,10 @@ public class VloerIsLavaUI {
         /*                                               */
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lPlaats Lava"))) {
-            p.sendMessage(prefix + "Je maakt de vloer van §6§lLava§7!");
             int randomRotsen = (int) Math.floor(Math.random() * 3) + 1;
 
             for (Player plr : getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de Vloer van §6§lLava §7gemaakt!");
                 }
             }

@@ -69,7 +69,6 @@ public class BuildBattleUI {
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lBouwen aan"))) {
-            p.sendMessage(prefix + "Je hebt §6§lBouwen §aaangezet§7!");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen block-place -w Survival allow");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen2 block-place -w Survival allow");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen block-break -w Survival allow");
@@ -78,14 +77,13 @@ public class BuildBattleUI {
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft §6§lBouwen §aaangezet §7bij Build Battle!");
                 }
             }
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lBouwen uit"))) {
-            p.sendMessage(prefix + "Je hebt §6§lBouwen §cuitgezet§7!");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen block-place -w Survival deny");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen2 block-place -w Survival deny");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen block-break -w Survival deny");
@@ -94,20 +92,19 @@ public class BuildBattleUI {
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft §6§lBouwen §cuitgezet §7bij Build Battle!");
                 }
             }
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lVerwijder muur"))) {
-            p.sendMessage(prefix + "Je hebt de §6§lMuur §cverwijderd§f!");
             dispatchCommand(getConsoleSender(), "fill -1382 167 -3335 -1382 183 -3311 air");
             muur = false;
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lMuur§7 bij Build Battle §cverwijderd§7!");
                 }
             }
@@ -115,24 +112,22 @@ public class BuildBattleUI {
 
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lPlaats muur"))) {
-            p.sendMessage(prefix + "Je hebt de §6§lMuur §ageplaatst§7!");
             dispatchCommand(getConsoleSender(), "clone -1389 51 -3403 -1389 35 -3379 -1382 167 -3335 replace force");
             muur = true;
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lMuur§7 bij Build Battle §ageplaatst§7!");
                 }
             }
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lReset bouwgebied"))) {
-            p.sendMessage(prefix + "Je §c§lReset§7 het §6§lbouwgebied§7!");
             dispatchCommand(getConsoleSender(), "clone -1405 36 -3360 -1379 50 -3335 -1395 166 -3335 replace");
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft het §6§lBouwgebied §cgereset§7!");
                 }
             }

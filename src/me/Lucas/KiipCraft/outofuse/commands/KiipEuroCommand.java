@@ -1,4 +1,4 @@
-package me.Lucas.KiipCraft.commands;
+package me.Lucas.KiipCraft.outofuse.commands;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.utils.Utils;
@@ -46,7 +46,7 @@ public class KiipEuroCommand implements CommandExecutor {
             aantalKiipEuros = defaultAmount;
         }
 
-        if (p.hasPermission("kiipcraft.kiipeuro") || p.getName().equals("Thunderkookie15")) {
+        if (p.hasPermission("kiipcraft.kiipeuro")) {
             p.sendMessage(prefix + "Oh, Kijk nou toch, je hebt de §6§lAlmachtige KiipEuro's §7gekregen!");
             p.getInventory().addItem(Utils.kiipEuro());
             return true;

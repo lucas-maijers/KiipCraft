@@ -9,8 +9,6 @@ commands:
   eventsadmin:
     aliases: [events]
     description: Open de EventsGUI voor de events!
-  kiipeuro:
-    description: Spawnt de Almachtige KiipEuros!
   kiipcraft:
     description: Laat de plugin commands zien.
   bottlexp:

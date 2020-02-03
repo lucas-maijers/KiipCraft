@@ -2,7 +2,6 @@ package me.Lucas.KiipCraft;
 
 import me.Lucas.KiipCraft.admintool.*;
 import me.Lucas.KiipCraft.commands.KiipCraftCommand;
-import me.Lucas.KiipCraft.commands.KiipEuroCommand;
 import me.Lucas.KiipCraft.commands.UpdateCommand;
 import me.Lucas.KiipCraft.commands.XpBottleCommand;
 import me.Lucas.KiipCraft.events.command.EventsToolCommand;
@@ -41,7 +40,6 @@ public class Main extends JavaPlugin {
 
         // Commands
         new GUICommand(this);
-        new KiipEuroCommand(this);
         new KiipCraftCommand(this);
         new XpBottleCommand(this);
         new EventsToolCommand(this);

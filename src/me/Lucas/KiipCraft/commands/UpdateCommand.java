@@ -40,7 +40,7 @@ public class UpdateCommand implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        if (p.hasPermission("kiipcraft.update") || p.getName().equals("Thunderkookie15")) {
+        if (p.hasPermission("kiipcraft.update")) {
             sender.sendMessage(prefix + "Checken voor KiipCraft plugin updates.");
             SpigotPluginUpdater spu = new SpigotPluginUpdater(plugin, "http://51.68.47.8/pluginupdate/plugin.html");
 

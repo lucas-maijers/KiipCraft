@@ -62,14 +62,8 @@ public class SpleefUI {
 
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&b&lSpleef Schep"))) {
-            if (!schepGegeven) {
-                p.sendMessage(Utils.chat(prefix + "Je hebt iedereen bij de &6&lSpleef&7 een &b&lSpleefSchep&7 gegeven!"));
-            } else {
-                p.sendMessage(Utils.chat(prefix + "Je hebt iedereen bij de &6&lSpleef&7 zijn &b&lSpleefSchep&7 afgenomen!"));
-            }
-
             for (Player plr : getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     if (!schepGegeven) {
                         plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft iedereen bij de §6§lSpleef §7een §b§lSpleefSchep §7gegeven!");
                     } else {
@@ -106,23 +100,21 @@ public class SpleefUI {
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&2&lStart"))) {
-            p.sendMessage(prefix + "Je hebt het §6§lSpleef Event §agestart§7!");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival spleef1 block-break allow");
 
             for (Player plr : getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft het §6§lSpleef Event §agestart§7!");
                 }
             }
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lStop"))) {
-            p.sendMessage(prefix + "Je hebt het §6§lSpleef Event §cgestopt§7!");
             dispatchCommand(getConsoleSender(), "rg flag -w Survival spleef1 block-break deny");
             dispatchCommand(getConsoleSender(), "clone -1375 44 -3332 -1352 44 -3309 -1408 175 -3227");
 
             for (Player plr : getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage") || plr.getName().equals("Thunderkookie15")) {
+                if (plr.hasPermission("kiipcraft.infomessage")) {
                     plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft het §6§lSpleef Event §cgestopt§7!");
                 }
             }

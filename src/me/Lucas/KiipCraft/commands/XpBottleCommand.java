@@ -67,7 +67,7 @@ public class XpBottleCommand implements CommandExecutor {
             return true;
         }
 
-        if (p.hasPermission("kiipcraft.donator") || p.getName().equals("Thunderkookie15")) {
+        if (p.hasPermission("kiipcraft.donator")) {
             if (amount > p.getLevel()) {
                 p.sendMessage(prefix + "Helaas, het ingevoerde aantal levels heb jij niet, je komt §a" + (amount - p.getLevel()) + " Levels §7te kort.");
                 return true;

@@ -62,12 +62,6 @@ public class MainEventsUI {
         // Build Battle
         Utils.createItemLore(inv, CRAFTING_TABLE, 1, 16, "&6&lBuild Battle", "&7Build Battle Controls!");
 
-        // KiipEuro's
-        if (p.hasPermission("kiipcraft.kiipeuro") || p.getName().equals("Thunderkookie15")) {
-            Utils.createItemLore(inv, IRON_NUGGET, 1, 17, "&6&l&oKiipEuro", "&7Geeft je de Almachtige KiipEuros!");
-        } else if (inv.contains(IRON_NUGGET)) {
-            inv.remove(IRON_NUGGET);
-        }
         // Close GUI
         Utils.createItem(inv, BARRIER, 1, 32, "&cSluiten");
 
@@ -106,20 +100,6 @@ public class MainEventsUI {
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lBuild Battle"))) {
             p.sendMessage(prefix + "Je opent de §6§lBuild Battle Controls§7...");
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
-        }
-        // KiipEuros
-        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&l&oKiipEuro"))) {
-            if (p.hasPermission("kiipcraft.kiipeuro") || p.getName().equals("Thunderkookie15")) {
-                p.getInventory().addItem(Utils.kiipEuroAdmin());
-
-                for (Player plr : Bukkit.getOnlinePlayers()) {
-                    if (plr.hasPermission("kiipcraft.kiipeuro") || plr.getName().equals("Thunderkookie15")) {
-                        plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft zichzelf §6§lKiipEuros §7gegeven.");
-                    }
-                }
-            } else {
-                return;
-            }
         }
 
         // Close GUI

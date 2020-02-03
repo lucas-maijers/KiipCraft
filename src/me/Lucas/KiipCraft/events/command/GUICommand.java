@@ -28,7 +28,7 @@ public class GUICommand implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        if (p.hasPermission("kiipcraft.events") || p.getName().equals("Thunderkookie15")) {
+        if (p.hasPermission("kiipcraft.events")) {
             p.sendMessage(prefix + "Bezig met het openen van de §3§lEventsAdmin GUI§7...");
             p.openInventory(MainEventsUI.mainGUI(p));
             return true;

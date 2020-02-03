@@ -29,7 +29,7 @@ public class EventsToolCommand implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        if (p.hasPermission("kiipcraft.events") || p.getName().equals("Thunderkookie15")) {
+        if (p.hasPermission("kiipcraft.eventstool")) {
             if (!(p.getInventory().contains(eventsTool()))) {
                 p.sendMessage(prefix + "Je hebt de §3§lEvents Tool §7gekregen.");
                 p.getInventory().addItem(eventsTool());
