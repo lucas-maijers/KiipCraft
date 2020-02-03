@@ -1,0 +1,29 @@
+name: KiipCraft
+version: 1.3
+author: Thunderkookie15
+main: me.Lucas.KiipCraft.Main
+api-version: 1.15
+description: De KiipCraft plugin voor de Shops en Events.
+
+commands:
+  eventsadmin:
+    aliases: [events]
+    description: Open de EventsGUI voor de events!
+  kiipeuro:
+    description: Spawnt de Almachtige KiipEuros!
+  kiipcraft:
+    description: Laat de plugin commands zien.
+  bottlexp:
+    description: Zet een aantal levels in een XP bottle.
+  eventstool:
+    description: Geeft je de Events Tool.
+  kiipcraftupdate:
+    description: Checked de plugin voor updates.
+  flycloud:
+    description: Zet de flycloud aan
+  servertour:
+    description: Maakt een warp voor de servertour.
+  admintool:
+    description: Geeft je de Admin Tool.
+  shard:
+    description: Geeft je een Shard.

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="KiipCraft:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/KiipCraft_jar</output-path>
+    <root id="archive" name="KiipCraft.jar">
+      <element id="module-output" name="KiipCraft" />
+    </root>
+  </artifact>
+</component>
