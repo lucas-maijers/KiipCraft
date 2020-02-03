@@ -49,9 +49,7 @@ public class SpigotPluginUpdater {
     }
 
     public boolean needsUpdate() {
-        if (this.canceled) {
-            return false;
-        } else {
+        if (!this.canceled) {
             try {
                 URLConnection con = this.url.openConnection();
                 InputStream _in = con.getInputStream();
@@ -75,8 +73,8 @@ public class SpigotPluginUpdater {
                 this.plugin.getLogger().log(Level.WARNING, "Error: ", var6);
             }
 
-            return false;
         }
+        return false;
     }
 
     public boolean newVersionAvailiable(String oldv, String newv) {
@@ -92,9 +90,7 @@ public class SpigotPluginUpdater {
                     return true;
                 }
 
-                if (newvnum == vnum && newvsec > vsec) {
-                    return true;
-                }
+                return newvnum == vnum && newvsec > vsec;
             }
         }
 
@@ -176,6 +172,7 @@ public class SpigotPluginUpdater {
                 this.plugin.getLogger().log(Level.INFO, "To install the new features you have to restart your server!");
             }
         } catch (IOException var10) {
+            var10.printStackTrace();
         }
 
     }
