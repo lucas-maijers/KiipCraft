@@ -1,4 +1,4 @@
-package me.Lucas.KiipCraft.gods.shards;
+package me.Lucas.KiipCraft.roleplay.shards;
 
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Material;

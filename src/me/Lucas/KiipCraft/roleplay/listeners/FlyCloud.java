@@ -1,7 +1,7 @@
-package me.Lucas.KiipCraft.gods.listeners;
+package me.Lucas.KiipCraft.roleplay.listeners;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.gods.commands.CloudCommand;
+import me.Lucas.KiipCraft.roleplay.commands.CloudCommand;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

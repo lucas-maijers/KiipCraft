@@ -1,4 +1,4 @@
-package me.Lucas.KiipCraft.gods.commands;
+package me.Lucas.KiipCraft.roleplay.commands;
 
 import me.Lucas.KiipCraft.Main;
 import org.bukkit.Bukkit;

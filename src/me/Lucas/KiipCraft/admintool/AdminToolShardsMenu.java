@@ -1,7 +1,7 @@
 package me.Lucas.KiipCraft.admintool;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.gods.shards.ShardItems;
+import me.Lucas.KiipCraft.roleplay.shards.ShardItems;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

@@ -1,7 +1,7 @@
-package me.Lucas.KiipCraft.gods.commands;
+package me.Lucas.KiipCraft.roleplay.commands;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.gods.shards.ShardItems;
+import me.Lucas.KiipCraft.roleplay.shards.ShardItems;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
