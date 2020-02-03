@@ -37,7 +37,7 @@ public class ShardCommand implements CommandExecutor {
                 p.sendMessage(prefix + Utils.chat("Geldige namen zijn: fire, water, air, earth, lightning, light, darkness, life"));
                 return true;
             }
-            switch (args[0]) {
+            switch (args[0].toLowerCase()) {
                 case "fire":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &4&lFire&7!"));
                     p.getInventory().addItem(ShardItems.fireShard());
