@@ -3,12 +3,15 @@ package me.Lucas.KiipCraft.admintool;
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import static me.Lucas.KiipCraft.utils.Utils.adminTool;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class AdminToolClick implements Listener {
@@ -33,6 +36,17 @@ public class AdminToolClick implements Listener {
                 p.sendMessage(prefix + Utils.chat("Dat is niet de bedoeling, jij mag dit item niet gebruiken, hoe kom je hier eigenlijk aan?!"));
                 p.getInventory().remove(Utils.adminTool());
             }
+        }
+    }
+
+    @EventHandler
+    public void dropAdminTool(PlayerDropItemEvent e) {
+        Player p = e.getPlayer();
+        Item i = e.getItemDrop();
+
+        if (i.getItemStack().equals(adminTool())) {
+            p.sendMessage(prefix + "Helaas, je kan dit item niet droppen.");
+            e.setCancelled(true);
         }
     }
 }

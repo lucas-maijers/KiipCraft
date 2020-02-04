@@ -70,6 +70,7 @@ public class Main extends JavaPlugin {
         new AdminToolGUI(this);
         new AdminToolPlayersGUI(this);
         new AdminToolShardsMenu(this);
+        new AdminToolPlayerSettings(this);
 
         MainEventsUI.initialize();
         AnvilDropUI.initialize();

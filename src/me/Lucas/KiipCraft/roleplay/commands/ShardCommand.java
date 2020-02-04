@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class ShardCommand implements CommandExecutor {
@@ -75,7 +76,7 @@ public class ShardCommand implements CommandExecutor {
                     return true;
             }
         } else {
-            p.sendMessage(prefix + "Sorry, maar jij mag dit commando niet gebruiken!");
+            p.sendMessage(noPermission);
         }
         return false;
     }

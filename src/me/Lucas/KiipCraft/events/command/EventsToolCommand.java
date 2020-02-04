@@ -6,8 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static me.Lucas.KiipCraft.utils.Utils.eventsTool;
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
+import static me.Lucas.KiipCraft.utils.Utils.*;
 
 public class EventsToolCommand implements CommandExecutor {
 
@@ -40,7 +39,7 @@ public class EventsToolCommand implements CommandExecutor {
                 return true;
             }
         } else {
-            p.sendMessage(prefix + "Dat is nou jammer, jij mag dit commando niet uitvoeren.");
+            p.sendMessage(noPermission);
         }
         return false;
     }

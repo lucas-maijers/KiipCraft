@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import java.util.HashSet;
 import java.util.Set;
 
+import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class XpBottleCommand implements CommandExecutor {
@@ -86,7 +87,7 @@ public class XpBottleCommand implements CommandExecutor {
             }
             return true;
         } else {
-            p.sendMessage(prefix + "Dat is nou jammer, jij mag dit commando niet uitvoeren.");
+            p.sendMessage(noPermission);
         }
         return false;
     }

@@ -50,5 +50,15 @@ public class AdminToolGUIClick implements Listener {
                 AdminToolShardsMenu.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
             }
         }
+
+        if (title.equals(AdminToolPlayerSettings.inv_name)) {
+            e.setCancelled(true);
+            if (e.getCurrentItem() == null) {
+                return;
+            }
+            if (title.equals(AdminToolPlayerSettings.inv_name)) {
+                AdminToolPlayerSettings.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
+            }
+        }
     }
 }

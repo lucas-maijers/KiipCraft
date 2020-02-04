@@ -30,6 +30,8 @@ public class Utils {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
 
+    public static String noPermission = prefix + chat("Helaas, jij mag dit commando niet uitvoeren!");
+
     public static ItemStack kiipEuro() {
         ItemStack kiipEuro = new ItemStack(IRON_NUGGET, KiipEuroCommand.aantalKiipEuros);
         ItemMeta kiipEuroMeta = kiipEuro.getItemMeta();

@@ -11,6 +11,7 @@ import org.bukkit.plugin.Plugin;
 import java.util.HashSet;
 import java.util.Set;
 
+import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class CloudCommand implements CommandExecutor {
@@ -47,7 +48,7 @@ public class CloudCommand implements CommandExecutor {
             Bukkit.getScheduler().cancelTasks((Plugin) pl);
             return true;
         } else {
-            p.sendMessage(prefix + "Helaas, jij mag dit commando niet uitvoeren");
+            p.sendMessage(noPermission);
         }
 
         return false;

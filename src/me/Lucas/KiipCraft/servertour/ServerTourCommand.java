@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 
+import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class ServerTourCommand implements CommandExecutor {
@@ -61,7 +62,7 @@ public class ServerTourCommand implements CommandExecutor {
                 p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
                 return true;
             } else {
-                p.sendMessage(prefix + "Sorry, jij mag dit commando niet gebruiken.");
+                p.sendMessage(noPermission);
             }
             return true;
         }

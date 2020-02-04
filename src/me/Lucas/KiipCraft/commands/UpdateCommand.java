@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class UpdateCommand implements CommandExecutor {
@@ -54,7 +55,7 @@ public class UpdateCommand implements CommandExecutor {
             }
             return true;
         } else {
-            p.sendMessage(prefix + "Dat is nou jammer, jij mag dit commando niet uitvoeren.");
+            p.sendMessage(noPermission);
         }
         return false;
     }

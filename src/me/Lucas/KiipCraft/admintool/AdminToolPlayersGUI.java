@@ -18,6 +18,8 @@ public class AdminToolPlayersGUI {
     private static int row_now = 5;
     public static int inv_rows = row_now * 9;
 
+    public static Player plrData = null;
+
     public AdminToolPlayersGUI(Main plugin) {
         AdminToolPlayersGUI.plugin = plugin;
     }
@@ -45,7 +47,7 @@ public class AdminToolPlayersGUI {
             if (plr.getName().equals(p.getName())) {
                 Utils.createItemHead(inv, playerHead(plr), 1, i, "&6&l" + plr.getName(), " ", "&c&lHealth: &c" + plr.getHealth(), "&b&lX: &a" + plr.getLocation().getX(), "&b&lY: &a" + plr.getLocation().getY(), "&b&lZ: &a" + plr.getLocation().getZ(), " ", "&5Dit ben jij zelf!");
             } else {
-                Utils.createItemHead(inv, playerHead(plr), 1, i, "&6&l" + plr.getName(), " ", "&c&lHealth: &c" + plr.getHealth(), "&b&lX: &a" + plr.getLocation().getX(), "&b&lY: &a" + plr.getLocation().getY(), "&b&lZ: &a" + plr.getLocation().getZ(), " ", "&5Klik om de inventaris van deze speler te openen.");
+                Utils.createItemHead(inv, playerHead(plr), 1, i, "&6&l" + plr.getName(), " ", "&c&lHealth: &c" + plr.getHealth(), "&b&lX: &a" + plr.getLocation().getX(), "&b&lY: &a" + plr.getLocation().getY(), "&b&lZ: &a" + plr.getLocation().getZ(), " ", "&5Klik om instellingen voor deze speler te openen.");
             }
             i++;
         }
@@ -62,7 +64,9 @@ public class AdminToolPlayersGUI {
 
         for (Player plr : Bukkit.getOnlinePlayers()) {
             if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&l" + plr.getName()))) {
-                p.openInventory(plr.getInventory());
+                plrData = plr;
+                AdminToolPlayerSettings.initialize();
+                p.openInventory(AdminToolPlayerSettings.playerSettings(p));
             }
         }
 
@@ -85,5 +89,4 @@ public class AdminToolPlayersGUI {
         adminHead.setItemMeta(adminHeadM);
         return adminHead;
     }
-
 }

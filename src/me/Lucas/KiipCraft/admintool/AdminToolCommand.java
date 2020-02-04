@@ -38,7 +38,7 @@ public class AdminToolCommand implements CommandExecutor {
             p.getInventory().remove(adminTool());
             return true;
         } else {
-            p.sendMessage(prefix + chat("Helaas, jij mag dit commando niet uitvoeren!"));
+            p.sendMessage(noPermission);
         }
 
         return false;
