@@ -18,7 +18,7 @@ public class MainEventsUI {
     public static int singleinvrow = 10;
 
     public static void initialize() {
-        inventory_name = Utils.chat("&c&lKiipCraft &3&lEvents GUI");
+        inventory_name = Utils.chat("&3&lEvents GUI");
 
         inv = Bukkit.createInventory(null, inv_rows);
     }

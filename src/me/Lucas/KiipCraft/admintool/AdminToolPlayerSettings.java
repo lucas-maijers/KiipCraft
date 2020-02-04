@@ -20,6 +20,7 @@ public class AdminToolPlayerSettings {
     private static int row_now = 6;
 
     private static boolean hasClickedKill = false;
+    private static boolean hasClickedClear = false;
 
     public static int inv_rows = row_now * 9;
 
@@ -57,9 +58,10 @@ public class AdminToolPlayerSettings {
         Utils.createItemLore(inv, ENDER_CHEST, 1, 47, "&5&lEnder Chest", "&7Opent de Ender Chest van: &6" + plrData.getName() + "&7!");
 
         Utils.createItemLore(inv, RED_MUSHROOM, 1, 48, "&a&lHeal", "&7Zet de speler op vol HP en volle hunger balk!");
-        Utils.createItemLore(inv, DIAMOND_SWORD, 1, 49, "&4&lKILL", "&7Vermoord de speler!", " ", "&4&lWAARSCHUWING: JE MOET 2x KLIKKEN!");
+        Utils.createItemLore(inv, DIAMOND_SWORD, 1, 51, "&4&lKILL", "&7Vermoord de speler!", " ", "&4&lWAARSCHUWING: JE MOET 2x KLIKKEN!");
+        Utils.createItemLore(inv, HOPPER, 1, 52, "&4&lCLEAR INVENTORY", "&7Cleart de inventaris van de speler", " ", "&4&lWAARSCHUWING: JE MOET 2x KLIKKEN!");
 
-        Utils.createItemLore(inv, COMPASS, 1, 50, "&6&lTeleport", "&7Teleporteer naar de Speler!");
+        Utils.createItemLore(inv, COMPASS, 1, 54, "&6&lTeleport", "&7Teleporteer naar de Speler!");
 
 
         toReturn.setContents(inv.getContents());
@@ -73,6 +75,7 @@ public class AdminToolPlayerSettings {
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&5&lEnder Chest"))) {
             p.openInventory(plrData.getEnderChest());
+            p.sendMessage(prefix = Utils.chat("Je opent de &5&lEnder Chest &7van &d" + plrData.getName() + "&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lHeal"))) {
@@ -87,7 +90,6 @@ public class AdminToolPlayerSettings {
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&4&lKILL"))) {
-
             if (!hasClickedKill) {
                 p.sendMessage(prefix + Utils.chat("klik binnen &c&l5 seconden &7nog een keer als je &d " + plrData.getName() + " &7wilt &4doodmaken7!"));
             }
@@ -108,6 +110,30 @@ public class AdminToolPlayerSettings {
             hasClickedKill = true;
 
             scheduler.scheduleSyncDelayedTask(plugin, () -> hasClickedKill = false, 20 * 5);
+        }
+
+        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&4&lCLEAR INVENTORY"))) {
+            if (!hasClickedClear) {
+                p.sendMessage(prefix + Utils.chat("klik binnen &c&l5 seconden &7nog een keer als je de inventaris van &d " + plrData.getName() + " &7wilt &4clearen&7!"));
+            }
+
+            if (hasClickedClear) {
+                plrData.getInventory().clear();
+
+                for (Player plr : Bukkit.getOnlinePlayers()) {
+                    if (plr.hasPermission("kiipcraft.infomessage")) {
+                        plr.sendMessage(prefix + Utils.chat("&b&l " + p.getName() + "&7 heeft &d&l" + plrData.getName() + " &7zijn inventaris &4gecleared&7!"));
+                    }
+                }
+                scheduler.cancelTasks(plugin);
+                p.openInventory(AdminToolPlayerSettings.playerSettings(p));
+                hasClickedClear = false;
+                return;
+            }
+
+            hasClickedClear = true;
+
+            scheduler.scheduleSyncDelayedTask(plugin, () -> hasClickedClear = false, 20 * 5);
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lTeleport"))) {
