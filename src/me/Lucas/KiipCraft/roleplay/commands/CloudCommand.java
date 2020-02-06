@@ -45,7 +45,7 @@ public class CloudCommand implements CommandExecutor {
         } else if (p.hasPermission("kiipcraft.flycloud") && playerList.contains(p.getName())) {
             playerList.remove(p.getName());
             p.sendMessage(prefix + "Je hebt zojuist de flycloud uitgezet!");
-            Bukkit.getScheduler().cancelTasks((Plugin) pl);
+            Bukkit.getScheduler().cancelTasks(pl);
             return true;
         } else {
             p.sendMessage(noPermission);

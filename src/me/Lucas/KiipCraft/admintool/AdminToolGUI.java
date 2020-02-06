@@ -25,10 +25,8 @@ public class AdminToolGUI {
         AdminToolGUI.plugin = plugin;
     }
 
-
     public static void initialize() {
         inv_name = Utils.chat("&4&lAdmintool Menu");
-
 
         inv = Bukkit.createInventory(null, inv_rows);
     }
@@ -86,7 +84,6 @@ public class AdminToolGUI {
             p.sendMessage(prefix + Utils.chat("Je opent het &c&lShards Menu&7!"));
             p.openInventory(AdminToolShardsMenu.shardsMenu(p));
         }
-
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&cSluiten"))) {
             p.closeInventory();

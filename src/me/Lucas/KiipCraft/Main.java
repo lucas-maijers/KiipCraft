@@ -11,8 +11,10 @@ import me.Lucas.KiipCraft.events.listener.EventsToolClick;
 import me.Lucas.KiipCraft.events.listener.InventoryClickListener;
 import me.Lucas.KiipCraft.events.ui.*;
 import me.Lucas.KiipCraft.roleplay.commands.CloudCommand;
+import me.Lucas.KiipCraft.roleplay.commands.OrbCommand;
 import me.Lucas.KiipCraft.roleplay.commands.ShardCommand;
 import me.Lucas.KiipCraft.roleplay.listeners.FlyCloud;
+import me.Lucas.KiipCraft.roleplay.listeners.LightningOrbAbility;
 import me.Lucas.KiipCraft.servertour.ServerTourCommand;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestSettings;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestsGUI;
@@ -49,6 +51,7 @@ public class Main extends JavaPlugin {
         new ServerTourCommand(this);
 
         new ShardCommand(this);
+        new OrbCommand(this);
 
         new AdminToolCommand(this);
         // Listeners
@@ -59,6 +62,8 @@ public class Main extends JavaPlugin {
 
         new ServertourMenuClick(this);
         new ServerTourRequestSettings(this);
+
+        new LightningOrbAbility(this);
 
         new AdminToolClick(this);
         new AdminToolGUIClick(this);

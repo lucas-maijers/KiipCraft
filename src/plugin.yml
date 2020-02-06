@@ -25,3 +25,5 @@ commands:
     description: Geeft je de Admin Tool.
   shard:
     description: Geeft je een Shard.
+  orb:
+    description: Geeft je een Orb.
