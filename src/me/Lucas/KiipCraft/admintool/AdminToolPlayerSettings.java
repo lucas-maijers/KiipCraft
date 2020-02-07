@@ -18,11 +18,9 @@ public class AdminToolPlayerSettings {
     public static String inv_name;
     private static Main plugin;
     private static int row_now = 6;
-
+    public static int inv_rows = row_now * 9;
     private static boolean hasClickedKill = false;
     private static boolean hasClickedClear = false;
-
-    public static int inv_rows = row_now * 9;
 
     public AdminToolPlayerSettings(Main plugin) {
         AdminToolPlayerSettings.plugin = plugin;
