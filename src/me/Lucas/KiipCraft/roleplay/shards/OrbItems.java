@@ -60,11 +60,18 @@ public class OrbItems {
         ItemStack shard = new ItemStack(Material.ENDER_EYE);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(Utils.chat("&7De &6&lEarth &c&lOrb &7heeft de kracht om mensen compleet vast te zetten!"));
+        lore.add(Utils.chat("&7Deze krachten zijn uiterst gevaarlijk!"));
+        lore.add(Utils.chat("&7Als ze in verkeerde handen vallen zou de wereld verdoemd zijn!"));
+
         assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&6&lEarth &c&lOrb"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
         shardMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        shardMeta.setLore(lore);
+
         shard.setItemMeta(shardMeta);
         return shard;
     }

@@ -50,7 +50,7 @@ public class FireOrbAbility implements Listener {
                     @Override
                     public void run() {
                         if (!(fireball.isValid())) {
-                            w.createExplosion(fireball.getLocation(), 5, true, false, p);
+                            w.createExplosion(fireball.getLocation(), 3, true, false, p);
                             this.cancel();
                         }
 

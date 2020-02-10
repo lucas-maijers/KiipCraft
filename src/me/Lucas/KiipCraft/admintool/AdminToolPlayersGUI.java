@@ -64,6 +64,7 @@ public class AdminToolPlayersGUI {
         for (Player plr : Bukkit.getOnlinePlayers()) {
             if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&l" + plr.getName()))) {
                 plrData = plr;
+                p.sendMessage(Utils.prefix + Utils.chat("Je opent de settings voor &d&l" + plrData.getName() + "&7!"));
                 AdminToolPlayerSettings.initialize();
                 p.openInventory(AdminToolPlayerSettings.playerSettings(p));
             }

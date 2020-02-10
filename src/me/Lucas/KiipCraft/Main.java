@@ -13,6 +13,7 @@ import me.Lucas.KiipCraft.events.ui.*;
 import me.Lucas.KiipCraft.roleplay.commands.CloudCommand;
 import me.Lucas.KiipCraft.roleplay.commands.OrbCommand;
 import me.Lucas.KiipCraft.roleplay.commands.ShardCommand;
+import me.Lucas.KiipCraft.roleplay.listeners.EarthOrbAbility;
 import me.Lucas.KiipCraft.roleplay.listeners.FireOrbAbility;
 import me.Lucas.KiipCraft.roleplay.listeners.FlyCloud;
 import me.Lucas.KiipCraft.roleplay.listeners.LightningOrbAbility;
@@ -66,6 +67,7 @@ public class Main extends JavaPlugin {
 
         new LightningOrbAbility(this);
         new FireOrbAbility(this);
+        new EarthOrbAbility(this);
 
         new AdminToolClick(this);
         new AdminToolGUIClick(this);

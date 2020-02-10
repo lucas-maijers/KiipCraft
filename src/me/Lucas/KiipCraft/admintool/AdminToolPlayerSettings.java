@@ -73,16 +73,17 @@ public class AdminToolPlayerSettings {
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&5&lEnder Chest"))) {
             p.openInventory(plrData.getEnderChest());
-            p.sendMessage(prefix = Utils.chat("Je opent de &5&lEnder Chest &7van &d" + plrData.getName() + "&7!"));
+            p.sendMessage(prefix + Utils.chat("Je opent de &5&lEnder Chest &7van &d" + plrData.getName() + "&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lHeal"))) {
             plrData.setHealth(20);
             plrData.setFoodLevel(20);
+            plrData.setFireTicks(0);
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.infomessage")) {
-                    plr.sendMessage(prefix + Utils.chat("&b&l " + p.getName() + "&7 heeft &d&l" + plrData.getName() + " &agenezen&7!"));
+                    plr.sendMessage(prefix + Utils.chat("&b&l" + p.getName() + "&7 heeft &d&l" + plrData.getName() + " &agenezen&7!"));
                 }
             }
         }
@@ -97,7 +98,7 @@ public class AdminToolPlayerSettings {
 
                 for (Player plr : Bukkit.getOnlinePlayers()) {
                     if (plr.hasPermission("kiipcraft.infomessage")) {
-                        plr.sendMessage(prefix + Utils.chat("&b&l " + p.getName() + "&7 heeft &d&l" + plrData.getName() + " &4gekilled&7!"));
+                        plr.sendMessage(prefix + Utils.chat("&b&l" + p.getName() + "&7 heeft &d&l" + plrData.getName() + " &4gekilled&7!"));
                     }
                 }
                 scheduler.cancelTasks(plugin);
@@ -120,7 +121,7 @@ public class AdminToolPlayerSettings {
 
                 for (Player plr : Bukkit.getOnlinePlayers()) {
                     if (plr.hasPermission("kiipcraft.infomessage")) {
-                        plr.sendMessage(prefix + Utils.chat("&b&l " + p.getName() + "&7 heeft &d&l" + plrData.getName() + " &7zijn inventaris &4gecleared&7!"));
+                        plr.sendMessage(prefix + Utils.chat("&b&l" + p.getName() + "&7 heeft &d&l" + plrData.getName() + " &7zijn inventaris &4gecleared&7!"));
                     }
                 }
                 scheduler.cancelTasks(plugin);
