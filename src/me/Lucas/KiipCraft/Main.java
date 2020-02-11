@@ -1,6 +1,12 @@
 package me.Lucas.KiipCraft;
 
-import me.Lucas.KiipCraft.admintool.*;
+import me.Lucas.KiipCraft.admintool.command.AdminToolCommand;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolGUI;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolPlayerSettings;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolPlayersGUI;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolShardsMenu;
+import me.Lucas.KiipCraft.admintool.listeners.AdminToolClick;
+import me.Lucas.KiipCraft.admintool.listeners.AdminToolGUIClick;
 import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
 import me.Lucas.KiipCraft.bottleXP.listener.DrinkXPBottle;
 import me.Lucas.KiipCraft.commands.KiipCraftCommand;

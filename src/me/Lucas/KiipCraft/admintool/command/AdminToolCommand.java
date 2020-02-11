@@ -1,4 +1,4 @@
-package me.Lucas.KiipCraft.admintool;
+package me.Lucas.KiipCraft.admintool.command;
 
 import me.Lucas.KiipCraft.Main;
 import org.bukkit.command.Command;

@@ -1,6 +1,7 @@
-package me.Lucas.KiipCraft.admintool;
+package me.Lucas.KiipCraft.admintool.listeners;
 
 import me.Lucas.KiipCraft.Main;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolGUI;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Item;

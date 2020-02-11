@@ -1,4 +1,4 @@
-package me.Lucas.KiipCraft.admintool;
+package me.Lucas.KiipCraft.admintool.guis;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.utils.Utils;

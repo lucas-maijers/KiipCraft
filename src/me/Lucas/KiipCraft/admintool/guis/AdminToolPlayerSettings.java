@@ -1,4 +1,4 @@
-package me.Lucas.KiipCraft.admintool;
+package me.Lucas.KiipCraft.admintool.guis;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.utils.Utils;
@@ -8,7 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import static me.Lucas.KiipCraft.admintool.AdminToolPlayersGUI.plrData;
+import static me.Lucas.KiipCraft.admintool.guis.AdminToolPlayersGUI.plrData;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 import static org.bukkit.Material.*;
 

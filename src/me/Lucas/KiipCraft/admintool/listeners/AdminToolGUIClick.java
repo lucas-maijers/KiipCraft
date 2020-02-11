@@ -1,6 +1,10 @@
-package me.Lucas.KiipCraft.admintool;
+package me.Lucas.KiipCraft.admintool.listeners;
 
 import me.Lucas.KiipCraft.Main;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolGUI;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolPlayerSettings;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolPlayersGUI;
+import me.Lucas.KiipCraft.admintool.guis.AdminToolShardsMenu;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
