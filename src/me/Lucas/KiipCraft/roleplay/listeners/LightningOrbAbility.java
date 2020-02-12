@@ -91,32 +91,41 @@ public class LightningOrbAbility implements Listener {
             e.setCancelled(true);
             if (p.hasPermission("kiipcraft.orb.use")) {
                 Location loc = p.getLocation();
+
+                ArmorStand as = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
+                as.setVisible(false);
+                as.setGravity(false);
+
                 double posX = p.getLocation().getX();
                 double posZ = p.getLocation().getZ();
                 Location loc2 = p.getLocation();
                 double y = p.getLocation().getY() + 30;
-                p.setFlySpeed(0);
 
                 new BukkitRunnable() {
 
                     double t = 0;
+                    double t2 = 0;
                     double r = 21;
 
                     @Override
                     public void run() {
 
-                        t = t + Math.PI / 64;
+                        t = t + Math.PI / 96;
+                        t2 = t2 - Math.PI / 96;
 
                         double x = r * cos(t);
                         double z = r * sin(t);
+
+                        double x2 = r * cos(t2);
+                        double z2 = r * sin(t2);
 
                         loc.setX(posX + x);
                         loc.setY(y);
                         loc.setZ(posZ + z);
 
-                        loc2.setX(posX + -x);
+                        loc2.setX(posX + x2);
                         loc2.setY(y);
-                        loc2.setZ(posZ + -z);
+                        loc2.setZ(posZ + z2);
 
                         final Firework fw = w.spawn(loc, Firework.class);
                         final Firework fw2 = w.spawn(loc2, Firework.class);
@@ -140,15 +149,29 @@ public class LightningOrbAbility implements Listener {
                         fw2.detonate();
 
                         if (t > Math.PI * 1) {
+
+                            Location asLoc = as.getLocation();
+                            asLoc.setY(as.getLocation().getY() + 18);
+
+                            final Firework endFW = w.spawn(asLoc, Firework.class);
+                            endFW.setSilent(true);
+                            FireworkMeta endFWmeta = endFW.getFireworkMeta();
+                            FireworkEffect endFwEffect = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.STAR).withColor(Color.AQUA).build();
+
+                            endFWmeta.addEffect(endFwEffect);
+                            endFWmeta.setPower(0);
+                            endFW.setFireworkMeta(endFWmeta);
+
+                            endFW.detonate();
+
                             fw.detonate();
                             fw2.detonate();
-                            p.setFlySpeed((float) .1);
-                            for (Entity t : p.getNearbyEntities(20, 255, 20)) {
-
-                                if (!(t instanceof Firework)) {
+                            for (Entity t : as.getNearbyEntities(20, 255, 20)) {
+                                if (t instanceof Player && !(t == p) || t instanceof Monster) {
                                     t.getWorld().strikeLightning(t.getLocation());
                                 }
                             }
+                            as.remove();
                             this.cancel();
                         }
                     }
