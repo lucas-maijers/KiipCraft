@@ -103,6 +103,8 @@ public class LightningOrbAbility implements Listener {
 
                 new BukkitRunnable() {
 
+                    int amount = 96;
+
                     double t = 0;
                     double t2 = 0;
                     double r = 20;
@@ -110,8 +112,8 @@ public class LightningOrbAbility implements Listener {
                     @Override
                     public void run() {
 
-                        t = t + Math.PI / 96;
-                        t2 = t2 - Math.PI / 96;
+                        t = t + Math.PI / amount;
+                        t2 = t2 - Math.PI / amount;
 
                         double x = r * cos(t);
                         double z = r * sin(t);
@@ -166,7 +168,7 @@ public class LightningOrbAbility implements Listener {
 
                             fw.detonate();
                             fw2.detonate();
-                            for (Entity t : as.getNearbyEntities(20, 255, 20)) {
+                            for (Entity t : as.getNearbyEntities(r, 30, r)) {
                                 if (t instanceof Player && !(t == p) || t instanceof Monster) {
                                     t.getWorld().strikeLightning(t.getLocation());
                                 }
