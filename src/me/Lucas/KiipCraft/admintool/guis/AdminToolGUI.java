@@ -54,7 +54,8 @@ public class AdminToolGUI {
         Utils.createItemLore(inv, FIREWORK_ROCKET, 1, 11, "&6&lEvents Menu", "&7Opent het Events Menu!");
         Utils.createItemLore(inv, WRITABLE_BOOK, 1, 12, "&6&lServer Tour Menu", "&7Opent het Servertour menu!");
         Utils.createItemHead(inv, adminHead(p), 1, 13, "&6&lSpelers Menu", "&7Opent een lijst met alle Online Spelers!");
-        Utils.createItemLore(inv, PRISMARINE_SHARD, 1, 14, "&c&lShards", "&7Opent het Menu met alle Shards!");
+        Utils.createItemLore(inv, PRISMARINE_SHARD, 1, 14, "&c&lShards Menu", "&7Opent het Menu met alle Shards!");
+        Utils.createItemLore(inv, ENDER_EYE, 1, 15, "&c&lOrbs Menu", "&7Opent het Menu met alle Orbs!");
 
         Utils.createItem(inv, BARRIER, 1, 32, "&cSluiten");
 
@@ -80,9 +81,14 @@ public class AdminToolGUI {
             p.openInventory(AdminToolPlayersGUI.spelersMenu(p));
         }
 
-        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShards"))) {
+        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShards Menu"))) {
             p.sendMessage(prefix + Utils.chat("Je opent het &c&lShards Menu&7!"));
             p.openInventory(AdminToolShardsMenu.shardsMenu(p));
+        }
+
+        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lOrbs Menu"))) {
+            p.sendMessage(prefix + Utils.chat("Je opent het &c&lOrbs Menu&7!"));
+            p.openInventory(AdminToolOrbMenu.orbMenu(p));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&cSluiten"))) {

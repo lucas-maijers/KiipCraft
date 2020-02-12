@@ -1,10 +1,7 @@
 package me.Lucas.KiipCraft;
 
 import me.Lucas.KiipCraft.admintool.command.AdminToolCommand;
-import me.Lucas.KiipCraft.admintool.guis.AdminToolGUI;
-import me.Lucas.KiipCraft.admintool.guis.AdminToolPlayerSettings;
-import me.Lucas.KiipCraft.admintool.guis.AdminToolPlayersGUI;
-import me.Lucas.KiipCraft.admintool.guis.AdminToolShardsMenu;
+import me.Lucas.KiipCraft.admintool.guis.*;
 import me.Lucas.KiipCraft.admintool.listeners.AdminToolClick;
 import me.Lucas.KiipCraft.admintool.listeners.AdminToolGUIClick;
 import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
@@ -16,12 +13,10 @@ import me.Lucas.KiipCraft.events.command.GUICommand;
 import me.Lucas.KiipCraft.events.listener.EventsToolClick;
 import me.Lucas.KiipCraft.events.listener.InventoryClickListener;
 import me.Lucas.KiipCraft.events.ui.*;
-import me.Lucas.KiipCraft.roleplay.commands.CloudCommand;
 import me.Lucas.KiipCraft.roleplay.commands.OrbCommand;
 import me.Lucas.KiipCraft.roleplay.commands.ShardCommand;
 import me.Lucas.KiipCraft.roleplay.listeners.EarthOrbAbility;
 import me.Lucas.KiipCraft.roleplay.listeners.FireOrbAbility;
-import me.Lucas.KiipCraft.roleplay.listeners.FlyCloud;
 import me.Lucas.KiipCraft.roleplay.listeners.LightningOrbAbility;
 import me.Lucas.KiipCraft.servertour.ServerTourCommand;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestSettings;
@@ -54,7 +49,6 @@ public class Main extends JavaPlugin {
         new XpBottleCommand(this);
         new EventsToolCommand(this);
         new UpdateCommand(this);
-        new CloudCommand(this, this);
 
         new ServerTourCommand(this);
 
@@ -66,7 +60,6 @@ public class Main extends JavaPlugin {
         new DrinkXPBottle(this);
         new InventoryClickListener(this);
         new EventsToolClick(this);
-        new FlyCloud(this, this);
 
         new ServertourMenuClick(this);
         new ServerTourRequestSettings(this);
@@ -83,8 +76,9 @@ public class Main extends JavaPlugin {
         new ServerTourRequestsGUI(this);
         // Admin Tool
         new AdminToolGUI(this);
-        new AdminToolPlayersGUI(this);
+        new AdminToolOrbMenu(this);
         new AdminToolShardsMenu(this);
+        new AdminToolPlayersGUI(this);
         new AdminToolPlayerSettings(this);
 
         MainEventsUI.initialize();
@@ -94,12 +88,16 @@ public class Main extends JavaPlugin {
         TheQuizUI.initialize();
         VloerIsLavaUI.initialize();
         BuildBattleUI.initialize();
+
         XpBottleCommand.initializelist();
+
         ServerTourRequestsGUI.initialize();
         ServerTourRequestSettings.initialize();
+
         AdminToolGUI.initialize();
         AdminToolPlayersGUI.initialize();
         AdminToolShardsMenu.initialize();
+        AdminToolOrbMenu.initialize();
     }
 
     public void onDisable() {

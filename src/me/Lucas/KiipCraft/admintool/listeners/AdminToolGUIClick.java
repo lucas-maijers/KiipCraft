@@ -1,10 +1,7 @@
 package me.Lucas.KiipCraft.admintool.listeners;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.admintool.guis.AdminToolGUI;
-import me.Lucas.KiipCraft.admintool.guis.AdminToolPlayerSettings;
-import me.Lucas.KiipCraft.admintool.guis.AdminToolPlayersGUI;
-import me.Lucas.KiipCraft.admintool.guis.AdminToolShardsMenu;
+import me.Lucas.KiipCraft.admintool.guis.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -52,6 +49,16 @@ public class AdminToolGUIClick implements Listener {
             }
             if (title.equals(AdminToolShardsMenu.inv_name)) {
                 AdminToolShardsMenu.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
+            }
+        }
+
+        if (title.equals(AdminToolOrbMenu.inv_name)) {
+            e.setCancelled(true);
+            if (e.getCurrentItem() == null) {
+                return;
+            }
+            if (title.equals(AdminToolOrbMenu.inv_name)) {
+                AdminToolPlayerSettings.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
             }
         }
 
