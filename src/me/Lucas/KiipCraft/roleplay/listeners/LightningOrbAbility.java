@@ -105,7 +105,7 @@ public class LightningOrbAbility implements Listener {
 
                     double t = 0;
                     double t2 = 0;
-                    double r = 21;
+                    double r = 20;
 
                     @Override
                     public void run() {
