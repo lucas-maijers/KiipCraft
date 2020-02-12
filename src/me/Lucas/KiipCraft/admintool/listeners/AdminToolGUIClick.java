@@ -64,7 +64,7 @@ public class AdminToolGUIClick implements Listener {
                 return;
             }
             if (title.equals(AdminToolOrbMenu.inv_name)) {
-                AdminToolPlayerSettings.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
+                AdminToolOrbMenu.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
             }
         }
 

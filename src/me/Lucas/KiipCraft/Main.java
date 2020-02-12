@@ -23,6 +23,7 @@ import me.Lucas.KiipCraft.roleplay.commands.OrbCommand;
 import me.Lucas.KiipCraft.roleplay.commands.ShardCommand;
 import me.Lucas.KiipCraft.roleplay.listeners.EarthOrbAbility;
 import me.Lucas.KiipCraft.roleplay.listeners.FireOrbAbility;
+import me.Lucas.KiipCraft.roleplay.listeners.LightOrbAbility;
 import me.Lucas.KiipCraft.roleplay.listeners.LightningOrbAbility;
 import me.Lucas.KiipCraft.servertour.ServerTourCommand;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestSettings;
@@ -70,9 +71,10 @@ public class Main extends JavaPlugin {
         new ServertourMenuClick(this);
         new ServerTourRequestSettings(this);
 
-        new LightningOrbAbility(this);
         new FireOrbAbility(this);
         new EarthOrbAbility(this);
+        new LightningOrbAbility(this);
+        new LightOrbAbility(this);
 
         new AdminToolClick(this);
         new AdminToolGUIClick(this);

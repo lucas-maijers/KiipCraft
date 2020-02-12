@@ -12,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import static me.Lucas.KiipCraft.admintool.guis.AdminToolPlayersGUI.plrData;
@@ -86,6 +87,10 @@ public class AdminToolPlayerSettings {
             plrData.setHealth(20);
             plrData.setFoodLevel(20);
             plrData.setFireTicks(0);
+
+            for (PotionEffect eff : plrData.getActivePotionEffects()) {
+                plrData.removePotionEffect(eff.getType());
+            }
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.infomessage")) {

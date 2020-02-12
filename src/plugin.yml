@@ -17,8 +17,6 @@ commands:
     description: Geeft je de Events Tool.
   kiipcraftupdate:
     description: Checked de plugin voor updates.
-  flycloud:
-    description: Zet de flycloud aan
   servertour:
     description: Maakt een warp voor de servertour.
   admintool:

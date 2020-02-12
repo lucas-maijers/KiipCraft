@@ -45,14 +45,12 @@ public class EarthOrbAbility implements Listener {
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.earthOrb())) {
-            e.setCancelled(true);
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.earthOrb())) {
             if (p.hasPermission("kiipcraft.orb.use")) {
                 World w = p.getWorld();
 
                 for (Entity target : p.getNearbyEntities(7, 14, 7)) {
                     if (target instanceof Player) {
-                        ((Player) target).setWalkSpeed(0);
                         stunnedPlayerList.add(target.getName());
 
                         scheduler.scheduleSyncRepeatingTask(plugin, () -> {
@@ -101,7 +99,6 @@ public class EarthOrbAbility implements Listener {
 
 
                         scheduler.scheduleSyncDelayedTask(plugin, () -> {
-                            ((Player) target).setWalkSpeed(0.2F);
                             Bukkit.getScheduler().cancelTasks(plugin);
                             stunnedPlayerList.clear();
                         }, 20 * 15);
@@ -116,7 +113,6 @@ public class EarthOrbAbility implements Listener {
     @EventHandler
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.earthOrb())) {
             e.setCancelled(true);
         }
@@ -133,7 +129,7 @@ public class EarthOrbAbility implements Listener {
 
 
     @EventHandler
-    public void stunnedJump(PlayerMoveEvent e) {
+    public void stunnedMovement(PlayerMoveEvent e) {
         Player p = e.getPlayer();
 
         if (stunnedPlayerList.contains(p.getName())) {

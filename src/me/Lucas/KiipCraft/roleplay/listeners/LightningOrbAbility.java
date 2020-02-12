@@ -85,7 +85,7 @@ public class LightningOrbAbility implements Listener {
 
 
     @EventHandler
-    public void throwOrb(PlayerInteractEvent e) {
+    public void onRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         World w = p.getWorld();
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightningOrb())) {
