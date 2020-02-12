@@ -88,6 +88,7 @@ public class LightningOrbAbility implements Listener {
     public void onRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
         World w = p.getWorld();
+
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightningOrb())) {
             e.setCancelled(true);
             if (p.hasPermission("kiipcraft.orb.use")) {

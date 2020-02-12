@@ -21,10 +21,7 @@ import me.Lucas.KiipCraft.events.listener.InventoryClickListener;
 import me.Lucas.KiipCraft.events.ui.*;
 import me.Lucas.KiipCraft.roleplay.commands.OrbCommand;
 import me.Lucas.KiipCraft.roleplay.commands.ShardCommand;
-import me.Lucas.KiipCraft.roleplay.listeners.EarthOrbAbility;
-import me.Lucas.KiipCraft.roleplay.listeners.FireOrbAbility;
-import me.Lucas.KiipCraft.roleplay.listeners.LightOrbAbility;
-import me.Lucas.KiipCraft.roleplay.listeners.LightningOrbAbility;
+import me.Lucas.KiipCraft.roleplay.listeners.*;
 import me.Lucas.KiipCraft.servertour.ServerTourCommand;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestSettings;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestsGUI;
@@ -75,6 +72,7 @@ public class Main extends JavaPlugin {
         new EarthOrbAbility(this);
         new LightningOrbAbility(this);
         new LightOrbAbility(this);
+        new DarknessOrbAbility(this);
 
         new AdminToolClick(this);
         new AdminToolGUIClick(this);

@@ -20,12 +20,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class LightOrbAbility implements Listener {
+public class DarknessOrbAbility implements Listener {
 
     private Main plugin;
 
-
-    public LightOrbAbility(Main plugin) {
+    public DarknessOrbAbility(Main plugin) {
         this.plugin = plugin;
 
         Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -35,11 +34,11 @@ public class LightOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightOrb())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.darknessOrb())) {
             if (p.hasPermission("kiipcraft.orb.use")) {
-                for (Entity t : p.getNearbyEntities(25,20,25)) {
+                for (Entity t : p.getNearbyEntities(25, 20, 25)) {
                     if (t instanceof Player) {
-                        ((Player) t).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20 * 30, 1));
+                        ((Player) t).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 15, 1));
                     }
                 }
             } else {
@@ -52,7 +51,7 @@ public class LightOrbAbility implements Listener {
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.darknessOrb())) {
             e.setCancelled(true);
         }
     }
@@ -61,8 +60,9 @@ public class LightOrbAbility implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(OrbItems.lightOrb())) {
+        if (p.getItemInHand().equals(OrbItems.darknessOrb())) {
             e.setCancelled(true);
         }
     }
+
 }

@@ -81,6 +81,7 @@ public class FireOrbAbility implements Listener {
     @EventHandler
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
+
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.fireOrb())) {
             e.setCancelled(true);
         }
