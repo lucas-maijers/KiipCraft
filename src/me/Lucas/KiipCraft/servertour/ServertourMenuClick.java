@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2020.
+ * Created by Lucas Maijers.
+ * All rights reserved.
+ */
+
 package me.Lucas.KiipCraft.servertour;
 
 import me.Lucas.KiipCraft.Main;
