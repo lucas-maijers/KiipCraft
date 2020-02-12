@@ -11,11 +11,13 @@ import me.Lucas.KiipCraft.roleplay.shards.OrbItems;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -52,6 +54,15 @@ public class DarknessOrbAbility implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.darknessOrb())) {
+            e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDrop(PlayerDropItemEvent e) {
+        Item i = e.getItemDrop();
+
+        if (i.getItemStack().equals(OrbItems.darknessOrb())) {
             e.setCancelled(true);
         }
     }
