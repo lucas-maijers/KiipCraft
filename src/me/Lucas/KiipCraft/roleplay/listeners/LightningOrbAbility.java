@@ -81,7 +81,6 @@ public class LightningOrbAbility implements Listener {
         }
     }
 
-
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
@@ -192,7 +191,6 @@ public class LightningOrbAbility implements Listener {
             e.setCancelled(true);
         }
     }
-
 
     @EventHandler
     public void onDrop(PlayerDropItemEvent e) {

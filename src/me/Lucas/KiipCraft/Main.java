@@ -69,6 +69,8 @@ public class Main extends JavaPlugin {
         new ServerTourRequestSettings(this);
 
         new FireOrbAbility(this);
+
+        new AirOrbAbility(this);
         new EarthOrbAbility(this);
         new LightningOrbAbility(this);
         new LightOrbAbility(this);
