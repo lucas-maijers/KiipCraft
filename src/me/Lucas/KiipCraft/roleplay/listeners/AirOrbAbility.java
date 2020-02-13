@@ -24,7 +24,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.util.Vector;
 
 public class AirOrbAbility implements Listener {
@@ -66,7 +65,6 @@ public class AirOrbAbility implements Listener {
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
-        BukkitScheduler scheduler = Bukkit.getScheduler();
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.airOrb())) {
             e.setCancelled(true);

@@ -18,6 +18,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -73,9 +74,21 @@ public class FireOrbAbility implements Listener {
                             fw.detonate();
                         }
                     }
-                }.runTaskTimer(plugin, 0, 1);
+                }.runTaskTimer(plugin, 3, 1);
             } else {
                 p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+            }
+        }
+    }
+
+    @EventHandler
+    public void onFire(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            Player p = (Player) e.getEntity();
+            if (e.getCause() == EntityDamageEvent.DamageCause.FIRE || e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK || e.getCause() == EntityDamageEvent.DamageCause.LAVA || e.getCause() == EntityDamageEvent.DamageCause.HOT_FLOOR) {
+                if (p.hasPermission("kiipcraft.orb.use") && p.getInventory().contains(OrbItems.fireOrb())) {
+                    e.setCancelled(true);
+                }
             }
         }
     }

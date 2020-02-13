@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -179,6 +180,18 @@ public class LightningOrbAbility implements Listener {
                 }.runTaskTimer(plugin, 0, 1);
             } else {
                 p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+            }
+        }
+    }
+
+    @EventHandler
+    public void onHit(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            Player p = (Player) e.getEntity();
+            if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING || e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
+                if (p.hasPermission("kiipcraft.orb.use") && p.getInventory().contains(OrbItems.lightningOrb())) {
+                    e.setCancelled(true);
+                }
             }
         }
     }
