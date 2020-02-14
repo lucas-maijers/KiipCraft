@@ -17,9 +17,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 
@@ -31,9 +33,8 @@ import static java.lang.Math.sin;
 
 public class EarthOrbAbility implements Listener {
 
-    private Main plugin;
-
     public static Set<String> stunnedPlayerList = new HashSet<>();
+    private Main plugin;
 
     public EarthOrbAbility(Main plugin) {
         this.plugin = plugin;
@@ -146,6 +147,15 @@ public class EarthOrbAbility implements Listener {
 
         if (stunnedPlayerList.contains(p.getName())) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        for (ItemStack droppedItem : e.getDrops()) {
+            if (droppedItem.equals(OrbItems.earthOrb())) {
+                e.getDrops().remove(OrbItems.earthOrb());
+            }
         }
     }
 }

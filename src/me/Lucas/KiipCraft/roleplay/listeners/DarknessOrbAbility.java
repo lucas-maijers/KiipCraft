@@ -17,8 +17,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -76,4 +78,12 @@ public class DarknessOrbAbility implements Listener {
         }
     }
 
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        for (ItemStack droppedItem : e.getDrops()) {
+            if (droppedItem.equals(OrbItems.darknessOrb())) {
+                e.getDrops().remove(OrbItems.darknessOrb());
+            }
+        }
+    }
 }

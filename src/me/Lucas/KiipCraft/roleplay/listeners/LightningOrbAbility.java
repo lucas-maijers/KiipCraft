@@ -16,8 +16,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -211,6 +213,15 @@ public class LightningOrbAbility implements Listener {
 
         if (i.getItemStack().equals(OrbItems.lightningOrb())) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        for (ItemStack droppedItem : e.getDrops()) {
+            if (droppedItem.equals(OrbItems.lightningOrb())) {
+                e.getDrops().remove(OrbItems.lightningOrb());
+            }
         }
     }
 }

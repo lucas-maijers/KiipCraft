@@ -75,6 +75,7 @@ public class Main extends JavaPlugin {
         new LightningOrbAbility(this);
         new LightOrbAbility(this);
         new DarknessOrbAbility(this);
+        new LifeOrbAbility(this);
 
         new AdminToolClick(this);
         new AdminToolGUIClick(this);

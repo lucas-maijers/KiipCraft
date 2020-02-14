@@ -75,7 +75,7 @@ public class OrbCommand implements CommandExecutor {
                     return true;
                 case "life":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt &a&lLife &c&lOrb&7!"));
-                    p.getInventory().addItem(OrbItems.lifeorb());
+                    p.getInventory().addItem(OrbItems.lifeOrb());
                     return true;
                 default:
                     p.sendMessage(prefix + "Onbekende Orbnaam.");

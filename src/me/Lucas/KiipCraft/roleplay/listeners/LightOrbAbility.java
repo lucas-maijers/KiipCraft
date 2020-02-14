@@ -17,8 +17,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -39,7 +41,7 @@ public class LightOrbAbility implements Listener {
 
         if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightOrb())) {
             if (p.hasPermission("kiipcraft.orb.use")) {
-                for (Entity t : p.getNearbyEntities(25,20,25)) {
+                for (Entity t : p.getNearbyEntities(25, 20, 25)) {
                     if (t instanceof Player) {
                         ((Player) t).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20 * 30, 1));
                     }
@@ -74,6 +76,15 @@ public class LightOrbAbility implements Listener {
 
         if (p.getItemInHand().equals(OrbItems.lightOrb())) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        for (ItemStack droppedItem : e.getDrops()) {
+            if (droppedItem.equals(OrbItems.lightOrb())) {
+                e.getDrops().remove(OrbItems.lightOrb());
+            }
         }
     }
 }

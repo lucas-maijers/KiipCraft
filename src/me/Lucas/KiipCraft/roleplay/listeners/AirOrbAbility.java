@@ -21,8 +21,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -203,6 +205,15 @@ public class AirOrbAbility implements Listener {
 
         if (i.getItemStack().equals(OrbItems.airOrb())) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        for (ItemStack droppedItem : e.getDrops()) {
+            if (droppedItem.equals(OrbItems.airOrb())) {
+                e.getDrops().remove(OrbItems.airOrb());
+            }
         }
     }
 }

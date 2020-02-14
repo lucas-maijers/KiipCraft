@@ -112,8 +112,6 @@ public class Utils {
 
         assert eventsToolM != null;
         eventsToolM.setDisplayName(Utils.chat("&3&lEvents Tool"));
-        eventsToolM.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-        eventsToolM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         eventsToolM.setLore(lore);
         eventsTool.setItemMeta(eventsToolM);
@@ -129,8 +127,6 @@ public class Utils {
 
         assert adminToolM != null;
         adminToolM.setDisplayName(Utils.chat("&4&lAdmin Tool"));
-        adminToolM.addEnchant(Enchantment.VANISHING_CURSE, 1, true);
-        adminToolM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         adminToolM.setLore(lore);
         adminTool.setItemMeta(adminToolM);

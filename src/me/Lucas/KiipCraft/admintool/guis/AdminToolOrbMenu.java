@@ -112,7 +112,7 @@ public class AdminToolOrbMenu {
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lLife &c&lOrb"))) {
-            p.getInventory().addItem(OrbItems.lifeorb());
+            p.getInventory().addItem(OrbItems.lifeOrb());
             p.sendMessage(prefix + Utils.chat("Je ontvangt de &a&lLife &c&lOrb&7!"));
         }
 

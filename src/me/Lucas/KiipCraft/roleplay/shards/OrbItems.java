@@ -141,7 +141,7 @@ public class OrbItems {
         return shard;
     }
 
-    public static ItemStack lifeorb() {
+    public static ItemStack lifeOrb() {
         ItemStack shard = new ItemStack(Material.ENDER_EYE);
         ItemMeta shardMeta = shard.getItemMeta();
 

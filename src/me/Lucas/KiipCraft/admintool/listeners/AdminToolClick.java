@@ -16,8 +16,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import static me.Lucas.KiipCraft.utils.Utils.adminTool;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
@@ -64,6 +66,15 @@ public class AdminToolClick implements Listener {
 
         if (p.getItemInHand().equals(adminTool())) {
             e.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDeath(PlayerDeathEvent e) {
+        for (ItemStack droppedItem : e.getDrops()) {
+            if (droppedItem.equals(adminTool())) {
+                e.getDrops().remove(adminTool());
+            }
         }
     }
 }
