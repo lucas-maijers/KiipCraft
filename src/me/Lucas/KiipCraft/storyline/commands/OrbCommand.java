@@ -4,10 +4,10 @@
  * All rights reserved.
  */
 
-package me.Lucas.KiipCraft.roleplay.commands;
+package me.Lucas.KiipCraft.storyline.commands;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.roleplay.shards.OrbItems;
+import me.Lucas.KiipCraft.storyline.shards.OrbItems;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

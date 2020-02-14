@@ -7,7 +7,7 @@
 package me.Lucas.KiipCraft.admintool.guis;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.roleplay.shards.OrbItems;
+import me.Lucas.KiipCraft.storyline.shards.OrbItems;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

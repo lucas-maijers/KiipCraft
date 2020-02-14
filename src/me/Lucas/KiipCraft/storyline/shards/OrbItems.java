@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-package me.Lucas.KiipCraft.roleplay.shards;
+package me.Lucas.KiipCraft.storyline.shards;
 
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Material;

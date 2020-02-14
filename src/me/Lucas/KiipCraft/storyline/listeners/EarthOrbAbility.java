@@ -4,10 +4,10 @@
  * All rights reserved.
  */
 
-package me.Lucas.KiipCraft.roleplay.listeners;
+package me.Lucas.KiipCraft.storyline.listeners;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.roleplay.shards.OrbItems;
+import me.Lucas.KiipCraft.storyline.shards.OrbItems;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;

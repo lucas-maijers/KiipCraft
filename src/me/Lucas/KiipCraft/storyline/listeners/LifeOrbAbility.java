@@ -4,10 +4,10 @@
  * All rights reserved.
  */
 
-package me.Lucas.KiipCraft.roleplay.listeners;
+package me.Lucas.KiipCraft.storyline.listeners;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.roleplay.shards.OrbItems;
+import me.Lucas.KiipCraft.storyline.shards.OrbItems;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -29,6 +29,8 @@ public class LifeOrbAbility implements Listener {
 
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
+
+    /* TODO make it give regen */
 
     @EventHandler
     public void onThrow(PlayerInteractEvent e) {
