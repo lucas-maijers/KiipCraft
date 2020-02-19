@@ -118,5 +118,4 @@ public class ShardItems {
         shard.setItemMeta(shardMeta);
         return shard;
     }
-
 }

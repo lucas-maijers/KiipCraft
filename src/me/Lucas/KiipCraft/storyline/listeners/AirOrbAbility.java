@@ -31,7 +31,9 @@ import org.bukkit.util.Vector;
 public class AirOrbAbility implements Listener {
 
     private Main plugin;
-    private boolean onCooldown = false;
+    private boolean cooldown;
+    private String cooldownMessage = "";
+    private int timeratNow = 120;
 
     public AirOrbAbility(Main plugin) {
         this.plugin = plugin;
@@ -45,7 +47,7 @@ public class AirOrbAbility implements Listener {
 
         if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.airOrb())) {
             if (p.hasPermission("kiipcraft.orb.use")) {
-                p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 50, (float) 1.8);
+                p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 20, (float) 1.8);
                 for (Entity et : p.getNearbyEntities(10, 10, 10)) {
                     if (et instanceof Player || et instanceof Monster) {
                         Location etLoc = et.getLocation();
@@ -71,11 +73,11 @@ public class AirOrbAbility implements Listener {
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.airOrb())) {
             e.setCancelled(true);
             if (p.hasPermission("kiipcraft.orb.use")) {
-                if (onCooldown) {
-                    p.sendMessage(Utils.prefix + Utils.chat("De krachten om je te laten vliegen zijn momenteel nog op cooldown."));
+                if (cooldown) {
+                    p.sendMessage(cooldownMessage);
                     return;
                 }
-                onCooldown = true;
+                startCooldown();
                 p.setAllowFlight(true);
                 p.setExp(0F);
                 p.setLevel(60);
@@ -167,7 +169,6 @@ public class AirOrbAbility implements Listener {
                             p.setExp(0F);
                             p.setAllowFlight(false);
                             p.setFlying(false);
-                            onCooldown = false;
                             this.cancel();
                         }
                     }
@@ -215,5 +216,24 @@ public class AirOrbAbility implements Listener {
                 e.getDrops().remove(OrbItems.airOrb());
             }
         }
+    }
+
+    private void startCooldown() {
+        cooldown = true;
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (timeratNow > 0) {
+                    timeratNow--;
+                    cooldownMessage = Utils.prefix + Utils.chat("Deze ability zit nog op cooldown voor &c" + timeratNow + " &7seconden!");
+                }
+                if (timeratNow == 0) {
+                    timeratNow = 120;
+                    cooldown = false;
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0, 20);
     }
 }

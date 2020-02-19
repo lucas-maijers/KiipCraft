@@ -97,6 +97,7 @@ public class AdminToolPlayerSettings {
                     plr.sendMessage(prefix + Utils.chat("&b&l" + p.getName() + "&7 heeft &d&l" + plrData.getName() + " &agenezen&7!"));
                 }
             }
+            p.openInventory(AdminToolPlayerSettings.playerSettings(p));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&4&lKILL"))) {

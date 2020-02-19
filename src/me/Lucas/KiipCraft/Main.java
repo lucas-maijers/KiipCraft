@@ -69,7 +69,7 @@ public class Main extends JavaPlugin {
         new ServerTourRequestSettings(this);
 
         new FireOrbAbility(this);
-
+        new WaterOrbAbility(this);
         new AirOrbAbility(this);
         new EarthOrbAbility(this);
         new LightningOrbAbility(this);
@@ -109,6 +109,7 @@ public class Main extends JavaPlugin {
         AdminToolOrbMenu.initialize();
     }
 
+    @Override
     public void onDisable() {
         cfgm.saveWarps();
         saveConfig();

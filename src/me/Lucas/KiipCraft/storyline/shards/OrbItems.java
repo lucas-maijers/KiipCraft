@@ -114,7 +114,7 @@ public class OrbItems {
         ItemMeta shardMeta = shard.getItemMeta();
 
         ArrayList<String> lore = new ArrayList<>();
-        lore.add(Utils.chat("&7De &e&lLight &c&lOrb &7heeft de kracht om iedereen in een straal om jou heen te verlichten!"));
+        lore.add(Utils.chat("&7De &e&lLight &c&lOrb &7heeft de kracht om iedereen om jou heen te verlichten!"));
         lore.add(Utils.chat("&7Deze krachten zijn uiterst gevaarlijk!"));
         lore.add(Utils.chat("&7Als ze in verkeerde handen vallen zou de wereld verdoemd zijn!"));
 
@@ -132,6 +132,11 @@ public class OrbItems {
     public static ItemStack darknessOrb() {
         ItemStack shard = new ItemStack(Material.ENDER_EYE);
         ItemMeta shardMeta = shard.getItemMeta();
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(Utils.chat("&7De &5&lDark&0&lness &c&lOrb &7heeft de kracht om iedereen om jou heen te verblinden!"));
+        lore.add(Utils.chat("&7Deze krachten zijn uiterst gevaarlijk!"));
+        lore.add(Utils.chat("&7Als ze in verkeerde handen vallen zou de wereld verdoemd zijn!"));
 
         assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&5&lDark&0&lness &c&lOrb"));
