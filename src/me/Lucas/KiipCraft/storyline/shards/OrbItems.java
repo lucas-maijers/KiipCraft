@@ -32,6 +32,7 @@ public class OrbItems {
 
         shardMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         shardMeta.setLore(lore);
+
         shard.setItemMeta(shardMeta);
         return shard;
     }
@@ -40,11 +41,18 @@ public class OrbItems {
         ItemStack shard = new ItemStack(Material.ENDER_EYE);
         ItemMeta shardMeta = shard.getItemMeta();
 
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(Utils.chat("&7De &1&lWater &c&lOrb &7heeft de kracht om ijsmuren te creëren!"));
+        lore.add(Utils.chat("&7Deze krachten zijn uiterst gevaarlijk!"));
+        lore.add(Utils.chat("&7Als ze in verkeerde handen vallen zou de wereld verdoemd zijn!"));
+
         assert shardMeta != null;
         shardMeta.setDisplayName(Utils.chat("&1&lWater &c&lOrb"));
         shardMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
         shardMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        shardMeta.setLore(lore);
+
         shard.setItemMeta(shardMeta);
         return shard;
     }
@@ -142,6 +150,8 @@ public class OrbItems {
         shardMeta.setDisplayName(Utils.chat("&5&lDark&0&lness &c&lOrb"));
 
         shardMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        shardMeta.setLore(lore);
+
         shard.setItemMeta(shardMeta);
         return shard;
     }

@@ -19,6 +19,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -60,6 +61,18 @@ public class WaterOrbAbility implements Listener {
     }
 
     @EventHandler
+    public void loseOxygen(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            Player p = (Player) e.getEntity();
+            if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
+                if (p.hasPermission("kiipcraft.orb.use") && p.getInventory().contains(OrbItems.waterOrb())) {
+                    e.setCancelled(true);
+                }
+            }
+        }
+    }
+
+    @EventHandler
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
@@ -95,6 +108,7 @@ public class WaterOrbAbility implements Listener {
         }
     }
 
+    // Cooldown shit
     private void startCooldown() {
         cooldown = true;
 
@@ -111,7 +125,7 @@ public class WaterOrbAbility implements Listener {
                     this.cancel();
                 }
             }
-        }.runTaskTimer(plugin, 0, 1);
+        }.runTaskTimer(plugin, 0, 20);
     }
 
 

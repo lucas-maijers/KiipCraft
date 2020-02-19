@@ -35,6 +35,7 @@ public class EarthOrbAbility implements Listener {
 
     public static Set<String> stunnedPlayerList = new HashSet<>();
     private Main plugin;
+    private int timeratNow = 15;
 
     public EarthOrbAbility(Main plugin) {
         this.plugin = plugin;
@@ -56,7 +57,9 @@ public class EarthOrbAbility implements Listener {
                     if (target instanceof Player) {
                         stunnedPlayerList.add(target.getName());
 
-                        scheduler.scheduleSyncRepeatingTask(plugin, () -> {
+                        scheduler.scheduleSyncRepeatingTask(plugin, () -> new BukkitRunnable() {
+                            Location loc = target.getLocation();
+                            Location loc2 = target.getLocation();
                             float red = 121;
                             float green = 96;
                             float blue = 76;
@@ -65,40 +68,35 @@ public class EarthOrbAbility implements Listener {
                             float green2 = 65;
                             float blue2 = 47;
 
-                            new BukkitRunnable() {
-                                Location loc = target.getLocation();
-                                Location loc2 = target.getLocation();
+                            double t = 0;
+                            double r = 1;
 
-                                double t = 0;
-                                double r = 1;
+                            @Override
+                            public void run() {
 
-                                @Override
-                                public void run() {
+                                t = t + Math.PI / 16;
 
-                                    t = t + Math.PI / 16;
+                                double x = r * cos(t);
+                                double y = 0.08 * t;
+                                double z = r * sin(t);
+                                loc.add(x, y, z);
+                                loc2.add(z, y, x);
 
-                                    double x = r * cos(t);
-                                    double y = 0.08 * t;
-                                    double z = r * sin(t);
-                                    loc.add(x, y, z);
-                                    loc2.add(z, y, x);
+                                Particle.DustOptions lightBrown = new Particle.DustOptions(
+                                        Color.fromRGB((int) red, (int) green, (int) blue), 1);
+                                Particle.DustOptions darkBrown = new Particle.DustOptions(
+                                        Color.fromRGB((int) red2, (int) green2, (int) blue2), 1);
 
-                                    Particle.DustOptions lightBrown = new Particle.DustOptions(
-                                            Color.fromRGB((int) red, (int) green, (int) blue), 1);
-                                    Particle.DustOptions darkBrown = new Particle.DustOptions(
-                                            Color.fromRGB((int) red2, (int) green2, (int) blue2), 1);
+                                w.spawnParticle(Particle.REDSTONE, loc, 1, 0, 0, 0, 0.01, lightBrown);
+                                w.spawnParticle(Particle.REDSTONE, loc2, 1, 0, 0, 0, 0.1, darkBrown);
+                                loc.subtract(x, y, z);
+                                loc2.subtract(z, y, x);
 
-                                    w.spawnParticle(Particle.REDSTONE, loc, 1, 0, 0, 0, 0.01, lightBrown);
-                                    w.spawnParticle(Particle.REDSTONE, loc2, 1, 0, 0, 0, 0.1, darkBrown);
-                                    loc.subtract(x, y, z);
-                                    loc2.subtract(z, y, x);
-
-                                    if (t > Math.PI * 8) {
-                                        this.cancel();
-                                    }
+                                if (t > Math.PI * 8) {
+                                    this.cancel();
                                 }
-                            }.runTaskTimer(plugin, 0, 1);
-                        }, 0L, 20L);
+                            }
+                        }.runTaskTimer(plugin, 0, 1), 0L, 20L);
 
 
                         scheduler.scheduleSyncDelayedTask(plugin, () -> {
@@ -139,7 +137,6 @@ public class EarthOrbAbility implements Listener {
             e.setCancelled(true);
         }
     }
-
 
     @EventHandler
     public void stunnedMovement(PlayerMoveEvent e) {
