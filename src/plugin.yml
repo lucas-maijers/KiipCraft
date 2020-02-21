@@ -8,7 +8,7 @@ description: De KiipCraft plugin voor de Shops en Events.
 commands:
   eventsadmin:
     aliases: [events]
-    description: Open de EventsGUI voor de events!
+    description: Open de EventsGUI voor de events.
   kiipcraft:
     description: Laat de plugin commands zien.
   bottlexp:
@@ -25,3 +25,5 @@ commands:
     description: Geeft je een Shard.
   orb:
     description: Geeft je een Orb.
+  dungeons:
+    description: Geeft je een Dungeon Key.

@@ -7,12 +7,11 @@
 package me.Lucas.KiipCraft.commands;
 
 import me.Lucas.KiipCraft.Main;
+import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class KiipCraftCommand implements CommandExecutor {
 
@@ -50,7 +49,7 @@ public class KiipCraftCommand implements CommandExecutor {
             p.sendMessage(" ");
             return true;
         } else {
-            sender.sendMessage(prefix + "Alleen spelers kunnen dit commando uitvoeren.");
+            sender.sendMessage(Utils.consoleMessage);
         }
         return false;
     }

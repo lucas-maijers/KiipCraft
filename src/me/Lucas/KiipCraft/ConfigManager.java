@@ -17,8 +17,10 @@ import java.util.logging.Level;
 public class ConfigManager {
 
     private static ConfigManager manager = new ConfigManager();
-    public FileConfiguration warpscfg;
+    public FileConfiguration warpsCFG;
     public File warpsfile;
+    public File dungeonGatesFile;
+    public FileConfiguration dungeonGatesCFG;
     private Main plugin = Main.getPlugin(Main.class);
 
     public static ConfigManager getManager() {
@@ -31,6 +33,7 @@ public class ConfigManager {
         }
 
         warpsfile = new File(plugin.getDataFolder(), "warps.yml");
+        dungeonGatesFile = new File(plugin.getDataFolder(), "dungeongates.yml");
 
         if (!warpsfile.exists()) {
             try {
@@ -40,31 +43,63 @@ public class ConfigManager {
             }
         }
 
-        warpscfg = YamlConfiguration.loadConfiguration(warpsfile);
-
-    }
-
-    public FileConfiguration getWarpscfg() {
-        warpsfile = new File(plugin.getDataFolder(), "warps.yml");
-        warpscfg = YamlConfiguration.loadConfiguration(warpsfile);
-        return warpscfg;
-    }
-
-    public void saveWarps() {
-        try {
-            warpsfile = new File(plugin.getDataFolder(), "warps.yml");
-            warpscfg = YamlConfiguration.loadConfiguration(warpsfile);
-            if (!warpscfg.isConfigurationSection("Warps")) {
-                warpscfg.createSection("Warps");
+        if (!dungeonGatesFile.exists()) {
+            try {
+                dungeonGatesFile.createNewFile();
+            } catch (IOException e) {
+                Bukkit.getServer().getLogger().log(Level.WARNING, "File could not be created.");
             }
-            warpscfg.save(warpsfile);
+        }
+
+        warpsCFG = YamlConfiguration.loadConfiguration(warpsfile);
+        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+
+    }
+
+    public FileConfiguration getWarpsCFG() {
+        warpsfile = new File(plugin.getDataFolder(), "warps.yml");
+        warpsCFG = YamlConfiguration.loadConfiguration(warpsfile);
+        return warpsCFG;
+    }
+
+    public FileConfiguration getDungeonGatesCFG() {
+        dungeonGatesFile = new File(plugin.getDataFolder(), "dungeongates.yml");
+        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+        return dungeonGatesCFG;
+    }
+
+    public void saveDungeonGates() {
+        try {
+            dungeonGatesFile = new File(plugin.getDataFolder(), "dungeongates.yml");
+            dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+            if (!dungeonGatesCFG.isConfigurationSection("DungeonGates")) {
+                dungeonGatesCFG.createSection("DungeonGates");
+            }
+            dungeonGatesCFG.save(dungeonGatesFile);
         } catch (IOException e) {
             Bukkit.getServer().getLogger().log(Level.WARNING, "File could not be saved.");
         }
     }
 
+    public void saveWarps() {
+        try {
+            warpsfile = new File(plugin.getDataFolder(), "warps.yml");
+            warpsCFG = YamlConfiguration.loadConfiguration(warpsfile);
+            if (!warpsCFG.isConfigurationSection("Warps")) {
+                warpsCFG.createSection("Warps");
+            }
+            warpsCFG.save(warpsfile);
+        } catch (IOException e) {
+            Bukkit.getServer().getLogger().log(Level.WARNING, "File could not be saved.");
+        }
+    }
+
+    public void reloadDungeonGates() {
+        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+    }
+
     public void reloadWarps() {
-        warpscfg = YamlConfiguration.loadConfiguration(warpsfile);
+        warpsCFG = YamlConfiguration.loadConfiguration(warpsfile);
     }
 
 }

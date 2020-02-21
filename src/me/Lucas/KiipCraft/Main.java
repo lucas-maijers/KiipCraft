@@ -14,6 +14,7 @@ import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
 import me.Lucas.KiipCraft.bottleXP.listener.DrinkXPBottle;
 import me.Lucas.KiipCraft.commands.KiipCraftCommand;
 import me.Lucas.KiipCraft.commands.UpdateCommand;
+import me.Lucas.KiipCraft.dungeons.commands.DungeonsCommand;
 import me.Lucas.KiipCraft.events.command.EventsToolCommand;
 import me.Lucas.KiipCraft.events.command.GUICommand;
 import me.Lucas.KiipCraft.events.listener.EventsToolClick;
@@ -60,6 +61,8 @@ public class Main extends JavaPlugin {
         new OrbCommand(this);
 
         new AdminToolCommand(this);
+
+        new DungeonsCommand(this);
         // Listeners
         new DrinkXPBottle(this);
         new InventoryClickListener(this);
@@ -112,13 +115,18 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         cfgm.saveWarps();
+        cfgm.saveDungeonGates();
         saveConfig();
     }
 
     public void loadConfigManager() {
         cfgm = new ConfigManager();
         cfgm.setup();
+
+        cfgm.saveDungeonGates();
         cfgm.saveWarps();
+
+        cfgm.reloadDungeonGates();
         cfgm.reloadWarps();
 
     }

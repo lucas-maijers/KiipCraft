@@ -63,7 +63,7 @@ public class ServerTourRequestsGUI {
         Utils.createItem(inv, BARRIER, 1, 32, "&cSluiten");
 
         for (String key : warps.getConfigurationSection("Warps").getKeys(false)) {
-            ConfigurationSection cs = cfgm.getWarpscfg().getConfigurationSection("Warps." + key);
+            ConfigurationSection cs = cfgm.getWarpsCFG().getConfigurationSection("Warps." + key);
             Utils.createItemLore(inv, DIRT, 1, l, key, "&7Door: &6&l" + cs.getString("creator"), "&7X: &6" + cs.getDouble("X"), "&7Y: &6" + cs.getDouble("Y"), "&7Z: &6" + cs.getDouble("Z"), "&7World: &6" + cs.getString("world"), " ", "Klik om instellingen voor deze servertour locatie op te vragen");
             l++;
         }

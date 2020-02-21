@@ -31,6 +31,7 @@ import static org.bukkit.Material.*;
 public class Utils {
 
     public static String prefix = "§c§lKiipcraft §7§l»§7 ";
+    public static String consoleMessage = prefix + chat("Alleen een speler kan dit commando gebruiken!");
     public static String noPermission = prefix + chat("Helaas, jij mag dit commando niet uitvoeren!");
 
     public static String chat(String s) {

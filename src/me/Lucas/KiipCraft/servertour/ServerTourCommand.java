@@ -7,6 +7,7 @@
 package me.Lucas.KiipCraft.servertour;
 
 import me.Lucas.KiipCraft.Main;
+import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -71,6 +72,8 @@ public class ServerTourCommand implements CommandExecutor {
                 p.sendMessage(noPermission);
             }
             return true;
+        } else {
+            sender.sendMessage(Utils.consoleMessage);
         }
         return false;
     }
