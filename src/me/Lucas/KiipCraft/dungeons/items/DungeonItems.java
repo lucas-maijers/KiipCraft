@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 
-public class DungeonKeys {
+public class DungeonItems {
 
     public static ItemStack diamondKey() {
         ItemStack dKey = new ItemStack(Material.PAPER);
@@ -75,5 +75,25 @@ public class DungeonKeys {
 
         dKey.setItemMeta(dKeyM);
         return dKey;
+    }
+
+    public static ItemStack dungeonGateTool() {
+        ItemStack gateTool = new ItemStack(Material.BLAZE_ROD);
+        ItemMeta gateToolM = gateTool.getItemMeta();
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(Utils.chat("&7De Dungeon Gate Tool om deuren voor dungeons mee aan te wijzen!"));
+        lore.add(Utils.chat("&7Met de tool kan je een dungeon gate maken!"));
+        lore.add(Utils.chat("&7Om te beginnen met een dungeon gate te maken doe je /dungeons createdungeon!"));
+
+        assert gateToolM != null;
+        gateToolM.setDisplayName(Utils.chat("&c&lDungeon Gate Tool"));
+        gateToolM.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+
+        gateToolM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        gateToolM.setLore(lore);
+
+        gateTool.setItemMeta(gateToolM);
+        return gateTool;
     }
 }

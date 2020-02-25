@@ -33,7 +33,7 @@ public class ConfigManager {
         }
 
         warpsfile = new File(plugin.getDataFolder(), "warps.yml");
-        dungeonGatesFile = new File(plugin.getDataFolder(), "dungeongates.yml");
+        dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
 
         if (!warpsfile.exists()) {
             try {
@@ -63,17 +63,17 @@ public class ConfigManager {
     }
 
     public FileConfiguration getDungeonGatesCFG() {
-        dungeonGatesFile = new File(plugin.getDataFolder(), "dungeongates.yml");
+        dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
         dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
         return dungeonGatesCFG;
     }
 
     public void saveDungeonGates() {
         try {
-            dungeonGatesFile = new File(plugin.getDataFolder(), "dungeongates.yml");
+            dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
             dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
-            if (!dungeonGatesCFG.isConfigurationSection("DungeonGates")) {
-                dungeonGatesCFG.createSection("DungeonGates");
+            if (!dungeonGatesCFG.isConfigurationSection("Dungeons")) {
+                dungeonGatesCFG.createSection("Dungeons");
             }
             dungeonGatesCFG.save(dungeonGatesFile);
         } catch (IOException e) {

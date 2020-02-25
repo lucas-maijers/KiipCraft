@@ -42,7 +42,7 @@ public class Utils {
         ItemStack kiipEuro = new ItemStack(IRON_NUGGET, KiipEuroCommand.aantalKiipEuros);
         ItemMeta kiipEuroMeta = kiipEuro.getItemMeta();
 
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("§5De KiipEuro om items in de Shop mee te kopen.");
         lore.add("Officieel KiipCraft Store Item.");
 
@@ -58,7 +58,7 @@ public class Utils {
         ItemStack kiipEuro = new ItemStack(IRON_NUGGET, 64);
         ItemMeta kiipEuroMeta = kiipEuro.getItemMeta();
 
-        ArrayList<String> lore = new ArrayList<String>();
+        ArrayList<String> lore = new ArrayList<>();
         lore.add("§5De KiipEuro om items in de Shop mee te kopen.");
         lore.add("Officieel KiipCraft Store Item.");
 

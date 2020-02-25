@@ -15,6 +15,7 @@ import me.Lucas.KiipCraft.bottleXP.listener.DrinkXPBottle;
 import me.Lucas.KiipCraft.commands.KiipCraftCommand;
 import me.Lucas.KiipCraft.commands.UpdateCommand;
 import me.Lucas.KiipCraft.dungeons.commands.DungeonsCommand;
+import me.Lucas.KiipCraft.dungeons.listeners.DungeonGateCreation;
 import me.Lucas.KiipCraft.events.command.EventsToolCommand;
 import me.Lucas.KiipCraft.events.command.GUICommand;
 import me.Lucas.KiipCraft.events.listener.EventsToolClick;
@@ -79,6 +80,8 @@ public class Main extends JavaPlugin {
         new LightOrbAbility(this);
         new DarknessOrbAbility(this);
         new LifeOrbAbility(this);
+
+        new DungeonGateCreation(this);
 
         new AdminToolClick(this);
         new AdminToolGUIClick(this);
