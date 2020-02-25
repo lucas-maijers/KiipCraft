@@ -69,7 +69,7 @@ public class DungeonsCommand implements CommandExecutor {
                 return true;
             }
             /* GateTool */
-            if (args[0].equals("gatetool") && p.hasPermission("kiipcraft.dungeons.tool")) {
+            if (args[0].equals("tool") && p.hasPermission("kiipcraft.dungeons.tool")) {
                 p.getInventory().addItem(DungeonItems.dungeonGateTool());
                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt de &c&lDungeons Gate Tool &7ontvangen!"));
                 return true;
