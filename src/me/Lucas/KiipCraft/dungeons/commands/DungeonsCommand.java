@@ -169,7 +169,6 @@ public class DungeonsCommand implements CommandExecutor {
                 } else {
                     p.sendMessage(Utils.prefix + Utils.chat("De dungeongate " + args[0] + " bestaat niet! Doe &c/dungeons list &7voor een lijst met dungeongates."));
                 }
-
             }
         } else {
             p.sendMessage(Utils.noPermission);
