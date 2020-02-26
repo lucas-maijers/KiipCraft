@@ -55,10 +55,6 @@ public class DungeonGateCreation implements Listener {
     private Location rightCorner;
     private Location sleutelBlock;
 
-    /* #TODO
-     * - Sla de boel op in een config
-     */
-
     public DungeonGateCreation(Main plugin) {
         this.plugin = plugin;
 

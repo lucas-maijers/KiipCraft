@@ -165,9 +165,9 @@ public class DungeonsCommand implements CommandExecutor {
                         p.sendMessage(Utils.prefix + Utils.chat("Error met het verwijderen van deze dungeongate, raadpleeg console voor meer informatie!"));
                         e.printStackTrace();
                     }
-                    p.sendMessage(Utils.prefix + Utils.chat("De dungeongate met de naam: &c" + args[0] + "&7 wordt verwijderd!"));
+                    p.sendMessage(Utils.prefix + Utils.chat("De dungeongate met de naam: &c" + args[1] + "&7 wordt verwijderd!"));
                 } else {
-                    p.sendMessage(Utils.prefix + Utils.chat("De dungeongate " + args[0] + " bestaat niet! Doe &c/dungeons list &7voor een lijst met dungeongates."));
+                    p.sendMessage(Utils.prefix + Utils.chat("De dungeongate " + args[1] + " bestaat niet! Doe &c/dungeons list &7voor een lijst met dungeongates."));
                 }
             }
         } else {
