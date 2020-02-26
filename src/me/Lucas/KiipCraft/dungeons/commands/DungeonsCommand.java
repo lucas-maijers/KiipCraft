@@ -6,25 +6,43 @@
 
 package me.Lucas.KiipCraft.dungeons.commands;
 
+import me.Lucas.KiipCraft.ConfigManager;
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.dungeons.items.DungeonItems;
 import me.Lucas.KiipCraft.dungeons.listeners.DungeonGateCreation;
 import me.Lucas.KiipCraft.utils.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class DungeonsCommand implements CommandExecutor {
 
     private Main plugin;
+
+    private File dungeonGatesFile;
+    private FileConfiguration dungeonGatesCFG;
+
+    private static ConfigManager cfgm = ConfigManager.getManager();
+
+    private Set<String> dungeonList = new HashSet<>();
+
     public static Set<String> creatingPlayer = new HashSet<>();
 
     public DungeonsCommand(Main plugin) {
         this.plugin = plugin;
+
+        dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
+        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
 
         plugin.getCommand("dungeons").setExecutor(this);
     }
@@ -49,17 +67,33 @@ public class DungeonsCommand implements CommandExecutor {
                     p.sendMessage(Utils.prefix + Utils.chat("Je moet een geldige soort sleutel invoeren, geldige soorten zijn: Gold, Diamond, Emerald!"));
                     return true;
                 }
+                if (args.length == 3) {
+                    for (Player plr : Bukkit.getOnlinePlayers()) {
+                        if (args[2].equals(plr.getName())) {
+                            p = plr;
+                        }
+                    }
+                }
                 switch (args[1].toLowerCase()) {
                     case "diamond":
                         p.getInventory().addItem(DungeonItems.diamondKey());
+                        if (args.length == 3) {
+                            sender.sendMessage(Utils.prefix + Utils.chat("Je hebt &d&l" + p.getName() + " &7een &b&LDiamond &c&lDungeon Key &7gegeven!"));
+                        }
                         p.sendMessage(Utils.prefix + Utils.chat("Je hebt een &b&lDiamond &c&lDungeon Key &7ontvangen!"));
                         break;
                     case "emerald":
                         p.getInventory().addItem(DungeonItems.emeraldKey());
+                        if (args.length == 3) {
+                            sender.sendMessage(Utils.prefix + Utils.chat("Je hebt &d&l" + p.getName() + " &7een &a&LEmerald &c&lDungeon Key &7gegeven!"));
+                        }
                         p.sendMessage(Utils.prefix + Utils.chat("Je hebt een &a&lEmerald &c&lDungeon Key &7ontvangen!"));
                         break;
                     case "gold":
                         p.getInventory().addItem(DungeonItems.goldKey());
+                        if (args.length == 3) {
+                            sender.sendMessage(Utils.prefix + Utils.chat("Je hebt &d&l" + p.getName() + " &7een &6&LGold &c&lDungeon Key &7gegeven!"));
+                        }
                         p.sendMessage(Utils.prefix + Utils.chat("Je hebt een &6&lGold &c&lDungeon Key &7ontvangen!"));
                         break;
                     default:
@@ -103,10 +137,47 @@ public class DungeonsCommand implements CommandExecutor {
                     return true;
                 }
             }
+            /* List Gates */
+            if (args[0].equals("list") && p.hasPermission("kiipcraft.dungeons.list")) {
+                refreshList();
+                p.sendMessage(Utils.prefix + Utils.chat("Dungeons:"));
+                for (String s : dungeonList) {
+                    p.sendMessage(Utils.chat("  &7- &a" + s));
+                }
+            }
+            /* Remove Gates */
+            if (args[0].equals("remove") && p.hasPermission("kiipcraft.dungeons.remove")) {
+                refreshList();
+                if (args.length == 1) {
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt geen dungeon ingevuld om te verwijderen, probeer het opnieuw!"));
+                    return true;
+                }
 
+                if (dungeonList.contains(args[1])) {
+                    ConfigurationSection cs = dungeonGatesCFG.getConfigurationSection("Dungeons");
+
+                    try {
+                        assert cs != null;
+                        cs.set(args[1], null);
+                        dungeonGatesCFG.save(dungeonGatesFile);
+                        dungeonList.remove(args[1]);
+                    } catch (IOException e) {
+                        p.sendMessage(Utils.prefix + Utils.chat("Error met het verwijderen van deze dungeongate, raadpleeg console voor meer informatie!"));
+                        e.printStackTrace();
+                    }
+                    p.sendMessage(Utils.prefix + Utils.chat("De dungeongate met de naam: &c" + args[0] + "&7 wordt verwijderd!"));
+                } else {
+                    p.sendMessage(Utils.prefix + Utils.chat("De dungeongate " + args[0] + " bestaat niet! Doe &c/dungeons list &7voor een lijst met dungeongates."));
+                }
+
+            }
         } else {
             p.sendMessage(Utils.noPermission);
         }
         return false;
+    }
+
+    private void refreshList() {
+        dungeonList.addAll(cfgm.getDungeonGatesCFG().getConfigurationSection("Dungeons").getKeys(false));
     }
 }

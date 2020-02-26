@@ -38,8 +38,8 @@ public class DungeonGateCreation implements Listener {
 
     private Main plugin;
 
-    public File dungeonGatesFile;
-    public FileConfiguration dungeonGatesCFG;
+    private File dungeonGatesFile;
+    private FileConfiguration dungeonGatesCFG;
 
     public static Set<String> phase1 = new HashSet<>();
     public static Set<String> phase2 = new HashSet<>();
