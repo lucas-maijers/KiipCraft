@@ -6,8 +6,8 @@
 
 package me.Lucas.KiipCraft.servertour;
 
-import me.Lucas.KiipCraft.ConfigManager;
 import me.Lucas.KiipCraft.Main;
+import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;

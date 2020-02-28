@@ -8,41 +8,44 @@ package me.Lucas.KiipCraft.events.command;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.events.ui.MainEventsUI;
-import me.Lucas.KiipCraft.utils.Utils;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import me.Lucas.KiipCraft.managers.SubCommand;
 import org.bukkit.entity.Player;
 
 import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
-public class GUICommand implements CommandExecutor {
+public class GUICommand extends SubCommand {
 
     private Main plugin;
 
     public GUICommand(Main plugin) {
         this.plugin = plugin;
-        plugin.getCommand("eventsadmin").setExecutor(this);
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(Utils.consoleMessage);
-            return true;
-        }
-
-        Player p = (Player) sender;
-
+    public void onCommand(Player p, String[] args) {
         if (p.hasPermission("kiipcraft.events")) {
             p.sendMessage(prefix + "Bezig met het openen van de §3§lEventsAdmin GUI§7...");
             p.openInventory(MainEventsUI.mainGUI(p));
-            return true;
+            return;
         } else {
             p.sendMessage(noPermission);
         }
-        return false;
     }
+
+    @Override
+    public String name() {
+        return plugin.cmdMngr.eventsadmin;
+    }
+
+    @Override
+    public String info() {
+        return "";
+    }
+
+    @Override
+    public String[] aliases() {
+        return new String[]{"events"};
+    }
+
 }

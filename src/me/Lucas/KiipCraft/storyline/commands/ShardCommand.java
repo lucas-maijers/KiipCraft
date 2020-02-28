@@ -7,83 +7,85 @@
 package me.Lucas.KiipCraft.storyline.commands;
 
 import me.Lucas.KiipCraft.Main;
+import me.Lucas.KiipCraft.managers.SubCommand;
 import me.Lucas.KiipCraft.storyline.shards.ShardItems;
 import me.Lucas.KiipCraft.utils.Utils;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
-public class ShardCommand implements CommandExecutor {
+public class ShardCommand extends SubCommand {
 
     private Main plugin;
 
     public ShardCommand(Main plugin) {
         this.plugin = plugin;
-
-        plugin.getCommand("shard").setExecutor(this);
     }
 
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(Utils.consoleMessage);
-            return true;
-        }
-
-        Player p = (Player) sender;
-
+    public void onCommand(Player p, String[] args) {
         if (p.hasPermission("kiipcraft.shard")) {
-            if (args.length == 0) {
+            if (args.length == 1) {
                 p.sendMessage(prefix + "Je moet de naam van een Shard invullen.");
                 p.sendMessage(prefix + Utils.chat("Geldige namen zijn: fire, water, air, earth, lightning, light, darkness, life"));
-                return true;
+                return;
             }
-            switch (args[0].toLowerCase()) {
+            switch (args[1].toLowerCase()) {
                 case "fire":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &4&lFire&7!"));
                     p.getInventory().addItem(ShardItems.fireShard());
-                    return true;
+                    return;
                 case "water":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &1&lWater&7!"));
                     p.getInventory().addItem(ShardItems.waterShard());
-                    return true;
+                    return;
                 case "air":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &f&lAir&7!"));
                     p.getInventory().addItem(ShardItems.airShard());
-                    return true;
+                    return;
                 case "earth":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &6&lEarth&7!"));
                     p.getInventory().addItem(ShardItems.earthShard());
-                    return true;
+                    return;
                 case "lightning":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &b&lLight&e&lning&7!"));
                     p.getInventory().addItem(ShardItems.lightningShard());
-                    return true;
+                    return;
                 case "light":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &e&lLight&7!"));
                     p.getInventory().addItem(ShardItems.lightShard());
-                    return true;
+                    return;
                 case "darkness":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &5&lDark&0&lness&7!"));
                     p.getInventory().addItem(ShardItems.darknessShard());
-                    return true;
+                    return;
                 case "life":
                     p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &a&lLife&7!"));
                     p.getInventory().addItem(ShardItems.lifeShard());
-                    return true;
+                    return;
                 default:
                     p.sendMessage(prefix + "Onbekende Shardnaam.");
-                    return true;
+                    return;
             }
         } else {
             p.sendMessage(noPermission);
         }
-        return false;
+    }
+
+    @Override
+    public String name() {
+        return plugin.cmdMngr.shard;
+    }
+
+    @Override
+    public String info() {
+        return "";
+    }
+
+    @Override
+    public String[] aliases() {
+        return new String[0];
     }
 }

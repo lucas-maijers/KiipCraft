@@ -4,8 +4,9 @@
  * All rights reserved.
  */
 
-package me.Lucas.KiipCraft;
+package me.Lucas.KiipCraft.managers;
 
+import me.Lucas.KiipCraft.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

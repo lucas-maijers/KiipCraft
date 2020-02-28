@@ -7,12 +7,9 @@
 package me.Lucas.KiipCraft.servertour;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.utils.Utils;
+import me.Lucas.KiipCraft.managers.SubCommand;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -24,7 +21,7 @@ import java.io.IOException;
 import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
-public class ServerTourCommand implements CommandExecutor {
+public class ServerTourCommand extends SubCommand {
 
     private Main plugin;
 
@@ -36,49 +33,55 @@ public class ServerTourCommand implements CommandExecutor {
 
         warpsfile = new File(plugin.getDataFolder(), "warps.yml");
         warps = YamlConfiguration.loadConfiguration(warpsfile);
+    }
 
-        plugin.getCommand("servertour").setExecutor(this);
+
+    @Override
+    public void onCommand(Player p, String[] args) {
+        Location loc = p.getLocation();
+        World w = p.getWorld();
+
+        if (args == null || args.length == 1) {
+            try {
+                makeNewWarp(loc, p);
+                ServerTourRequestsGUI.initialize();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        } else if (args[1].equals("menu") && p.hasPermission("kiipcraft.servertour.menu")) {
+            p.sendMessage(prefix + "Je opent het Servertour Menu.");
+            warps = YamlConfiguration.loadConfiguration(warpsfile);
+            try {
+                warps.save(warpsfile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ServerTourRequestsGUI.initialize();
+            p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
+            return;
+        } else {
+            p.sendMessage(noPermission);
+        }
+        return;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
-        if (sender instanceof Player) {
-            Player p = (Player) sender;
-
-            Location loc = p.getLocation();
-            World w = p.getWorld();
-
-            if (args == null || args.length == 0) {
-                try {
-                    makeNewWarp(loc, p);
-                    ServerTourRequestsGUI.initialize();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return true;
-            } else if (args[0].equals("menu") && p.hasPermission("kiipcraft.servertour.menu")) {
-                p.sendMessage(prefix + "Je opent het Servertour Menu.");
-                warps = YamlConfiguration.loadConfiguration(warpsfile);
-                try {
-                    warps.save(warpsfile);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                ServerTourRequestsGUI.initialize();
-                p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
-                return true;
-            } else {
-                p.sendMessage(noPermission);
-            }
-            return true;
-        } else {
-            sender.sendMessage(Utils.consoleMessage);
-        }
-        return false;
+    public String name() {
+        return plugin.cmdMngr.servertour;
     }
 
-    public void makeNewWarp(Location loc, Player creator) throws IOException {
+    @Override
+    public String info() {
+        return "";
+    }
+
+    @Override
+    public String[] aliases() {
+        return new String[0];
+    }
+
+    private void makeNewWarp(Location loc, Player creator) throws IOException {
         if (!warps.isConfigurationSection("Warps")) {
             warps.createSection("Warps");
         }
