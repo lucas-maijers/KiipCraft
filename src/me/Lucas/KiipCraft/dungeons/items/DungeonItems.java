@@ -62,7 +62,7 @@ public class DungeonItems {
         ItemMeta dKeyM = dKey.getItemMeta();
 
         ArrayList<String> lore = new ArrayList<>();
-        lore.add(Utils.chat("&7Een &7&lGold &c&lDungeon Key &7kan een dungeon deur met een &6&lGolden &7slot openen."));
+        lore.add(Utils.chat("&7Een &6&lGold &c&lDungeon Key &7kan een dungeon deur met een &6&lGolden &7slot openen."));
         lore.add(Utils.chat("&7Na het gebruiken zal de sleutel verdwijnen."));
         lore.add(Utils.chat("&7Dit is een Officieel KiipCraft item."));
 

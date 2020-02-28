@@ -12,10 +12,11 @@ import me.Lucas.KiipCraft.admintool.listeners.AdminToolClick;
 import me.Lucas.KiipCraft.admintool.listeners.AdminToolGUIClick;
 import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
 import me.Lucas.KiipCraft.bottleXP.listener.DrinkXPBottle;
-import me.Lucas.KiipCraft.commands.KiipCraftCommand;
+import me.Lucas.KiipCraft.commands.CommandManager;
 import me.Lucas.KiipCraft.commands.UpdateCommand;
 import me.Lucas.KiipCraft.dungeons.commands.DungeonsCommand;
 import me.Lucas.KiipCraft.dungeons.listeners.DungeonGateCreation;
+import me.Lucas.KiipCraft.dungeons.listeners.OpenDungeonGate;
 import me.Lucas.KiipCraft.events.command.EventsToolCommand;
 import me.Lucas.KiipCraft.events.command.GUICommand;
 import me.Lucas.KiipCraft.events.listener.EventsToolClick;
@@ -31,11 +32,17 @@ import me.Lucas.KiipCraft.storyline.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
+    private static Main instance;
 
     private ConfigManager cfgm;
+    public CommandManager cmdMngr;
 
     @Override
     public void onEnable() {
+        setInstance(instance);
+
+        cmdMngr = new CommandManager();
+        cmdMngr.setup();
 
         loadConfigManager();
 
@@ -51,7 +58,6 @@ public class Main extends JavaPlugin {
 
         // Commands
         new GUICommand(this);
-        new KiipCraftCommand(this);
         new XpBottleCommand(this);
         new EventsToolCommand(this);
         new UpdateCommand(this);
@@ -82,6 +88,7 @@ public class Main extends JavaPlugin {
         new LifeOrbAbility(this);
 
         new DungeonGateCreation(this);
+        new OpenDungeonGate(this);
 
         new AdminToolClick(this);
         new AdminToolGUIClick(this);
@@ -120,6 +127,14 @@ public class Main extends JavaPlugin {
         cfgm.saveWarps();
         cfgm.saveDungeonGates();
         saveConfig();
+    }
+
+    public static Main getInstance() {
+        return instance;
+    }
+
+    private static void setInstance(Main instance) {
+        Main.instance = instance;
     }
 
     public void loadConfigManager() {

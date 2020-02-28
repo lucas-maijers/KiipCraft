@@ -295,8 +295,8 @@ public class DungeonGateCreation implements Listener {
         assert dungeonData != null;
 
         // Save Corner One
-        dungeonData.createSection("CornerOne");
-        ConfigurationSection cornerOne = dungeonGatesCFG.getConfigurationSection("Dungeons." + dungeonGateName + ".CornerOne");
+        dungeonData.createSection("CornerTop");
+        ConfigurationSection cornerOne = dungeonGatesCFG.getConfigurationSection("Dungeons." + dungeonGateName + ".CornerTop");
 
         assert cornerOne != null;
         cornerOne.set("X", leftCorner.getX());
@@ -304,8 +304,8 @@ public class DungeonGateCreation implements Listener {
         cornerOne.set("Z", leftCorner.getZ());
 
         // Save Corner Two
-        dungeonData.createSection("CornerTwo");
-        ConfigurationSection cornerTwo = dungeonGatesCFG.getConfigurationSection("Dungeons." + dungeonGateName + ".CornerTwo");
+        dungeonData.createSection("CornerBottom");
+        ConfigurationSection cornerTwo = dungeonGatesCFG.getConfigurationSection("Dungeons." + dungeonGateName + ".CornerBottom");
 
         assert cornerTwo != null;
         cornerTwo.set("X", rightCorner.getX());
