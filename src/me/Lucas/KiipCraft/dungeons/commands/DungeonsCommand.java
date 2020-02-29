@@ -58,7 +58,7 @@ public class DungeonsCommand extends SubCommand {
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons create&a: Start het dungeongate creatieproces."));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons stopcreation&a: Stopt het dungeon creatieproces."));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons list&a: Geeft je een lijst met dungeons."));
-                p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons remove <naam>&a: "));
+                p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons remove <naam>&a: Verwijderd de dungeongate met de ingevoerde naam."));
             }
 
             /* Key */
@@ -130,6 +130,7 @@ public class DungeonsCommand extends SubCommand {
                     DungeonGateCreation.phase1.remove(p.getName());
                     DungeonGateCreation.phase2.remove(p.getName());
                     DungeonGateCreation.phase3.remove(p.getName());
+                    DungeonGateCreation.lockType.remove(p.getName());
                     DungeonGateCreation.phasesComplete.remove(p.getName());
 
                     creatingPlayer.remove(p.getName());

@@ -77,7 +77,7 @@ public class CommandManager implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase(main)) {
             if (args.length == 0) {
-                p.sendMessage(Utils.prefix + Utils.chat("Geen subcommando gevonden. Doe /kiipcraft help voor meer informatie!"));
+                p.sendMessage(Utils.prefix + Utils.chat("Geen subcommando gevonden. Doe &c/kiipcraft help &7voor meer informatie!"));
                 return true;
             }
 
