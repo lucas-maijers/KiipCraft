@@ -47,7 +47,7 @@ public class WaterOrbAbility implements Listener {
         Block target;
 
         if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.waterOrb())) {
-            if (p.hasPermission("kiipcraft.orb.use")) {
+            if (p.hasPermission("kiipcraft.storyline")) {
                 if (cooldown) {
                     p.sendMessage(cooldownMessage);
                     return;
@@ -65,7 +65,7 @@ public class WaterOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
-                if (p.hasPermission("kiipcraft.orb.use") && p.getInventory().contains(OrbItems.waterOrb())) {
+                if (p.hasPermission("kiipcraft.storyline") && p.getInventory().contains(OrbItems.waterOrb())) {
                     e.setCancelled(true);
                 }
             }

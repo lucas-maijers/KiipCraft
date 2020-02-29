@@ -69,7 +69,7 @@ public class DungeonGateCreation implements Listener {
         Player p = e.getPlayer();
 
 
-        if (p.hasPermission("kiipcraft.dungeons.create")) {
+        if (p.hasPermission("kiipcraft.dungeons")) {
             if (DungeonsCommand.creatingPlayer.contains(p.getName())) {
                 if (p.getItemInHand().equals(DungeonItems.dungeonGateTool())) {
                     // Fase 1

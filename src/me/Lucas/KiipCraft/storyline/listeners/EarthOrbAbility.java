@@ -50,7 +50,7 @@ public class EarthOrbAbility implements Listener {
         BukkitScheduler scheduler = Bukkit.getScheduler();
 
         if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.earthOrb())) {
-            if (p.hasPermission("kiipcraft.orb.use")) {
+            if (p.hasPermission("kiipcraft.storyline")) {
                 World w = p.getWorld();
 
                 for (Entity target : p.getNearbyEntities(7, 14, 7)) {

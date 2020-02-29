@@ -41,7 +41,7 @@ public class FireOrbAbility implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.fireOrb())) {
-            if (p.hasPermission("kiipcraft.orb.use")) {
+            if (p.hasPermission("kiipcraft.storyline")) {
                 World w = p.getWorld();
 
                 double y = p.getLocation().getY();
@@ -88,7 +88,7 @@ public class FireOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.FIRE || e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK || e.getCause() == EntityDamageEvent.DamageCause.LAVA || e.getCause() == EntityDamageEvent.DamageCause.HOT_FLOOR) {
-                if (p.hasPermission("kiipcraft.orb.use") && p.getInventory().contains(OrbItems.fireOrb())) {
+                if (p.hasPermission("kiipcraft.storyline") && p.getInventory().contains(OrbItems.fireOrb())) {
                     e.setCancelled(true);
                 }
             }

@@ -41,7 +41,7 @@ public class LightningOrbAbility implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightningOrb())) {
-            if (p.hasPermission("kiipcraft.orb.use")) {
+            if (p.hasPermission("kiipcraft.storyline")) {
                 World w = p.getWorld();
 
                 double y = p.getLocation().getY();
@@ -91,7 +91,7 @@ public class LightningOrbAbility implements Listener {
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightningOrb())) {
             e.setCancelled(true);
-            if (p.hasPermission("kiipcraft.orb.use")) {
+            if (p.hasPermission("kiipcraft.storyline")) {
                 Location loc = p.getLocation();
 
                 ArmorStand as = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
@@ -191,7 +191,7 @@ public class LightningOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING || e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
-                if (p.hasPermission("kiipcraft.orb.use") && p.getInventory().contains(OrbItems.lightningOrb())) {
+                if (p.hasPermission("kiipcraft.storyline") && p.getInventory().contains(OrbItems.lightningOrb())) {
                     e.setCancelled(true);
                 }
             }

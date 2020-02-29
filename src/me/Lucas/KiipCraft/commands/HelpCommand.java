@@ -23,24 +23,25 @@ public class HelpCommand extends SubCommand {
         p.sendMessage(Utils.prefix + Utils.chat("&c&lKiipcraft Commands:"));
         p.sendMessage(" ");
         // De Commands voor de Nons
-        p.sendMessage(Utils.chat(" &7- &3/kiipcraft help&a: Laat dit bericht zien."));
-        p.sendMessage(Utils.chat(" &7- &3/kiipcraft servertour&a: Maakt een warp aan voor de servertour op jouw huidige locatie."));
+        p.sendMessage(Utils.chat(" &7- &3/kiipcraft help&7: Laat dit bericht zien."));
+        p.sendMessage(Utils.chat(" &7- &3/kiipcraft servertour&7: Maakt een warp aan voor de servertour op jouw huidige locatie."));
         p.sendMessage(Utils.chat(" "));
         // Al heb je Donateurs Permissies
-        if (p.hasPermission("kiipcraft.help.donator")) {
-            p.sendMessage(Utils.chat("&c&lDonateurs Sectie:"));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft bottlexp <levels>&a: Stopt het ingevoerde aantal levels in een flesje."));
+        if (p.hasPermission("kiipcraft.donator")) {
+            p.sendMessage(Utils.chat(" &c&lDonateurs Sectie:"));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft bottlexp <levels>&7: Stopt het ingevoerde aantal levels in een flesje."));
             p.sendMessage(" ");
         }
         // Staff Permissies
-        if (p.hasPermission("kiipcraft.help.all")) {
-            p.sendMessage(Utils.chat("&c&lStaff Sectie:"));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons help&a: Laat een lijst met alle dungeon commands zien."));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventstool&a: Geeft je de eventstool."));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventsadmin&a: Opent het events menu."));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft servertour menu&a: Opent het servertour menu,"));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft admintool&a: Geeft je de admintool."));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft update&a: Checkt de plugin voor updates."));
+        if (p.hasPermission("kiipcraft.staff")) {
+            p.sendMessage(Utils.chat(" &c&lStaff Sectie:"));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons help&7: Laat een lijst met alle dungeon commands zien."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventstool&7: Geeft je de eventstool."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventsadmin&7: Opent het events menu."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventstoken [aantal] [speler]&7: Geeft event tokens."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft servertour menu&7: Opent het servertour menu."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft admintool&7: Geeft je de admintool."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft update&7: Checkt de plugin voor updates."));
 
         }
         p.sendMessage(" ");

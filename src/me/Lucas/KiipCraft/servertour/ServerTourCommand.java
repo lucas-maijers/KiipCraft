@@ -49,7 +49,7 @@ public class ServerTourCommand extends SubCommand {
                 e.printStackTrace();
             }
             return;
-        } else if (args[1].equals("menu") && p.hasPermission("kiipcraft.servertour.menu")) {
+        } else if (args[1].equals("menu") && p.hasPermission("kiipcraft.servertour")) {
             p.sendMessage(prefix + "Je opent het Servertour Menu.");
             warps = YamlConfiguration.loadConfiguration(warpsfile);
             try {

@@ -22,7 +22,7 @@ public class EventsToolCommand extends SubCommand {
 
     @Override
     public void onCommand(Player p, String[] args) {
-        if (p.hasPermission("kiipcraft.eventstool")) {
+        if (p.hasPermission("kiipcraft.events")) {
             if (!(p.getInventory().contains(eventsTool()))) {
                 p.sendMessage(prefix + "Je hebt de §3§lEvents Tool §7gekregen.");
                 p.getInventory().addItem(eventsTool());
@@ -49,6 +49,6 @@ public class EventsToolCommand extends SubCommand {
 
     @Override
     public String[] aliases() {
-        return new String[0];
+        return new String[]{"token"};
     }
 }

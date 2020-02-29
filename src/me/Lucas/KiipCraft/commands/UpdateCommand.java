@@ -24,7 +24,7 @@ public class UpdateCommand extends SubCommand {
 
     @Override
     public void onCommand(Player p, String[] args) {
-        if (p.hasPermission("kiipcraft.update")) {
+        if (p.hasPermission("kiipcraft.staff")) {
             p.sendMessage(prefix + "Checken voor KiipCraft plugin updates.");
             SpigotPluginUpdater spu = new SpigotPluginUpdater(plugin, "http://51.68.47.8/pluginupdate/plugin.html");
 

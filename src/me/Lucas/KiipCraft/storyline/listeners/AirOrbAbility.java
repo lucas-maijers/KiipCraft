@@ -46,7 +46,7 @@ public class AirOrbAbility implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.airOrb())) {
-            if (p.hasPermission("kiipcraft.orb.use")) {
+            if (p.hasPermission("kiipcraft.storyline")) {
                 p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 20, (float) 1.8);
                 for (Entity et : p.getNearbyEntities(10, 10, 10)) {
                     if (et instanceof Player || et instanceof Monster) {
@@ -72,7 +72,7 @@ public class AirOrbAbility implements Listener {
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.airOrb())) {
             e.setCancelled(true);
-            if (p.hasPermission("kiipcraft.orb.use")) {
+            if (p.hasPermission("kiipcraft.storyline")) {
                 if (cooldown) {
                     p.sendMessage(cooldownMessage);
                     return;
@@ -184,7 +184,7 @@ public class AirOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.FALL && p.getInventory().contains(OrbItems.airOrb())) {
-                if (p.hasPermission("kiipcraft.orb.use")) {
+                if (p.hasPermission("kiipcraft.storyline")) {
                     e.setCancelled(true);
                 }
             }

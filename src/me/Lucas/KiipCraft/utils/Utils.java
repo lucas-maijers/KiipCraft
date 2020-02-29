@@ -9,6 +9,7 @@ package me.Lucas.KiipCraft.utils;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
+import me.Lucas.KiipCraft.events.command.EventTokenCommand;
 import me.Lucas.KiipCraft.outofuse.commands.KiipEuroCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -36,6 +37,23 @@ public class Utils {
 
     public static String chat(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);
+    }
+
+    public static ItemStack eventToken() {
+        ItemStack eToken = new ItemStack(IRON_NUGGET, EventTokenCommand.aantal);
+        ItemMeta eTokenM = eToken.getItemMeta();
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(Utils.chat("&5De KiipCraft Event Token."));
+        lore.add(Utils.chat("&5Dit item kan je inwisselen voor leuke verzamelitems."));
+        lore.add(Utils.chat("&5Officieel KiipCraft Item."));
+
+        assert eTokenM != null;
+        eTokenM.setDisplayName(Utils.chat("&6&lEvent &c&lToken"));
+        eTokenM.setLore(lore);
+
+        eToken.setItemMeta(eTokenM);
+        return eToken;
     }
 
     public static ItemStack kiipEuro() {

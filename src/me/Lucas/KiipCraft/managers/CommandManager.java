@@ -12,6 +12,7 @@ import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
 import me.Lucas.KiipCraft.commands.HelpCommand;
 import me.Lucas.KiipCraft.commands.UpdateCommand;
 import me.Lucas.KiipCraft.dungeons.commands.DungeonsCommand;
+import me.Lucas.KiipCraft.events.command.EventTokenCommand;
 import me.Lucas.KiipCraft.events.command.EventsToolCommand;
 import me.Lucas.KiipCraft.events.command.GUICommand;
 import me.Lucas.KiipCraft.servertour.ServerTourCommand;
@@ -45,6 +46,7 @@ public class CommandManager implements CommandExecutor {
     public String bottlexp = "bottlexp";
     public String eventstool = "eventstool";
     public String eventsadmin = "eventsadmin";
+    public String eventtoken = "eventstoken";
     public String dungeons = "dungeons";
     public String servertour = "servertour";
     public String orb = "orb";
@@ -58,6 +60,7 @@ public class CommandManager implements CommandExecutor {
         this.commands.add(new XpBottleCommand(plugin));
         this.commands.add(new EventsToolCommand(plugin));
         this.commands.add(new GUICommand(plugin));
+        this.commands.add(new EventTokenCommand(plugin));
         this.commands.add(new AdminToolCommand(plugin));
         this.commands.add(new DungeonsCommand(plugin));
         this.commands.add(new ServerTourCommand(plugin));
@@ -84,7 +87,7 @@ public class CommandManager implements CommandExecutor {
             SubCommand target = this.get(args[0]);
 
             if (target == null) {
-                p.sendMessage(Utils.prefix + Utils.chat("Ongeldig subcommando!"));
+                p.sendMessage(Utils.prefix + Utils.chat("Ongeldig subcommando, doe &c/kiipcraft help &7voor een lijst met geldige commmandos!"));
                 return true;
             }
 

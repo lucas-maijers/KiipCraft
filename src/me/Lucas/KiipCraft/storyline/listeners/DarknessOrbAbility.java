@@ -39,7 +39,7 @@ public class DarknessOrbAbility implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.darknessOrb())) {
-            if (p.hasPermission("kiipcraft.orb.use")) {
+            if (p.hasPermission("kiipcraft.storyline")) {
                 for (Entity t : p.getNearbyEntities(25, 20, 25)) {
                     if (t instanceof Player) {
                         ((Player) t).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 15, 1));
