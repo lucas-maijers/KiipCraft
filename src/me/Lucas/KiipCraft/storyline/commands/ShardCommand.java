@@ -26,7 +26,7 @@ public class ShardCommand extends SubCommand {
 
     @Override
     public void onCommand(Player p, String[] args) {
-        if (p.hasPermission("kiipcraft.roleplay")) {
+        if (p.hasPermission("kiipcraft.storyline")) {
             if (args.length == 1) {
                 p.sendMessage(prefix + "Je moet de naam van een Shard invullen.");
                 p.sendMessage(prefix + Utils.chat("Geldige namen zijn: fire, water, air, earth, lightning, light, darkness, life"));
