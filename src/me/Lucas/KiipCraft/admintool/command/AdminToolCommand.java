@@ -28,11 +28,9 @@ public class AdminToolCommand extends SubCommand {
         if (p.hasPermission("kiipcraft.admintool") && !(p.getInventory().contains(adminTool()))) {
             p.sendMessage(prefix + chat("Je hebt zojuist de &4&lAdmin Tool&7 ontvangen!"));
             p.getInventory().addItem(adminTool());
-            return;
         } else if (p.hasPermission("kiipcraft.admintool") && p.getInventory().contains(adminTool())) {
             p.sendMessage(prefix + chat("Je hebt zojuist je &4&lAdmin Tool&7 verwijderd!"));
             p.getInventory().remove(adminTool());
-            return;
         } else {
             p.sendMessage(noPermission);
         }

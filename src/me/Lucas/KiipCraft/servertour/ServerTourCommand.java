@@ -50,7 +50,6 @@ public class ServerTourCommand extends SubCommand {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return;
         } else if (args[1].equals("menu") && p.hasPermission("kiipcraft.servertour")) {
             p.sendMessage(prefix + "Je opent het Servertour Menu.");
             warps = YamlConfiguration.loadConfiguration(warpsfile);
@@ -61,11 +60,9 @@ public class ServerTourCommand extends SubCommand {
             }
             ServerTourRequestsGUI.initialize();
             p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
-            return;
         } else {
             p.sendMessage(noPermission);
         }
-        return;
     }
 
     @Override

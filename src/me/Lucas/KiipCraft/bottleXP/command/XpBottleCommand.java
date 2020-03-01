@@ -72,14 +72,11 @@ public class XpBottleCommand extends SubCommand {
                 p.setLevel(p.getLevel() - amount);
                 p.getInventory().removeItem(Utils.glasFlesje());
                 p.getInventory().addItem(Utils.xpDrinkFles());
-                return;
             } else if (!(p.getInventory().contains(Material.GLASS_BOTTLE))) {
                 p.sendMessage(prefix + "Je moet een §6Glass Bottle§7 in je inventory hebben om dit te doen.");
-                return;
             } else {
                 p.sendMessage(prefix + "Je moet minimaal §a10 Levels§7 bottlen.");
             }
-            return;
         } else {
             p.sendMessage(noPermission);
         }

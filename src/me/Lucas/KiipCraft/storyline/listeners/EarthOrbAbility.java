@@ -35,7 +35,6 @@ public class EarthOrbAbility implements Listener {
 
     public static Set<String> stunnedPlayerList = new HashSet<>();
     private Main plugin;
-    private int timeratNow = 15;
 
     public EarthOrbAbility(Main plugin) {
         this.plugin = plugin;

@@ -80,7 +80,6 @@ public class OrbCommand extends SubCommand {
                     return;
                 default:
                     p.sendMessage(prefix + "Onbekende Orbnaam.");
-                    return;
             }
         } else {
             p.sendMessage(noPermission);

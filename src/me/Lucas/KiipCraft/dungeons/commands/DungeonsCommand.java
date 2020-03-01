@@ -248,11 +248,10 @@ public class DungeonsCommand extends SubCommand {
             }
 
             if (args[1].equals("remove")) {
-                List<String> names = new ArrayList<>();
                 List<String> completionList = new ArrayList<>();
 
                 refreshList();
-                names.addAll(dungeonList);
+                List<String> names = new ArrayList<>(dungeonList);
 
                 if (!args[2].equals("")) {
                     for (String s : names) {

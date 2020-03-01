@@ -61,53 +61,55 @@ public class OpenDungeonGate implements Listener {
             if (b.getType() == Material.STRUCTURE_BLOCK) {
                 keyBlock = b.getLocation();
                 dungeonType = getDungeonType(keyBlock);
-                if (dungeonType.equals("Gold")) {
-                    gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=data]");
-                    if (p.getItemInHand().equals(DungeonItems.goldKey())) {
-                        e.setCancelled(true);
-                        if (b.getBlockData().matches(gateBlock)) {
-                            p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
-                            p.getInventory().remove(DungeonItems.goldKey());
-                            storeDungeonBlocks(keyBlock, w);
-                            openDungeonGate(storeDungeonBlocks(keyBlock, w));
-                            p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
+                switch (dungeonType) {
+                    case "Gold":
+                        gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=data]");
+                        if (p.getItemInHand().equals(DungeonItems.goldKey())) {
+                            e.setCancelled(true);
+                            if (b.getBlockData().matches(gateBlock)) {
+                                p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
+                                p.getInventory().remove(DungeonItems.goldKey());
+                                storeDungeonBlocks(keyBlock, w);
+                                openDungeonGate(storeDungeonBlocks(keyBlock, w));
+                                p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
+                            }
+                        } else {
+                            p.sendMessage(Utils.prefix + Utils.chat("Je moet een &6&lGold &c&lDungeon Key &7gebruiken om deze deur te openen!"));
                         }
-                    } else {
-                        p.sendMessage(Utils.prefix + Utils.chat("Je moet een &6&lGold &c&lDungeon Key &7gebruiken om deze deur te openen!"));
-                        return;
-                    }
-                } else if (dungeonType.equals("Diamond")) {
-                    gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=save]");
-                    if (p.getItemInHand().equals(DungeonItems.diamondKey())) {
-                        e.setCancelled(true);
-                        if (b.getBlockData().matches(gateBlock)) {
-                            p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
-                            p.getInventory().remove(DungeonItems.diamondKey());
-                            storeDungeonBlocks(keyBlock, w);
-                            openDungeonGate(storeDungeonBlocks(keyBlock, w));
-                            p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
+                        break;
+                    case "Diamond":
+                        gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=save]");
+                        if (p.getItemInHand().equals(DungeonItems.diamondKey())) {
+                            e.setCancelled(true);
+                            if (b.getBlockData().matches(gateBlock)) {
+                                p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
+                                p.getInventory().remove(DungeonItems.diamondKey());
+                                storeDungeonBlocks(keyBlock, w);
+                                openDungeonGate(storeDungeonBlocks(keyBlock, w));
+                                p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
+                            }
+                        } else {
+                            p.sendMessage(Utils.prefix + Utils.chat("Je moet een &b&lDiamond &c&lDungeon Key &7gebruiken om deze deur te openen!"));
                         }
-                    } else {
-                        p.sendMessage(Utils.prefix + Utils.chat("Je moet een &b&lDiamond &c&lDungeon Key &7gebruiken om deze deur te openen!"));
-                        return;
-                    }
-                } else if (dungeonType.equals("Emerald")) {
-                    gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=load]");
-                    if (p.getItemInHand().equals(DungeonItems.emeraldKey())) {
-                        e.setCancelled(true);
-                        if (b.getBlockData().matches(gateBlock)) {
-                            p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
-                            p.getInventory().remove(DungeonItems.emeraldKey());
-                            storeDungeonBlocks(keyBlock, w);
-                            openDungeonGate(storeDungeonBlocks(keyBlock, w));
-                            p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
+                        break;
+                    case "Emerald":
+                        gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=load]");
+                        if (p.getItemInHand().equals(DungeonItems.emeraldKey())) {
+                            e.setCancelled(true);
+                            if (b.getBlockData().matches(gateBlock)) {
+                                p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
+                                p.getInventory().remove(DungeonItems.emeraldKey());
+                                storeDungeonBlocks(keyBlock, w);
+                                openDungeonGate(storeDungeonBlocks(keyBlock, w));
+                                p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
+                            }
+                        } else {
+                            p.sendMessage(Utils.prefix + Utils.chat("Je moet een &a&lEmerald &c&lDungeon Key &7gebruiken om deze deur te openen!"));
                         }
-                    } else {
-                        p.sendMessage(Utils.prefix + Utils.chat("Je moet een &a&lEmerald &c&lDungeon Key &7gebruiken om deze deur te openen!"));
-                        return;
-                    }
-                } else {
-                    p.sendMessage(Utils.prefix + Utils.chat("Deze dungeon gate is nog niet aangemaakt, dus kan nog niet open worden gemaakt."));
+                        break;
+                    default:
+                        p.sendMessage(Utils.prefix + Utils.chat("Deze dungeon gate is nog niet aangemaakt, dus kan nog niet open worden gemaakt."));
+                        break;
                 }
             }
         }

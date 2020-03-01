@@ -26,7 +26,6 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 public class CommandManager implements TabExecutor {
@@ -106,9 +105,7 @@ public class CommandManager implements TabExecutor {
                 return true;
             }
 
-            ArrayList<String> arrayList = new ArrayList<>();
-
-            arrayList.addAll(Arrays.asList(args));
+            ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(args));
             arrayList.remove(0);
             try {
                 target.onCommand(p, args);
@@ -122,10 +119,8 @@ public class CommandManager implements TabExecutor {
     }
 
     private SubCommand get(String name) {
-        Iterator<SubCommand> subcommands = this.commands.iterator();
 
-        while (subcommands.hasNext()) {
-            SubCommand scmd = subcommands.next();
+        for (SubCommand scmd : this.commands) {
             if (scmd.name().equalsIgnoreCase(name)) {
                 return scmd;
             }
@@ -158,8 +153,7 @@ public class CommandManager implements TabExecutor {
                 return completionList;
             }
 
-            ArrayList<String> subCommands = new ArrayList<>(commandList);
-            return subCommands;
+            return new ArrayList<>(commandList);
         } else if (args.length > 1) {
             for (SubCommand command : commands) {
                 if (args[0].equalsIgnoreCase(command.name())) {

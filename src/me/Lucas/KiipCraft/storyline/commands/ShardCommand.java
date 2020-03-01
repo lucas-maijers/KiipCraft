@@ -81,7 +81,6 @@ public class ShardCommand extends SubCommand {
                     return;
                 default:
                     p.sendMessage(prefix + "Onbekende Shardnaam.");
-                    return;
             }
         } else {
             p.sendMessage(noPermission);

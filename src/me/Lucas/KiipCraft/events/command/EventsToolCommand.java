@@ -28,11 +28,9 @@ public class EventsToolCommand extends SubCommand {
             if (!(p.getInventory().contains(eventsTool()))) {
                 p.sendMessage(prefix + "Je hebt de §3§lEvents Tool §7gekregen.");
                 p.getInventory().addItem(eventsTool());
-                return;
             } else if (p.getInventory().contains(eventsTool())) {
                 p.sendMessage(prefix + "Je hebt de §3§lEvents Tool §7uit je inventaris verwijderd.");
                 p.getInventory().removeItem(eventsTool());
-                return;
             }
         } else {
             p.sendMessage(noPermission);
