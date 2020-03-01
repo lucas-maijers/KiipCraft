@@ -78,7 +78,7 @@ public class EventTokenCommand extends SubCommand {
 
         if (args.length == 2) {
             List<String> amountList = new ArrayList<>();
-            for (int i = 1; i < 64; i++) {
+            for (int i = 1; i <= 64; i++) {
                 amountList.add(String.valueOf(i));
             }
             Arrays.sort(amountList.toArray());

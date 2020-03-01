@@ -101,7 +101,7 @@ public class XpBottleCommand extends SubCommand {
     public List<String> getArguments(Player player, String[] args) {
         if (args.length == 2) {
             List<String> amountList = new ArrayList<>();
-            for (int i = 10; i < 50; i++) {
+            for (int i = 10; i <= 50; i++) {
                 amountList.add(String.valueOf(i));
             }
             Arrays.sort(amountList.toArray());
