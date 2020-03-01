@@ -17,6 +17,8 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
@@ -106,5 +108,27 @@ public class ServerTourCommand extends SubCommand {
         warp.set("world", loc.getWorld().getName());
         warp.set("creator", creator.getName());
         warps.save(warpsfile);
+    }
+
+    @Override
+    public List<String> getArguments(Player player, String[] args) {
+        List<String> menu = new ArrayList<>();
+        List<String> completionList = new ArrayList<>();
+
+        menu.add("menu");
+        if (args.length == 2) {
+
+            if (!args[1].equals("")) {
+                for (String s : menu) {
+                    if (s.startsWith(args[1].toLowerCase())) {
+                        completionList.add(s);
+                    }
+                }
+                return completionList;
+            }
+            return menu;
+        }
+
+        return null;
     }
 }

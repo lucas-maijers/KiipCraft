@@ -8,9 +8,12 @@ package me.Lucas.KiipCraft.managers;
 
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public abstract class SubCommand {
 
-    public SubCommand() {}
+    public SubCommand() {
+    }
 
     public abstract void onCommand(Player player, String[] args);
 
@@ -19,4 +22,6 @@ public abstract class SubCommand {
     public abstract String info();
 
     public abstract String[] aliases();
+
+    public abstract List<String> getArguments(Player player, String[] args);
 }

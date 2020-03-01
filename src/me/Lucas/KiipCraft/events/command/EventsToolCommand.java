@@ -10,6 +10,8 @@ import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.managers.SubCommand;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 import static me.Lucas.KiipCraft.utils.Utils.*;
 
 public class EventsToolCommand extends SubCommand {
@@ -48,7 +50,12 @@ public class EventsToolCommand extends SubCommand {
     }
 
     @Override
+    public List<String> getArguments(Player player, String[] args) {
+        return null;
+    }
+
+    @Override
     public String[] aliases() {
-        return new String[]{"token"};
+        return new String[0];
     }
 }

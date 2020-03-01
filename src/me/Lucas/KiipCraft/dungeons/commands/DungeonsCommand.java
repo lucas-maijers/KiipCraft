@@ -20,7 +20,9 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class DungeonsCommand extends SubCommand {
@@ -36,11 +38,21 @@ public class DungeonsCommand extends SubCommand {
 
     public static Set<String> creatingPlayer = new HashSet<>();
 
+    public static ArrayList<String> dSubCommands = new ArrayList<>();
+
     public DungeonsCommand(Main plugin) {
         this.plugin = plugin;
 
         dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
         dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+
+        dSubCommands.add("help");
+        dSubCommands.add("key");
+        dSubCommands.add("tool");
+        dSubCommands.add("create");
+        dSubCommands.add("stopcreation");
+        dSubCommands.add("list");
+        dSubCommands.add("remove");
     }
 
     @Override
@@ -108,6 +120,10 @@ public class DungeonsCommand extends SubCommand {
             if (args[1].equals("tool") && p.hasPermission("kiipcraft.dungeons")) {
                 p.getInventory().addItem(DungeonItems.dungeonGateTool());
                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt de &c&lDungeons Gate Tool &7ontvangen!"));
+                p.sendMessage(Utils.prefix + Utils.chat("Het Dungeon Creatieproces is gestart, om dit te annuleren doe &c/dungeons stopcreation&7!"));
+                p.sendMessage(" ");
+                p.sendMessage(Utils.prefix + Utils.chat("Selecteer de linker bovenhoek van de dungeon gate met je &c&l&nLinker&7 &c&l&nMuisknop&7!"));
+                creatingPlayer.add(p.getName());
                 return;
             }
             /* Create Dungeon */
@@ -195,5 +211,60 @@ public class DungeonsCommand extends SubCommand {
     @Override
     public String[] aliases() {
         return new String[0];
+    }
+
+    @Override
+    public List<String> getArguments(Player player, String[] args) {
+        if (args.length == 2) {
+            List<String> completionList = new ArrayList<>();
+            if (!args[1].equals("")) {
+                for (String s : dSubCommands) {
+                    if (s.startsWith(args[1].toLowerCase())) {
+                        completionList.add(s);
+                    }
+                }
+                return completionList;
+            }
+
+            return new ArrayList<>(DungeonsCommand.dSubCommands);
+        } else if (args.length == 3) {
+            if (args[1].equals("key")) {
+                List<String> completionList = new ArrayList<>();
+                List<String> types = new ArrayList<>();
+
+                types.add("gold");
+                types.add("diamond");
+                types.add("emerald");
+
+                if (!args[2].equals("")) {
+                    for (String s : types) {
+                        if (s.startsWith(args[2].toLowerCase())) {
+                            completionList.add(s);
+                        }
+                    }
+                    return completionList;
+                }
+                return types;
+            }
+
+            if (args[1].equals("remove")) {
+                List<String> names = new ArrayList<>();
+                List<String> completionList = new ArrayList<>();
+
+                refreshList();
+                names.addAll(dungeonList);
+
+                if (!args[2].equals("")) {
+                    for (String s : names) {
+                        if (s.startsWith(args[2].toLowerCase())) {
+                            completionList.add(s);
+                        }
+                    }
+                    return completionList;
+                }
+                return names;
+            }
+        }
+        return null;
     }
 }

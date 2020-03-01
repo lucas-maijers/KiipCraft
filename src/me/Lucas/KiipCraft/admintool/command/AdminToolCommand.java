@@ -10,6 +10,8 @@ import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.managers.SubCommand;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 import static me.Lucas.KiipCraft.utils.Utils.*;
 
 public class AdminToolCommand extends SubCommand {
@@ -19,6 +21,7 @@ public class AdminToolCommand extends SubCommand {
     public AdminToolCommand(Main plugin) {
         this.plugin = plugin;
     }
+
 
     @Override
     public void onCommand(Player p, String[] args) {
@@ -48,5 +51,10 @@ public class AdminToolCommand extends SubCommand {
     @Override
     public String[] aliases() {
         return new String[0];
+    }
+
+    @Override
+    public List<String> getArguments(Player player, String[] args) {
+        return null;
     }
 }

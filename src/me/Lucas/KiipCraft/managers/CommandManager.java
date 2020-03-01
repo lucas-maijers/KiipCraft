@@ -20,15 +20,16 @@ import me.Lucas.KiipCraft.storyline.commands.OrbCommand;
 import me.Lucas.KiipCraft.storyline.commands.ShardCommand;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
-public class CommandManager implements CommandExecutor {
+public class CommandManager implements TabExecutor {
 
     private ArrayList<SubCommand> commands = new ArrayList<>();
 
@@ -37,6 +38,8 @@ public class CommandManager implements CommandExecutor {
     public CommandManager(Main plugin) {
         this.plugin = plugin;
     }
+
+    public static ArrayList<String> commandList = new ArrayList<>();
 
     public String main = "kiipcraft";
 
@@ -66,6 +69,18 @@ public class CommandManager implements CommandExecutor {
         this.commands.add(new ServerTourCommand(plugin));
         this.commands.add(new OrbCommand(plugin));
         this.commands.add(new ShardCommand(plugin));
+
+        commandList.add(help);
+        commandList.add(update);
+        commandList.add(admintool);
+        commandList.add(bottlexp);
+        commandList.add(eventstool);
+        commandList.add(eventsadmin);
+        commandList.add(eventtoken);
+        commandList.add(dungeons);
+        commandList.add(servertour);
+        commandList.add(orb);
+        commandList.add(shard);
     }
 
     @Override
@@ -98,7 +113,7 @@ public class CommandManager implements CommandExecutor {
             try {
                 target.onCommand(p, args);
             } catch (Exception e) {
-                p.sendMessage(Utils.prefix + Utils.chat("&c&lEr is een error voorgekomen, raadpleeg een Administrator voor meer informatie!"));
+                p.sendMessage(Utils.prefix + Utils.chat("&cEr is een error voorgekomen, raadpleeg een Administrator voor meer informatie!"));
 
                 e.printStackTrace();
             }
@@ -122,6 +137,33 @@ public class CommandManager implements CommandExecutor {
                 String alias = aliases[var5];
                 if (name.equalsIgnoreCase(alias)) {
                     return scmd;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+
+        if (args.length == 1) { // kiipcraft <subcommand> <args>
+            List<String> completionList = new ArrayList<>();
+
+            if (!args[0].equals("")) {
+                for (String s : commandList) {
+                    if (s.startsWith(args[0].toLowerCase())) {
+                        completionList.add(s);
+                    }
+                }
+                return completionList;
+            }
+
+            ArrayList<String> subCommands = new ArrayList<>(commandList);
+            return subCommands;
+        } else if (args.length > 1) {
+            for (SubCommand command : commands) {
+                if (args[0].equalsIgnoreCase(command.name())) {
+                    return command.getArguments((Player) sender, args);
                 }
             }
         }

@@ -30,8 +30,9 @@ public class OpenDungeonGate implements Listener {
 
     private Main plugin;
 
-    private Map<Location, BlockData> restore = new HashMap<>();
     private int openTime = 30;
+
+    private String meta = "";
 
     private File dungeonGatesFile;
     private FileConfiguration dungeonGatesCFG;
@@ -68,7 +69,7 @@ public class OpenDungeonGate implements Listener {
                             p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
                             p.getInventory().remove(DungeonItems.goldKey());
                             storeDungeonBlocks(keyBlock, w);
-                            openDungeonGate();
+                            openDungeonGate(storeDungeonBlocks(keyBlock, w));
                             p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
                         }
                     } else {
@@ -83,7 +84,7 @@ public class OpenDungeonGate implements Listener {
                             p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
                             p.getInventory().remove(DungeonItems.diamondKey());
                             storeDungeonBlocks(keyBlock, w);
-                            openDungeonGate();
+                            openDungeonGate(storeDungeonBlocks(keyBlock, w));
                             p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
                         }
                     } else {
@@ -98,7 +99,7 @@ public class OpenDungeonGate implements Listener {
                             p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
                             p.getInventory().remove(DungeonItems.emeraldKey());
                             storeDungeonBlocks(keyBlock, w);
-                            openDungeonGate();
+                            openDungeonGate(storeDungeonBlocks(keyBlock, w));
                             p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
                         }
                     } else {
@@ -112,7 +113,8 @@ public class OpenDungeonGate implements Listener {
         }
     }
 
-    private void storeDungeonBlocks(Location kBlock, World w) {
+    private Map<Location, BlockData> storeDungeonBlocks(Location kBlock, World w) {
+        Map<Location, BlockData> restore = new HashMap<>();
 
         double x1, x2, y1, y2, z1, z2;
 
@@ -159,6 +161,19 @@ public class OpenDungeonGate implements Listener {
                         for (double y = lowestY; y <= highestY; y++) {
                             int x = (int) highestX;
                             Block b = w.getBlockAt(x, (int) y, (int) z);
+                            if (b.getType() == Material.STRUCTURE_BLOCK) {
+                                switch (getDungeonType(kBlock)) {
+                                    case "Gold":
+                                        meta = "DATA";
+                                        break;
+                                    case "Diamond":
+                                        meta = "SAVE";
+                                        break;
+                                    case "Emerald":
+                                        meta = "LOAD";
+                                        break;
+                                }
+                            }
                             restore.put(b.getLocation(), b.getBlockData());
                         }
                     }
@@ -167,16 +182,30 @@ public class OpenDungeonGate implements Listener {
                         for (double y = lowestY; y <= highestY; y++) {
                             int z = (int) highestZ;
                             Block b = w.getBlockAt((int) x, (int) y, z);
+                            if (b.getType() == Material.STRUCTURE_BLOCK) {
+                                switch (getDungeonType(kBlock)) {
+                                    case "Gold":
+                                        meta = "DATA";
+                                        break;
+                                    case "Diamond":
+                                        meta = "SAVE";
+                                        break;
+                                    case "Emerald":
+                                        meta = "LOAD";
+                                        break;
+                                }
+                            }
                             restore.put(b.getLocation(), b.getBlockData());
                         }
                     }
                 }
             }
         }
+        return restore;
     }
 
-    private void openDungeonGate() {
-        for (Map.Entry<Location, BlockData> entry : restore.entrySet()) {
+    private void openDungeonGate(Map<Location, BlockData> putBack) {
+        for (Map.Entry<Location, BlockData> entry : putBack.entrySet()) {
             Location loc = entry.getKey();
             loc.getBlock().setType(Material.AIR);
         }
@@ -184,15 +213,20 @@ public class OpenDungeonGate implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (Map.Entry<Location, BlockData> entry : restore.entrySet()) {
+                for (Map.Entry<Location, BlockData> entry : putBack.entrySet()) {
                     Location loc = entry.getKey();
-                    Material mt = entry.getValue().getMaterial();
                     BlockData data = entry.getValue();
+                    Material mt = data.getMaterial();
 
-                    loc.getBlock().setType(mt);
-                    loc.getBlock().setBlockData(data);
+                    if (mt == Material.STRUCTURE_BLOCK) {
+                        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "setblock " + (int) loc.getX() + " " + (int) loc.getY() + " " + (int) loc.getZ() + " " + data.getAsString() + "{mode:" + '"' + meta + '"' + "}");
+                    } else {
+                        loc.getBlock().setType(mt);
+                        loc.getBlock().getState().setBlockData(data);
+                        loc.getBlock().getState().update(true);
+                    }
                 }
-                restore.clear();
+                putBack.clear();
             }
         }.runTaskLater(plugin, 20 * openTime);
     }

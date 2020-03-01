@@ -12,6 +12,10 @@ import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class EventTokenCommand extends SubCommand {
 
     private Main plugin;
@@ -22,6 +26,7 @@ public class EventTokenCommand extends SubCommand {
         this.plugin = plugin;
     }
 
+
     @Override
     public void onCommand(Player p, String[] args) {
 
@@ -30,9 +35,13 @@ public class EventTokenCommand extends SubCommand {
                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt jezelf Event Tokens gegeven"));
                 p.getInventory().addItem(Utils.eventToken());
             } else if (args.length == 2) {
-                aantal = Integer.parseInt(args[1]);
-                p.sendMessage(Utils.prefix + Utils.chat("Je hebt &6" + aantal + "&7 Event Tokens aan jezelf gegeven!"));
-                p.getInventory().addItem(Utils.eventToken());
+                try {
+                    aantal = Integer.parseInt(args[1]);
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt &6" + aantal + "&7 Event Tokens aan jezelf gegeven!"));
+                    p.getInventory().addItem(Utils.eventToken());
+                } catch (NumberFormatException e) {
+                    p.sendMessage(Utils.prefix + Utils.chat("Je moet een getal invullen!"));
+                }
             } else if (args.length == 3) {
                 aantal = Integer.parseInt(args[1]);
                 for (Player plr : Bukkit.getOnlinePlayers()) {
@@ -61,6 +70,21 @@ public class EventTokenCommand extends SubCommand {
 
     @Override
     public String[] aliases() {
-        return new String[0];
+        return new String[]{"token"};
+    }
+
+    @Override
+    public List<String> getArguments(Player player, String[] args) {
+
+        if (args.length == 2) {
+            List<String> amountList = new ArrayList<>();
+            for (int i = 1; i < 64; i++) {
+                amountList.add(String.valueOf(i));
+            }
+            Arrays.sort(amountList.toArray());
+            return amountList;
+        }
+
+        return null;
     }
 }

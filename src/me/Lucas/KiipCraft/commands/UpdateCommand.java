@@ -11,6 +11,8 @@ import me.Lucas.KiipCraft.SpigotPluginUpdater;
 import me.Lucas.KiipCraft.managers.SubCommand;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
@@ -21,6 +23,7 @@ public class UpdateCommand extends SubCommand {
     public UpdateCommand(Main plugin) {
         this.plugin = plugin;
     }
+
 
     @Override
     public void onCommand(Player p, String[] args) {
@@ -54,6 +57,11 @@ public class UpdateCommand extends SubCommand {
     @Override
     public String[] aliases() {
         return new String[0];
+    }
+
+    @Override
+    public List<String> getArguments(Player player, String[] args) {
+        return null;
     }
 
 }

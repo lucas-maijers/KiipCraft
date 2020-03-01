@@ -11,12 +11,15 @@ import me.Lucas.KiipCraft.managers.SubCommand;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class HelpCommand extends SubCommand {
     private Main plugin;
 
     public HelpCommand(Main plugin) {
         this.plugin = plugin;
     }
+
 
     @Override
     public void onCommand(Player p, String[] args) {
@@ -60,5 +63,10 @@ public class HelpCommand extends SubCommand {
     @Override
     public String[] aliases() {
         return new String[0];
+    }
+
+    @Override
+    public List<String> getArguments(Player player, String[] args) {
+        return null;
     }
 }

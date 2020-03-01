@@ -12,8 +12,7 @@ import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
@@ -99,5 +98,19 @@ public class XpBottleCommand extends SubCommand {
     @Override
     public String[] aliases() {
         return new String[0];
+    }
+
+    @Override
+    public List<String> getArguments(Player player, String[] args) {
+        if (args.length == 2) {
+            List<String> amountList = new ArrayList<>();
+            for (int i = 10; i < 50; i++) {
+                amountList.add(String.valueOf(i));
+            }
+            Arrays.sort(amountList.toArray());
+            return amountList;
+        }
+
+        return null;
     }
 }

@@ -27,7 +27,7 @@ public class DungeonItems {
         lore.add(Utils.chat("&7Dit is een Officieel KiipCraft item."));
 
         assert dKeyM != null;
-        dKeyM.setDisplayName(Utils.chat("&b&lDiamond &c&lKey"));
+        dKeyM.setDisplayName(Utils.chat("&b&lDiamond &c&lDungeon Key"));
         dKeyM.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
         dKeyM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -47,7 +47,7 @@ public class DungeonItems {
         lore.add(Utils.chat("&7Dit is een Officieel KiipCraft item."));
 
         assert dKeyM != null;
-        dKeyM.setDisplayName(Utils.chat("&a&lEmerald &c&lKey"));
+        dKeyM.setDisplayName(Utils.chat("&a&lEmerald &c&lDungeon Key"));
         dKeyM.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
         dKeyM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -67,7 +67,7 @@ public class DungeonItems {
         lore.add(Utils.chat("&7Dit is een Officieel KiipCraft item."));
 
         assert dKeyM != null;
-        dKeyM.setDisplayName(Utils.chat("&6&lGold &c&lKey"));
+        dKeyM.setDisplayName(Utils.chat("&6&lGold &c&lDungeon Key"));
         dKeyM.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
 
         dKeyM.addItemFlags(ItemFlag.HIDE_ENCHANTS);

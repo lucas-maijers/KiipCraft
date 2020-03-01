@@ -11,6 +11,8 @@ import me.Lucas.KiipCraft.events.ui.MainEventsUI;
 import me.Lucas.KiipCraft.managers.SubCommand;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 import static me.Lucas.KiipCraft.utils.Utils.noPermission;
 import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
@@ -20,6 +22,11 @@ public class GUICommand extends SubCommand {
 
     public GUICommand(Main plugin) {
         this.plugin = plugin;
+    }
+
+    @Override
+    public List<String> getArguments(Player player, String[] args) {
+        return null;
     }
 
     @Override

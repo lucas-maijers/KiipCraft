@@ -25,15 +25,12 @@ import me.Lucas.KiipCraft.storyline.listeners.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
-    private static Main instance;
 
     private ConfigManager cfgm;
     public CommandManager cmdMngr;
 
     @Override
     public void onEnable() {
-        setInstance(instance);
-
 
         loadConfigManager();
 
@@ -49,6 +46,8 @@ public class Main extends JavaPlugin {
 
         cmdMngr = new CommandManager(this);
         cmdMngr.setup();
+
+        getCommand("kiipcraft").setTabCompleter(new CommandManager(this));
 
         // Listeners
         new DrinkXPBottle(this);
@@ -107,14 +106,6 @@ public class Main extends JavaPlugin {
         cfgm.saveWarps();
         cfgm.saveDungeonGates();
         saveConfig();
-    }
-
-    public static Main getInstance() {
-        return instance;
-    }
-
-    private static void setInstance(Main instance) {
-        Main.instance = instance;
     }
 
     public void loadConfigManager() {
