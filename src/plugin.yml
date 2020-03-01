@@ -3,7 +3,7 @@ version: 2.0
 author: Thunderkookie15
 main: me.Lucas.KiipCraft.Main
 api-version: 1.15
-description: De KiipCraft plugin voor de Shops en Events.
+description: De KiipCraft Plugin.
 
 commands:
   kiipcraft:
