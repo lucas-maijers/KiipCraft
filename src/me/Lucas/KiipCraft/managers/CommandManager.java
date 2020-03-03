@@ -101,7 +101,7 @@ public class CommandManager implements TabExecutor {
             SubCommand target = this.get(args[0]);
 
             if (target == null) {
-                p.sendMessage(Utils.prefix + Utils.chat("Ongeldig subcommando, doe &c/kiipcraft help &7voor een lijst met geldige commmandos!"));
+                p.sendMessage(Utils.prefix + Utils.chat("Ongeldig subcommando, doe &c/kiipcraft help &7voor een lijst met geldige commands!"));
                 return true;
             }
 

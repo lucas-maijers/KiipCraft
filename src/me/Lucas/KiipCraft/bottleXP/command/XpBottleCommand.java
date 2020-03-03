@@ -58,7 +58,7 @@ public class XpBottleCommand extends SubCommand {
 
         // Max Amount Check
         if (amount > maxAmount) {
-            p.sendMessage(prefix + "Je kan maximaal §a50 Levels §7 in een flesje stoppen.");
+            p.sendMessage(prefix + "Je kan maximaal §a50 Levels §7in een flesje stoppen.");
             return;
         }
 
