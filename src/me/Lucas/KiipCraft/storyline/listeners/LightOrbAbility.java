@@ -39,7 +39,7 @@ public class LightOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightOrb())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lightOrb())) {
             if (p.hasPermission("kiipcraft.storyline")) {
                 for (Entity t : p.getNearbyEntities(25, 20, 25)) {
                     if (t instanceof Player) {
@@ -74,7 +74,7 @@ public class LightOrbAbility implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(OrbItems.lightOrb())) {
+        if (p.getInventory().getItemInMainHand().equals(OrbItems.lightOrb())) {
             e.setCancelled(true);
         }
     }

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DungeonItems {
 
     public static ItemStack diamondKey() {
-        ItemStack dKey = new ItemStack(Material.PAPER);
+        ItemStack dKey = new ItemStack(Material.PAPER, 1);
         ItemMeta dKeyM = dKey.getItemMeta();
 
         ArrayList<String> lore = new ArrayList<>();
@@ -38,7 +38,7 @@ public class DungeonItems {
     }
 
     public static ItemStack emeraldKey() {
-        ItemStack dKey = new ItemStack(Material.PAPER);
+        ItemStack dKey = new ItemStack(Material.PAPER, 1);
         ItemMeta dKeyM = dKey.getItemMeta();
 
         ArrayList<String> lore = new ArrayList<>();
@@ -58,7 +58,7 @@ public class DungeonItems {
     }
 
     public static ItemStack goldKey() {
-        ItemStack dKey = new ItemStack(Material.PAPER);
+        ItemStack dKey = new ItemStack(Material.PAPER, 1);
         ItemMeta dKeyM = dKey.getItemMeta();
 
         ArrayList<String> lore = new ArrayList<>();

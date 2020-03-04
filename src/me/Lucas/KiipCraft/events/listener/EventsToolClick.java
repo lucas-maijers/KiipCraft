@@ -38,7 +38,7 @@ public class EventsToolClick implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if (p.hasPermission("kiipcraft.events") && p.getItemInHand().equals(eventsTool())) {
+            if (p.hasPermission("kiipcraft.events") && p.getInventory().getItemInMainHand().equals(eventsTool())) {
                 p.sendMessage(prefix + "Bezig met het openen van de §3§lEventsAdmin GUI§7...");
                 p.openInventory(MainEventsUI.mainGUI(p));
             }

@@ -46,7 +46,7 @@ public class WaterOrbAbility implements Listener {
         Player p = e.getPlayer();
         Block target;
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.waterOrb())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb())) {
             if (p.hasPermission("kiipcraft.storyline")) {
                 if (cooldown) {
                     p.sendMessage(cooldownMessage);
@@ -56,6 +56,8 @@ public class WaterOrbAbility implements Listener {
                 BlockFace rotation = p.getFacing();
                 placeWall(rotation, target);
                 startCooldown();
+            } else {
+                p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
             }
         }
     }
@@ -76,7 +78,7 @@ public class WaterOrbAbility implements Listener {
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.waterOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb())) {
             e.setCancelled(true);
         }
     }
@@ -94,7 +96,7 @@ public class WaterOrbAbility implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(OrbItems.waterOrb())) {
+        if (p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb())) {
             e.setCancelled(true);
         }
     }

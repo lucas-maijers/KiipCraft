@@ -45,7 +45,6 @@ public class HelpCommand extends SubCommand {
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft servertour menu&7: Opent het servertour menu."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft admintool&7: Geeft je de admintool."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft update&7: Checkt de plugin voor updates."));
-
         }
         p.sendMessage(" ");
     }

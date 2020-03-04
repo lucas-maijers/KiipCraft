@@ -45,7 +45,7 @@ public class AirOrbAbility implements Listener {
     public void onLeftClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.airOrb())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
             if (p.hasPermission("kiipcraft.storyline")) {
                 p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 20, (float) 1.8);
                 for (Entity et : p.getNearbyEntities(10, 10, 10)) {
@@ -70,7 +70,7 @@ public class AirOrbAbility implements Listener {
     public void onRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.airOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
             e.setCancelled(true);
             if (p.hasPermission("kiipcraft.storyline")) {
                 if (cooldown) {
@@ -195,7 +195,7 @@ public class AirOrbAbility implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(OrbItems.airOrb())) {
+        if (p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
             e.setCancelled(true);
         }
     }

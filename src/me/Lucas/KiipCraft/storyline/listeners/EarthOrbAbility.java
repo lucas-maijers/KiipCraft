@@ -48,7 +48,7 @@ public class EarthOrbAbility implements Listener {
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.earthOrb())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.earthOrb())) {
             if (p.hasPermission("kiipcraft.storyline")) {
                 World w = p.getWorld();
 
@@ -114,7 +114,7 @@ public class EarthOrbAbility implements Listener {
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.earthOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.earthOrb())) {
             e.setCancelled(true);
         }
     }
@@ -132,7 +132,7 @@ public class EarthOrbAbility implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(OrbItems.earthOrb())) {
+        if (p.getInventory().getItemInMainHand().equals(OrbItems.earthOrb())) {
             e.setCancelled(true);
         }
     }

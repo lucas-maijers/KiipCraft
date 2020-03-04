@@ -40,7 +40,7 @@ public class FireOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.fireOrb())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb())) {
             if (p.hasPermission("kiipcraft.storyline")) {
                 World w = p.getWorld();
 
@@ -99,7 +99,7 @@ public class FireOrbAbility implements Listener {
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.fireOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb())) {
             e.setCancelled(true);
         }
     }
@@ -117,7 +117,7 @@ public class FireOrbAbility implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(OrbItems.fireOrb())) {
+        if (p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb())) {
             e.setCancelled(true);
         }
     }

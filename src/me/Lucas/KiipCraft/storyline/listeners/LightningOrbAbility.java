@@ -40,7 +40,7 @@ public class LightningOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightningOrb())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
             if (p.hasPermission("kiipcraft.storyline")) {
                 World w = p.getWorld();
 
@@ -89,7 +89,7 @@ public class LightningOrbAbility implements Listener {
         Player p = e.getPlayer();
         World w = p.getWorld();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightningOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
             e.setCancelled(true);
             if (p.hasPermission("kiipcraft.storyline")) {
                 Location loc = p.getLocation();
@@ -202,7 +202,7 @@ public class LightningOrbAbility implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(OrbItems.lightningOrb())) {
+        if (p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
             e.setCancelled(true);
         }
     }

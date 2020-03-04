@@ -67,7 +67,7 @@ public class DungeonsCommand extends SubCommand {
                 p.sendMessage(Utils.prefix + Utils.chat("&c&lDungeon Commands:"));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons key <Soort> [speler]&7: Geeft een dungeon sleutel."));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons tool&7: Geeft je de Dungeon Creatietool."));
-                p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons create&7: Start het dungeongate creatieproces."));
+                p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons create&7: Start het dungeon creatieproces."));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons stopcreation&7: Stopt het dungeon creatieproces."));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons list&7: Geeft je een lijst met dungeons."));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons remove <naam>&7: Verwijderd de dungeongate met de ingevoerde naam."));

@@ -38,7 +38,7 @@ public class DarknessOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getItemInHand().equals(OrbItems.darknessOrb())) {
+        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.darknessOrb())) {
             if (p.hasPermission("kiipcraft.storyline")) {
                 for (Entity t : p.getNearbyEntities(25, 20, 25)) {
                     if (t instanceof Player) {
@@ -55,7 +55,7 @@ public class DarknessOrbAbility implements Listener {
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.darknessOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.darknessOrb())) {
             e.setCancelled(true);
         }
     }
@@ -73,7 +73,7 @@ public class DarknessOrbAbility implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(OrbItems.darknessOrb())) {
+        if (p.getInventory().getItemInMainHand().equals(OrbItems.darknessOrb())) {
             e.setCancelled(true);
         }
     }

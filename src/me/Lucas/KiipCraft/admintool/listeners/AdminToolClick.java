@@ -39,10 +39,10 @@ public class AdminToolClick implements Listener {
         Player p = e.getPlayer();
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
-            if (p.getItemInHand().equals(Utils.adminTool()) && p.hasPermission("kiipcraft.admintool")) {
+            if (p.getInventory().getItemInMainHand().equals(Utils.adminTool()) && p.hasPermission("kiipcraft.admintool")) {
                 p.sendMessage(prefix + Utils.chat("Je opent het &4&lAdmin Tool Menu&7!"));
                 p.openInventory(AdminToolGUI.adminToolGUI(p));
-            } else if (p.getItemInHand().equals(Utils.adminTool()) && !(p.hasPermission("kiipcraft.admintool"))) {
+            } else if (p.getInventory().getItemInMainHand().equals(Utils.adminTool()) && !(p.hasPermission("kiipcraft.admintool"))) {
                 p.sendMessage(prefix + Utils.chat("Dat is niet de bedoeling, jij mag dit item niet gebruiken, hoe kom je hier eigenlijk aan?!"));
                 p.getInventory().remove(Utils.adminTool());
             }
@@ -64,7 +64,7 @@ public class AdminToolClick implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(adminTool())) {
+        if (p.getInventory().getItemInMainHand().equals(adminTool())) {
             e.setCancelled(true);
         }
     }

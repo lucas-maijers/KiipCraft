@@ -64,12 +64,11 @@ public class OpenDungeonGate implements Listener {
                 switch (dungeonType) {
                     case "Gold":
                         gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=data]");
-                        if (p.getItemInHand().equals(DungeonItems.goldKey())) {
+                        if (p.getInventory().getItemInMainHand().equals(DungeonItems.goldKey())) {
                             e.setCancelled(true);
                             if (b.getBlockData().matches(gateBlock)) {
                                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
-                                p.getInventory().remove(DungeonItems.goldKey());
-                                storeDungeonBlocks(keyBlock, w);
+                                p.getInventory().removeItem(p.getInventory().getItemInMainHand());
                                 openDungeonGate(storeDungeonBlocks(keyBlock, w));
                                 p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
                             }
@@ -79,12 +78,11 @@ public class OpenDungeonGate implements Listener {
                         break;
                     case "Diamond":
                         gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=save]");
-                        if (p.getItemInHand().equals(DungeonItems.diamondKey())) {
+                        if (p.getInventory().getItemInMainHand().equals(DungeonItems.diamondKey())) {
                             e.setCancelled(true);
                             if (b.getBlockData().matches(gateBlock)) {
                                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
-                                p.getInventory().remove(DungeonItems.diamondKey());
-                                storeDungeonBlocks(keyBlock, w);
+                                p.getInventory().removeItem(p.getInventory().getItemInMainHand());
                                 openDungeonGate(storeDungeonBlocks(keyBlock, w));
                                 p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
                             }
@@ -94,12 +92,11 @@ public class OpenDungeonGate implements Listener {
                         break;
                     case "Emerald":
                         gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=load]");
-                        if (p.getItemInHand().equals(DungeonItems.emeraldKey())) {
+                        if (p.getInventory().getItemInMainHand().equals(DungeonItems.emeraldKey())) {
                             e.setCancelled(true);
                             if (b.getBlockData().matches(gateBlock)) {
                                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist deze dungeon gate open gemaakt. Je hebt &c&l" + openTime + " seconden&7 om naar binnen te gaan voor de deur sluit."));
-                                p.getInventory().remove(DungeonItems.emeraldKey());
-                                storeDungeonBlocks(keyBlock, w);
+                                p.getInventory().removeItem(p.getInventory().getItemInMainHand());
                                 openDungeonGate(storeDungeonBlocks(keyBlock, w));
                                 p.playSound(p.getLocation(), Sound.ENTITY_WITHER_BREAK_BLOCK, 50, 1);
                             }
