@@ -32,8 +32,6 @@ public class OpenDungeonGate implements Listener {
 
     private int openTime = 30;
 
-    private String meta = "";
-
     private File dungeonGatesFile;
     private FileConfiguration dungeonGatesCFG;
 
@@ -160,19 +158,6 @@ public class OpenDungeonGate implements Listener {
                         for (double y = lowestY; y <= highestY; y++) {
                             int x = (int) highestX;
                             Block b = w.getBlockAt(x, (int) y, (int) z);
-                            if (b.getType() == Material.STRUCTURE_BLOCK) {
-                                switch (getDungeonType(kBlock)) {
-                                    case "Gold":
-                                        meta = "DATA";
-                                        break;
-                                    case "Diamond":
-                                        meta = "SAVE";
-                                        break;
-                                    case "Emerald":
-                                        meta = "LOAD";
-                                        break;
-                                }
-                            }
                             restore.put(b.getLocation(), b.getBlockData());
                         }
                     }
@@ -181,19 +166,6 @@ public class OpenDungeonGate implements Listener {
                         for (double y = lowestY; y <= highestY; y++) {
                             int z = (int) highestZ;
                             Block b = w.getBlockAt((int) x, (int) y, z);
-                            if (b.getType() == Material.STRUCTURE_BLOCK) {
-                                switch (getDungeonType(kBlock)) {
-                                    case "Gold":
-                                        meta = "DATA";
-                                        break;
-                                    case "Diamond":
-                                        meta = "SAVE";
-                                        break;
-                                    case "Emerald":
-                                        meta = "LOAD";
-                                        break;
-                                }
-                            }
                             restore.put(b.getLocation(), b.getBlockData());
                         }
                     }
@@ -204,10 +176,25 @@ public class OpenDungeonGate implements Listener {
     }
 
     private void openDungeonGate(Map<Location, BlockData> putBack) {
+        String meta = "";
         for (Map.Entry<Location, BlockData> entry : putBack.entrySet()) {
             Location loc = entry.getKey();
+            if (loc.getBlock().getType() == Material.STRUCTURE_BLOCK) {
+                switch (getDungeonType(loc)) {
+                    case "Gold":
+                        meta = "DATA";
+                        break;
+                    case "Diamond":
+                        meta = "SAVE";
+                        break;
+                    case "Emerald":
+                        meta = "LOAD";
+                        break;
+                }
+            }
             loc.getBlock().setType(Material.AIR);
         }
+        String savedMeta = meta;
 
         new BukkitRunnable() {
             @Override
@@ -218,7 +205,7 @@ public class OpenDungeonGate implements Listener {
                     Material mt = data.getMaterial();
 
                     if (mt == Material.STRUCTURE_BLOCK) {
-                        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "setblock " + (int) loc.getX() + " " + (int) loc.getY() + " " + (int) loc.getZ() + " " + data.getAsString() + "{mode:" + '"' + meta + '"' + "}");
+                        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "setblock " + (int) loc.getX() + " " + (int) loc.getY() + " " + (int) loc.getZ() + " " + data.getAsString() + "{mode:" + '"' + savedMeta + '"' + "}");
                     } else {
                         loc.getBlock().setType(mt);
                         loc.getBlock().getState().setBlockData(data);
