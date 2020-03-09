@@ -10,6 +10,7 @@ import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.admintool.command.AdminToolCommand;
 import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
 import me.Lucas.KiipCraft.commands.HelpCommand;
+import me.Lucas.KiipCraft.commands.StopLoopsCommand;
 import me.Lucas.KiipCraft.commands.UpdateCommand;
 import me.Lucas.KiipCraft.dungeons.commands.DungeonsCommand;
 import me.Lucas.KiipCraft.events.command.EventTokenCommand;
@@ -53,6 +54,7 @@ public class CommandManager implements TabExecutor {
     public String servertour = "servertour";
     public String orb = "orb";
     public String shard = "shard";
+    public String fix = "fix";
 
     public void setup() {
         plugin.getCommand(main).setExecutor(this);
@@ -68,6 +70,7 @@ public class CommandManager implements TabExecutor {
         this.commands.add(new ServerTourCommand(plugin));
         this.commands.add(new OrbCommand(plugin));
         this.commands.add(new ShardCommand(plugin));
+        this.commands.add(new StopLoopsCommand(plugin));
 
         commandList.add(help);
         commandList.add(update);
@@ -80,6 +83,7 @@ public class CommandManager implements TabExecutor {
         commandList.add(servertour);
         commandList.add(orb);
         commandList.add(shard);
+        commandList.add(fix);
     }
 
     @Override
@@ -128,11 +132,8 @@ public class CommandManager implements TabExecutor {
             String[] aliases;
             int length = (aliases = scmd.aliases()).length;
 
-            for (int var5 = 0; var5 < length; ++var5) {
-                String alias = aliases[var5];
-                if (name.equalsIgnoreCase(alias)) {
-                    return scmd;
-                }
+            if (Arrays.stream(aliases, 0, length).anyMatch(name::equalsIgnoreCase)) {
+                return scmd;
             }
         }
         return null;

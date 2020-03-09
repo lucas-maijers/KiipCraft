@@ -9,12 +9,16 @@ package me.Lucas.KiipCraft.dungeons.listeners;
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.dungeons.items.DungeonItems;
 import me.Lucas.KiipCraft.utils.Utils;
+import net.minecraft.server.v1_15_R1.NBTTagCompound;
+import net.minecraft.server.v1_15_R1.TileEntity;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.craftbukkit.v1_15_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_15_R1.block.CraftBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -158,7 +162,7 @@ public class OpenDungeonGate implements Listener {
                         for (double y = lowestY; y <= highestY; y++) {
                             int x = (int) highestX;
                             Block b = w.getBlockAt(x, (int) y, (int) z);
-                            restore.put(b.getLocation(), b.getBlockData());
+                            restore.put(b.getLocation(), b.getState().getBlockData());
                         }
                     }
                 } else if (ignoreZ) {
@@ -166,7 +170,7 @@ public class OpenDungeonGate implements Listener {
                         for (double y = lowestY; y <= highestY; y++) {
                             int z = (int) highestZ;
                             Block b = w.getBlockAt((int) x, (int) y, z);
-                            restore.put(b.getLocation(), b.getBlockData());
+                            restore.put(b.getLocation(), b.getState().getBlockData());
                         }
                     }
                 }
@@ -176,40 +180,49 @@ public class OpenDungeonGate implements Listener {
     }
 
     private void openDungeonGate(Map<Location, BlockData> putBack) {
-        String meta = "";
+        NBTTagCompound ntc = null;
         for (Map.Entry<Location, BlockData> entry : putBack.entrySet()) {
             Location loc = entry.getKey();
+            World w = loc.getWorld();
             if (loc.getBlock().getType() == Material.STRUCTURE_BLOCK) {
-                switch (getDungeonType(loc)) {
-                    case "Gold":
-                        meta = "DATA";
-                        break;
-                    case "Diamond":
-                        meta = "SAVE";
-                        break;
-                    case "Emerald":
-                        meta = "LOAD";
-                        break;
+                CraftWorld ws = (CraftWorld) w;
+                CraftBlock cb = (CraftBlock) loc.getBlock();
+                TileEntity te = ws.getHandle().getTileEntity(cb.getPosition());
+
+                if (te != null) {
+                    ntc = new NBTTagCompound();
+                    te.save(ntc);
                 }
             }
             loc.getBlock().setType(Material.AIR);
         }
-        String savedMeta = meta;
+
+        final NBTTagCompound finalNtc = ntc;
 
         new BukkitRunnable() {
+            final NBTTagCompound nbt = finalNtc;
+
             @Override
             public void run() {
                 for (Map.Entry<Location, BlockData> entry : putBack.entrySet()) {
                     Location loc = entry.getKey();
+                    String stringData = entry.getValue().getAsString();
                     BlockData data = entry.getValue();
                     Material mt = data.getMaterial();
 
                     if (mt == Material.STRUCTURE_BLOCK) {
-                        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "setblock " + (int) loc.getX() + " " + (int) loc.getY() + " " + (int) loc.getZ() + " " + data.getAsString() + "{mode:" + '"' + savedMeta + '"' + "}");
+                        loc.getBlock().setType(mt);
+
+                        CraftWorld ws = (CraftWorld) loc.getWorld();
+                        CraftBlock cb = (CraftBlock) loc.getBlock();
+                        TileEntity te = ws.getHandle().getTileEntity(cb.getPosition());
+
+                        te.load(nbt);
+                        te.update();
+
                     } else {
                         loc.getBlock().setType(mt);
-                        loc.getBlock().getState().setBlockData(data);
-                        loc.getBlock().getState().update(true);
+                        loc.getBlock().setBlockData(Bukkit.getServer().createBlockData(stringData));
                     }
                 }
                 putBack.clear();

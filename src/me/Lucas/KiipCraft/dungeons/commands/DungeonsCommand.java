@@ -88,22 +88,22 @@ public class DungeonsCommand extends SubCommand {
                     }
                 }
 
-                switch (args[2].toLowerCase()) {
-                    case "diamond":
+                switch (args[2].toUpperCase()) {
+                    case "DIAMOND":
                         p.getInventory().addItem(DungeonItems.diamondKey());
                         if (args.length == 4) {
                             sender.sendMessage(Utils.prefix + Utils.chat("Je hebt &d&l" + p.getName() + " &7een &b&LDiamond &c&lDungeon Key &7gegeven!"));
                         }
                         p.sendMessage(Utils.prefix + Utils.chat("Je hebt een &b&lDiamond &c&lDungeon Key &7ontvangen!"));
                         break;
-                    case "emerald":
+                    case "EMERALD":
                         p.getInventory().addItem(DungeonItems.emeraldKey());
                         if (args.length == 4) {
                             sender.sendMessage(Utils.prefix + Utils.chat("Je hebt &d&l" + p.getName() + " &7een &a&LEmerald &c&lDungeon Key &7gegeven!"));
                         }
                         p.sendMessage(Utils.prefix + Utils.chat("Je hebt een &a&lEmerald &c&lDungeon Key &7ontvangen!"));
                         break;
-                    case "gold":
+                    case "GOLD":
                         p.getInventory().addItem(DungeonItems.goldKey());
                         if (args.length == 4) {
                             sender.sendMessage(Utils.prefix + Utils.chat("Je hebt &d&l" + p.getName() + " &7een &6&LGold &c&lDungeon Key &7gegeven!"));

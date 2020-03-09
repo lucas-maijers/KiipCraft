@@ -68,7 +68,7 @@ public class XpBottleCommand extends SubCommand {
                 return;
             }
             if (amount >= 10 && p.getInventory().contains(Material.GLASS_BOTTLE)) {
-                p.sendMessage(prefix + "Je hebt zojuist §a" + amount + " Levels §7gebottled");
+                p.sendMessage(prefix + "Je hebt zojuist §a" + amount + " Levels §7gebottled.");
                 p.setLevel(p.getLevel() - amount);
                 p.getInventory().removeItem(Utils.glasFlesje());
                 p.getInventory().addItem(Utils.xpDrinkFles());

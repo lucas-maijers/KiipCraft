@@ -90,10 +90,10 @@ public class ServerTourCommand extends SubCommand {
         ConfigurationSection cs = warps.getConfigurationSection("Warps");
         assert cs != null;
         if (cs.isConfigurationSection(creator.getName())) {
-            creator.sendMessage(prefix + "Sorry, maar jij kan dit commando nu niet uitvoeren");
+            creator.sendMessage(prefix + "Sorry, maar jij kan dit commando nu niet uitvoeren.");
             return;
         } else {
-            creator.sendMessage(prefix + "Succes, je hebt een locatie aangemaakt voor de servertour");
+            creator.sendMessage(prefix + "Succes, je hebt een locatie aangemaakt voor de servertour.");
         }
         cs.createSection(creator.getName());
         ConfigurationSection warp = warps.getConfigurationSection("Warps." + creator.getName());

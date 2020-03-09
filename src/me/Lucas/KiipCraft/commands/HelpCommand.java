@@ -43,8 +43,11 @@ public class HelpCommand extends SubCommand {
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventsadmin&7: Opent het events menu."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventstoken <aantal> [speler]&7: Geeft event tokens."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft servertour menu&7: Opent het servertour menu."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft shard <naam>&7: Geeft je de shard van de ingevoerde soort."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft orb <naam>&7: Geeft je de orb van de ingevoerde soort."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft admintool&7: Geeft je de admintool."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft update&7: Checkt de plugin voor updates."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft fix&7: Fixt herhalende loops in de plugin."));
         }
         p.sendMessage(" ");
     }

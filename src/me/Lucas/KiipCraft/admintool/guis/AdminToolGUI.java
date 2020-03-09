@@ -79,6 +79,7 @@ public class AdminToolGUI {
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lServer Tour Menu"))) {
             p.sendMessage(prefix + Utils.chat("Je opent het &6&lServertour Menu&7!"));
+            ServerTourRequestsGUI.initialize();
             p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
         }
 
