@@ -226,7 +226,7 @@ public class AirOrbAbility implements Listener {
             public void run() {
                 if (timeratNow > 0) {
                     timeratNow--;
-                    cooldownMessage = Utils.prefix + Utils.chat("Deze ability zit nog op cooldown voor &c" + timeratNow + " &7seconden!");
+                    cooldownMessage = Utils.prefix + Utils.chat(String.format("Deze ability zit nog op cooldown voor &c%d &7seconden!", timeratNow));
                 }
                 if (timeratNow == 0) {
                     timeratNow = 120;

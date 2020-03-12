@@ -88,10 +88,10 @@ public class SpigotPluginUpdater {
             oldv = oldv.replace('.', '_');
             newv = newv.replace('.', '_');
             if (oldv.split("_").length != 0 && oldv.split("_").length != 1 && newv.split("_").length != 0 && newv.split("_").length != 1) {
-                int vnum = Integer.valueOf(oldv.split("_")[0]);
-                int vsec = Integer.valueOf(oldv.split("_")[1]);
-                int newvnum = Integer.valueOf(newv.split("_")[0]);
-                int newvsec = Integer.valueOf(newv.split("_")[1]);
+                int vnum = Integer.parseInt(oldv.split("_")[0]);
+                int vsec = Integer.parseInt(oldv.split("_")[1]);
+                int newvnum = Integer.parseInt(newv.split("_")[0]);
+                int newvsec = Integer.parseInt(newv.split("_")[1]);
                 if (newvnum > vnum) {
                     return true;
                 }

@@ -57,7 +57,6 @@ public class OpenDungeonGate implements Listener {
         World w = p.getWorld();
         String dungeonType;
 
-
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             assert b != null;
             if (b.getType() == Material.STRUCTURE_BLOCK) {
@@ -187,6 +186,7 @@ public class OpenDungeonGate implements Listener {
             if (loc.getBlock().getType() == Material.STRUCTURE_BLOCK) {
                 CraftWorld ws = (CraftWorld) w;
                 CraftBlock cb = (CraftBlock) loc.getBlock();
+                assert ws != null;
                 TileEntity te = ws.getHandle().getTileEntity(cb.getPosition());
 
                 if (te != null) {
@@ -210,18 +210,18 @@ public class OpenDungeonGate implements Listener {
                     BlockData data = entry.getValue();
                     Material mt = data.getMaterial();
 
+                    loc.getBlock().setType(mt);
                     if (mt == Material.STRUCTURE_BLOCK) {
-                        loc.getBlock().setType(mt);
 
                         CraftWorld ws = (CraftWorld) loc.getWorld();
                         CraftBlock cb = (CraftBlock) loc.getBlock();
+                        assert ws != null;
                         TileEntity te = ws.getHandle().getTileEntity(cb.getPosition());
 
+                        assert te != null;
                         te.load(nbt);
                         te.update();
-
                     } else {
-                        loc.getBlock().setType(mt);
                         loc.getBlock().setBlockData(Bukkit.getServer().createBlockData(stringData));
                     }
                 }

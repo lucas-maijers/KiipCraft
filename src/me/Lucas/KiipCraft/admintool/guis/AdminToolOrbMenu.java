@@ -94,7 +94,7 @@ public class AdminToolOrbMenu {
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lEarth &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.earthOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &6&lEarth &c&lOrbh&7!"));
+            p.sendMessage(prefix + Utils.chat("Je ontvangt de &6&lEarth &c&lOrb&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&b&lLight&e&lning &c&lOrb"))) {
