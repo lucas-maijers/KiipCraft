@@ -7,6 +7,7 @@
 package me.Lucas.KiipCraft.servertour;
 
 import me.Lucas.KiipCraft.Main;
+import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.managers.SubCommand;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -26,6 +27,7 @@ import static me.Lucas.KiipCraft.utils.Utils.prefix;
 public class ServerTourCommand extends SubCommand {
 
     private Main plugin;
+    private ConfigManager cfgm = ConfigManager.getManager();
 
     private FileConfiguration warps;
     private File warpsfile;
@@ -34,7 +36,6 @@ public class ServerTourCommand extends SubCommand {
         this.plugin = plugin;
 
         warpsfile = new File(plugin.getDataFolder(), "warps.yml");
-        warps = YamlConfiguration.loadConfiguration(warpsfile);
     }
 
 
@@ -50,16 +51,20 @@ public class ServerTourCommand extends SubCommand {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (args[1].equals("menu") && p.hasPermission("kiipcraft.servertour")) {
-            p.sendMessage(prefix + "Je opent het Servertour Menu.");
-            warps = YamlConfiguration.loadConfiguration(warpsfile);
-            try {
-                warps.save(warpsfile);
-            } catch (IOException e) {
-                e.printStackTrace();
+        } else if (args[1].equals("menu")) {
+            if (p.hasPermission("kiipcraft.staff")) {
+                p.sendMessage(prefix + "Je opent het Servertour Menu.");
+                warps = YamlConfiguration.loadConfiguration(warpsfile);
+                try {
+                    warps.save(warpsfile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ServerTourRequestsGUI.initialize();
+                p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
+            } else {
+                p.sendMessage(noPermission);
             }
-            ServerTourRequestsGUI.initialize();
-            p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
         } else {
             p.sendMessage(noPermission);
         }
@@ -81,11 +86,12 @@ public class ServerTourCommand extends SubCommand {
     }
 
     private void makeNewWarp(Location loc, Player creator) throws IOException {
+        warps = cfgm.getWarpsCFG();
+
         if (!warps.isConfigurationSection("Warps")) {
             warps.createSection("Warps");
         }
 
-        warps = YamlConfiguration.loadConfiguration(warpsfile);
 
         ConfigurationSection cs = warps.getConfigurationSection("Warps");
         assert cs != null;

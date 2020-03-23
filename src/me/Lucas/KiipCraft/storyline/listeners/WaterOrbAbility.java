@@ -46,20 +46,21 @@ public class WaterOrbAbility implements Listener {
         Player p = e.getPlayer();
         Block target;
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb())) {
-            if (p.hasPermission("kiipcraft.storyline")) {
-                if (cooldown) {
-                    p.sendMessage(cooldownMessage);
-                    return;
+        if (e.getAction() == Action.LEFT_CLICK_AIR)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb())) {
+                if (p.hasPermission("kiipcraft.storyline")) {
+                    if (cooldown) {
+                        p.sendMessage(cooldownMessage);
+                        return;
+                    }
+                    target = p.getTargetBlock(null, 20);
+                    BlockFace rotation = p.getFacing();
+                    placeWall(rotation, target);
+                    startCooldown();
+                } else {
+                    p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
-                target = p.getTargetBlock(null, 20);
-                BlockFace rotation = p.getFacing();
-                placeWall(rotation, target);
-                startCooldown();
-            } else {
-                p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
             }
-        }
     }
 
     @EventHandler
@@ -67,9 +68,10 @@ public class WaterOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
-                if (p.hasPermission("kiipcraft.storyline") && p.getInventory().contains(OrbItems.waterOrb())) {
-                    e.setCancelled(true);
-                }
+                if (p.hasPermission("kiipcraft.storyline"))
+                    if (p.getInventory().contains(OrbItems.waterOrb())) {
+                        e.setCancelled(true);
+                    }
             }
         }
     }
@@ -78,7 +80,7 @@ public class WaterOrbAbility implements Listener {
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb()) || e.getAction() == Action.RIGHT_CLICK_BLOCK && p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb())) {
             e.setCancelled(true);
         }
     }

@@ -7,4 +7,6 @@ description: De KiipCraft Plugin.
 
 commands:
   kiipcraft:
+    aliases:
+      - kcs
     description: Laat de plugin commands zien.

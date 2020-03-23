@@ -39,9 +39,7 @@ public class HelpCommand extends SubCommand {
         if (p.hasPermission("kiipcraft.staff")) {
             p.sendMessage(Utils.chat(" &c&lStaff Sectie:"));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft dungeons help&7: Laat een lijst met alle dungeon commands zien."));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventstool&7: Geeft je de eventstool."));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventsadmin&7: Opent het events menu."));
-            p.sendMessage(Utils.chat(" &7- &3/kiipcraft eventstoken <aantal> [speler]&7: Geeft event tokens."));
+            p.sendMessage(Utils.chat(" &7- &3/kiipcraft events help&7: Laat een lijst met alle event commands zien."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft servertour menu&7: Opent het servertour menu."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft shard <naam>&7: Geeft je de shard van de ingevoerde soort."));
             p.sendMessage(Utils.chat(" &7- &3/kiipcraft orb <naam>&7: Geeft je de orb van de ingevoerde soort."));

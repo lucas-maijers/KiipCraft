@@ -12,18 +12,14 @@ import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import java.io.File;
 
 import static org.bukkit.Bukkit.createInventory;
 import static org.bukkit.Material.*;
 
 public class ServerTourRequestsGUI {
-
     public static Inventory inv;
     public static String inv_name;
     public static String warpSettingName;
@@ -33,7 +29,7 @@ public class ServerTourRequestsGUI {
     public static int inv_rows = row_now * 9;
 
     private static FileConfiguration warps;
-    private static File warpsfile;
+
 
     public ServerTourRequestsGUI(Main plugin) {
         ServerTourRequestsGUI.plugin = plugin;
@@ -42,8 +38,7 @@ public class ServerTourRequestsGUI {
     public static void initialize() {
         inv_name = Utils.chat("&6&lServertour Warps");
 
-        warpsfile = new File(plugin.getDataFolder(), "warps.yml");
-        warps = YamlConfiguration.loadConfiguration(warpsfile);
+        warps = cfgm.getWarpsCFG();
 
         inv = Bukkit.createInventory(null, inv_rows);
     }

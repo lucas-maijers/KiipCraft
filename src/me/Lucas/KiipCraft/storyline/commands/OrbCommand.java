@@ -20,9 +20,8 @@ import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class OrbCommand extends SubCommand {
 
-    private Main plugin;
-
     private static List<String> types = new ArrayList<>();
+    private Main plugin;
 
     public OrbCommand(Main plugin) {
         this.plugin = plugin;

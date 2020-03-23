@@ -25,12 +25,16 @@ public class AdminToolCommand extends SubCommand {
 
     @Override
     public void onCommand(Player p, String[] args) {
-        if (p.hasPermission("kiipcraft.admintool") && !(p.getInventory().contains(adminTool()))) {
-            p.sendMessage(prefix + chat("Je hebt zojuist de &4&lAdmin Tool&7 ontvangen!"));
-            p.getInventory().addItem(adminTool());
-        } else if (p.hasPermission("kiipcraft.admintool") && p.getInventory().contains(adminTool())) {
-            p.sendMessage(prefix + chat("Je hebt zojuist je &4&lAdmin Tool&7 verwijderd!"));
-            p.getInventory().remove(adminTool());
+        if (p.hasPermission("kiipcraft.staff")) {
+            if (!(p.getInventory().contains(adminTool()))) {
+                p.sendMessage(prefix + chat("Je hebt zojuist de &4&lAdmin Tool&7 ontvangen!"));
+                p.getInventory().addItem(adminTool());
+            } else if (p.getInventory().contains(adminTool())) {
+                p.sendMessage(prefix + chat("Je hebt zojuist je &4&lAdmin Tool&7 verwijderd!"));
+                p.getInventory().remove(adminTool());
+            } else {
+                p.sendMessage(noPermission);
+            }
         } else {
             p.sendMessage(noPermission);
         }

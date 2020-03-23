@@ -45,149 +45,163 @@ public class AirOrbAbility implements Listener {
     public void onLeftClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
-            if (p.hasPermission("kiipcraft.storyline")) {
-                p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 20, (float) 1.8);
-                for (Entity et : p.getNearbyEntities(10, 10, 10)) {
-                    if (et instanceof Player || et instanceof Monster) {
-                        Location etLoc = et.getLocation();
-                        Location pLoc = p.getLocation();
+        if (e.getAction() == Action.LEFT_CLICK_AIR)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
+                if (p.hasPermission("kiipcraft.storyline")) {
+                    p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 20, (float) 1.8);
+                    for (Entity et : p.getNearbyEntities(10, 10, 10)) {
+                        if (et instanceof Player || et instanceof Monster) {
+                            Location etLoc = et.getLocation();
+                            Location pLoc = p.getLocation();
 
-                        Location newLoc = etLoc.subtract(pLoc);
-                        Vector newV = newLoc.toVector().normalize().multiply(2);
-                        newV.setY(1);
+                            Location newLoc = etLoc.subtract(pLoc);
+                            Vector newV = newLoc.toVector().normalize().multiply(2);
+                            newV.setY(1);
 
-                        et.setVelocity(newV);
+                            et.setVelocity(newV);
+                        }
                     }
+                } else {
+                    p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
-            } else {
-                p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
             }
-        }
     }
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
-            e.setCancelled(true);
-            if (p.hasPermission("kiipcraft.storyline")) {
-                if (cooldown) {
-                    p.sendMessage(cooldownMessage);
-                    return;
-                }
-                startCooldown();
-                p.setAllowFlight(true);
-                p.setExp(0F);
-                p.setLevel(60);
-
-                final int[] currentsubtraction = {0};
-
-                new BukkitRunnable() {
-
-                    @Override
-                    public void run() {
-
-                        float currentExp = p.getExp();
-                        float currentLevel = p.getLevel();
-
-                        if (currentExp <= 0) {
-                            if (currentLevel > 0) {
-                                p.setLevel(p.getLevel() - 1);
-                            }
-                            p.setExp(1F);
-                            currentsubtraction[0] = 0;
-                        }
-
-                        switch (currentsubtraction[0]) {
-                            case 0:
-                                p.setExp(0.95F);
-                                break;
-                            case 1:
-                                p.setExp(0.90F);
-                                break;
-                            case 2:
-                                p.setExp(0.85F);
-                                break;
-                            case 3:
-                                p.setExp(0.80F);
-                                break;
-                            case 4:
-                                p.setExp(0.75F);
-                                break;
-                            case 5:
-                                p.setExp(0.70F);
-                                break;
-                            case 7:
-                                p.setExp(0.65F);
-                                break;
-                            case 8:
-                                p.setExp(0.60F);
-                                break;
-                            case 9:
-                                p.setExp(0.55F);
-                                break;
-                            case 10:
-                                p.setExp(0.50F);
-                                break;
-                            case 11:
-                                p.setExp(0.45F);
-                                break;
-                            case 12:
-                                p.setExp(0.40F);
-                                break;
-                            case 13:
-                                p.setExp(0.35F);
-                                break;
-                            case 14:
-                                p.setExp(0.30F);
-                                break;
-                            case 15:
-                                p.setExp(0.25F);
-                                break;
-                            case 16:
-                                p.setExp(0.20F);
-                                break;
-                            case 17:
-                                p.setExp(0.15F);
-                                break;
-                            case 18:
-                                p.setExp(0.10F);
-                                break;
-                            case 19:
-                                p.setExp(0.05F);
-                                break;
-                            case 20:
-                                p.setExp(0F);
-                                break;
-                        }
-                        ++currentsubtraction[0];
-
-
-                        if (currentLevel == 0 && currentExp == 0) {
-                            p.setExp(0F);
-                            p.setAllowFlight(false);
-                            p.setFlying(false);
-                            this.cancel();
-                        }
+        if (e.getAction() == Action.RIGHT_CLICK_AIR)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
+                e.setCancelled(true);
+                if (p.hasPermission("kiipcraft.storyline")) {
+                    if (cooldown) {
+                        p.sendMessage(cooldownMessage);
+                        return;
                     }
-                }.runTaskTimer(plugin, 0, 1);
-            } else {
-                p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+                    startCooldown();
+                    p.setAllowFlight(true);
+                    p.setExp(0F);
+                    p.setLevel(60);
+
+                    final int[] currentsubtraction = {0};
+
+                    new BukkitRunnable() {
+
+                        @Override
+                        public void run() {
+
+                            float currentExp = p.getExp();
+                            float currentLevel = p.getLevel();
+
+                            if (currentExp <= 0) {
+                                if (currentLevel > 0) {
+                                    p.setLevel(p.getLevel() - 1);
+                                }
+                                p.setExp(1F);
+                                currentsubtraction[0] = 0;
+                            }
+
+                            switch (currentsubtraction[0]) {
+                                case 0:
+                                    p.setExp(0.95F);
+                                    break;
+                                case 1:
+                                    p.setExp(0.90F);
+                                    break;
+                                case 2:
+                                    p.setExp(0.85F);
+                                    break;
+                                case 3:
+                                    p.setExp(0.80F);
+                                    break;
+                                case 4:
+                                    p.setExp(0.75F);
+                                    break;
+                                case 5:
+                                    p.setExp(0.70F);
+                                    break;
+                                case 7:
+                                    p.setExp(0.65F);
+                                    break;
+                                case 8:
+                                    p.setExp(0.60F);
+                                    break;
+                                case 9:
+                                    p.setExp(0.55F);
+                                    break;
+                                case 10:
+                                    p.setExp(0.50F);
+                                    break;
+                                case 11:
+                                    p.setExp(0.45F);
+                                    break;
+                                case 12:
+                                    p.setExp(0.40F);
+                                    break;
+                                case 13:
+                                    p.setExp(0.35F);
+                                    break;
+                                case 14:
+                                    p.setExp(0.30F);
+                                    break;
+                                case 15:
+                                    p.setExp(0.25F);
+                                    break;
+                                case 16:
+                                    p.setExp(0.20F);
+                                    break;
+                                case 17:
+                                    p.setExp(0.15F);
+                                    break;
+                                case 18:
+                                    p.setExp(0.10F);
+                                    break;
+                                case 19:
+                                    p.setExp(0.05F);
+                                    break;
+                                case 20:
+                                    p.setExp(0F);
+                                    break;
+                            }
+                            ++currentsubtraction[0];
+
+
+                            if (currentLevel == 0 && currentExp == 0) {
+                                p.setExp(0F);
+                                p.setAllowFlight(false);
+                                p.setFlying(false);
+                                this.cancel();
+                            }
+                        }
+                    }.runTaskTimer(plugin, 0, 1);
+                } else {
+                    p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+                }
             }
-        }
     }
+
+    @EventHandler
+    public void throwOrb(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
+                e.setCancelled(true);
+            }
+    }
+
 
     @EventHandler
     public void onFallDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
-            if (e.getCause() == EntityDamageEvent.DamageCause.FALL && p.getInventory().contains(OrbItems.airOrb())) {
-                if (p.hasPermission("kiipcraft.storyline")) {
-                    e.setCancelled(true);
+            if (p.getInventory().contains(OrbItems.airOrb()))
+                if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                    if (p.hasPermission("kiipcraft.storyline")) {
+                        e.setCancelled(true);
+                    }
                 }
-            }
         }
     }
 

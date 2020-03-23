@@ -9,6 +9,7 @@ package me.Lucas.KiipCraft.dungeons.listeners;
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.dungeons.commands.DungeonsCommand;
 import me.Lucas.KiipCraft.dungeons.items.DungeonItems;
+import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -16,7 +17,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,18 +36,15 @@ import java.util.Set;
 
 public class DungeonGateCreation implements Listener {
 
-    private Main plugin;
-
-    private File dungeonGatesFile;
-    private FileConfiguration dungeonGatesCFG;
-
     public static Set<String> phase1 = new HashSet<>();
     public static Set<String> phase2 = new HashSet<>();
     public static Set<String> phase3 = new HashSet<>();
-
     public static Set<String> phasesComplete = new HashSet<>();
     public static Set<String> lockType = new HashSet<>();
-
+    private Main plugin;
+    private ConfigManager cfgm = ConfigManager.getManager();
+    private File dungeonGatesFile;
+    private FileConfiguration dungeonGatesCFG;
     private String dungeonGateName;
     private String dungeonType;
 
@@ -59,7 +56,6 @@ public class DungeonGateCreation implements Listener {
         this.plugin = plugin;
 
         dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
-        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
 
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -69,7 +65,7 @@ public class DungeonGateCreation implements Listener {
         Player p = e.getPlayer();
 
 
-        if (p.hasPermission("kiipcraft.dungeons")) {
+        if (p.hasPermission("kiipcraft.staff")) {
             if (DungeonsCommand.creatingPlayer.contains(p.getName())) {
                 if (p.getInventory().getItemInMainHand().equals(DungeonItems.dungeonGateTool())) {
                     // Fase 1
@@ -272,11 +268,11 @@ public class DungeonGateCreation implements Listener {
     }
 
     public void saveToConfig(Player p) {
+        dungeonGatesCFG = cfgm.getDungeonGatesCFG();
+
         if (!dungeonGatesCFG.isConfigurationSection("Dungeons")) {
             dungeonGatesCFG.createSection("Dungeons");
         }
-
-        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
 
         ConfigurationSection cs = dungeonGatesCFG.getConfigurationSection("Dungeons");
 

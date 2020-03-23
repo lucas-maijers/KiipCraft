@@ -9,7 +9,7 @@ package me.Lucas.KiipCraft.utils;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
-import me.Lucas.KiipCraft.events.command.EventTokenCommand;
+import me.Lucas.KiipCraft.events.command.EventsCommand;
 import me.Lucas.KiipCraft.outofuse.commands.KiipEuroCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -40,7 +40,7 @@ public class Utils {
     }
 
     public static ItemStack eventToken() {
-        ItemStack eToken = new ItemStack(IRON_NUGGET, EventTokenCommand.aantal);
+        ItemStack eToken = new ItemStack(IRON_NUGGET, EventsCommand.aantal);
         ItemMeta eTokenM = eToken.getItemMeta();
 
         ArrayList<String> lore = new ArrayList<>();
@@ -137,6 +137,24 @@ public class Utils {
         return eventsTool;
     }
 
+    public static ItemStack selectorTool() {
+        ItemStack st = new ItemStack(BLAZE_ROD);
+        ItemMeta meta = st.getItemMeta();
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(Utils.chat("&7De selection tool waarmee je event gebied selections mee kan maken!"));
+        lore.add(Utils.chat("&7Werkt alleen na gebruik van een geldig selectiecommando."));
+
+        assert meta != null;
+        meta.setDisplayName(Utils.chat("&6&lSelection Tool"));
+        meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        meta.setLore(lore);
+        st.setItemMeta(meta);
+        return st;
+    }
+
     public static ItemStack adminTool() {
         ItemStack adminTool = new ItemStack(NETHER_STAR);
         ItemMeta adminToolM = adminTool.getItemMeta();
@@ -150,6 +168,22 @@ public class Utils {
         adminToolM.setLore(lore);
         adminTool.setItemMeta(adminToolM);
         return adminTool;
+    }
+
+    public static ItemStack syncTool() {
+        ItemStack syncTool = new ItemStack(STICK);
+        ItemMeta syncToolM = syncTool.getItemMeta();
+
+        ArrayList<String> lore = new ArrayList<>();
+        lore.add(Utils.chat("&7Met deze tool kan je chesten selecteren om te synchroniseren."));
+        lore.add(Utils.chat("&7Om een synchronisatie maken doe: /kiipcraft events synckist"));
+
+        assert syncToolM != null;
+        syncToolM.setDisplayName(Utils.chat("&4&lSynchronisatie Tool"));
+
+        syncToolM.setLore(lore);
+        syncTool.setItemMeta(syncToolM);
+        return syncTool;
     }
 
     public static ItemStack grinchMasker() {

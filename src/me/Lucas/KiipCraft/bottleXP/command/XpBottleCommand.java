@@ -11,6 +11,7 @@ import me.Lucas.KiipCraft.managers.SubCommand;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
@@ -22,8 +23,10 @@ public class XpBottleCommand extends SubCommand {
     public static Set<Integer> amountList = new HashSet<>();
     public static int amountGet;
     public static String bottler;
-    public static int maxAmount = 50;
+    private static int maxAmount = 50;
     private Main plugin;
+
+    private Set<String> delayPlayers = new HashSet<>();
 
     public XpBottleCommand(Main plugin) {
         this.plugin = plugin;
@@ -44,7 +47,7 @@ public class XpBottleCommand extends SubCommand {
             return;
         }
 
-        int amount = 0;
+        int amount;
 
         // Zet tekst over in Int
         try {
@@ -63,15 +66,29 @@ public class XpBottleCommand extends SubCommand {
         }
 
         if (p.hasPermission("kiipcraft.donator")) {
-            if (amount > p.getLevel()) {
-                p.sendMessage(prefix + "Helaas, het ingevoerde aantal levels heb jij niet, je komt §a" + (amount - p.getLevel()) + " Levels §7te kort.");
+
+            if (delayPlayers.contains(p.getName())) {
+                p.sendMessage(prefix + Utils.chat("Dit commando zit nog op cooldown!"));
                 return;
             }
-            if (amount >= 10 && p.getInventory().contains(Material.GLASS_BOTTLE)) {
-                p.sendMessage(prefix + "Je hebt zojuist §a" + amount + " Levels §7gebottled.");
-                p.setLevel(p.getLevel() - amount);
-                p.getInventory().removeItem(Utils.glasFlesje());
-                p.getInventory().addItem(Utils.xpDrinkFles());
+
+            if (amount > p.getLevel()) {
+                p.sendMessage(String.format("%sHelaas, het ingevoerde aantal levels heb jij niet, je komt §a%d Levels §7te kort.", prefix, amount - p.getLevel()));
+                return;
+            }
+            if (amount >= 10) {
+                if (p.getInventory().contains(Material.GLASS_BOTTLE)) {
+                    p.sendMessage(prefix + "Je hebt zojuist §a" + amount + " Levels §7gebottled.");
+                    p.setLevel(p.getLevel() - amount);
+                    p.getInventory().removeItem(Utils.glasFlesje());
+                    p.getInventory().addItem(Utils.xpDrinkFles());
+                    delayPlayers.add(p.getName());
+                    startDelay(p);
+                } else if (!(p.getInventory().contains(Material.GLASS_BOTTLE))) {
+                    p.sendMessage(prefix + "Je moet een §6Glass Bottle§7 in je inventory hebben om dit te doen.");
+                } else {
+                    p.sendMessage(prefix + "Je moet minimaal §a10 Levels§7 bottlen.");
+                }
             } else if (!(p.getInventory().contains(Material.GLASS_BOTTLE))) {
                 p.sendMessage(prefix + "Je moet een §6Glass Bottle§7 in je inventory hebben om dit te doen.");
             } else {
@@ -109,5 +126,14 @@ public class XpBottleCommand extends SubCommand {
         }
 
         return null;
+    }
+
+    private void startDelay(Player p) {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                delayPlayers.remove(p.getName());
+            }
+        }.runTaskLater(plugin, 20 * 5);
     }
 }

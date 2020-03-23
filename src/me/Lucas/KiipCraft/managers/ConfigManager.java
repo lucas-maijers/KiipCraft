@@ -18,9 +18,11 @@ import java.util.logging.Level;
 public class ConfigManager {
 
     private static ConfigManager manager = new ConfigManager();
-    public FileConfiguration warpsCFG;
     public File warpsfile;
+    public File syncChestFile;
     public File dungeonGatesFile;
+    public FileConfiguration syncChestCFG;
+    public FileConfiguration warpsCFG;
     public FileConfiguration dungeonGatesCFG;
     private Main plugin = Main.getPlugin(Main.class);
 
@@ -34,6 +36,7 @@ public class ConfigManager {
         }
 
         warpsfile = new File(plugin.getDataFolder(), "warps.yml");
+        syncChestFile = new File(plugin.getDataFolder(), "syncchests.yml");
         dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
 
         if (!warpsfile.exists()) {
@@ -52,7 +55,16 @@ public class ConfigManager {
             }
         }
 
+        if (!syncChestFile.exists()) {
+            try {
+                syncChestFile.createNewFile();
+            } catch (IOException e) {
+                Bukkit.getServer().getLogger().log(Level.WARNING, "File could not be created.");
+            }
+        }
+
         warpsCFG = YamlConfiguration.loadConfiguration(warpsfile);
+        syncChestCFG = YamlConfiguration.loadConfiguration(syncChestFile);
         dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
 
     }
@@ -67,6 +79,12 @@ public class ConfigManager {
         dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
         dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
         return dungeonGatesCFG;
+    }
+
+    public FileConfiguration getSyncChestsCFG() {
+        syncChestFile = new File(plugin.getDataFolder(), "syncchests.yml");
+        syncChestCFG = YamlConfiguration.loadConfiguration(syncChestFile);
+        return syncChestCFG;
     }
 
     public void saveDungeonGates() {
@@ -95,12 +113,29 @@ public class ConfigManager {
         }
     }
 
+    public void saveSyncChests() {
+        try {
+            syncChestFile = new File(plugin.getDataFolder(), "syncchests.yml");
+            syncChestCFG = YamlConfiguration.loadConfiguration(syncChestFile);
+            if (!syncChestCFG.isConfigurationSection("SyncedChests")) {
+                syncChestCFG.createSection("SyncedChests");
+            }
+            syncChestCFG.save(syncChestFile);
+        } catch (IOException e) {
+            Bukkit.getServer().getLogger().log(Level.WARNING, "File could not be saved.");
+        }
+    }
+
     public void reloadDungeonGates() {
         dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
     }
 
     public void reloadWarps() {
         warpsCFG = YamlConfiguration.loadConfiguration(warpsfile);
+    }
+
+    public void reloadSyncChests() {
+        syncChestCFG = YamlConfiguration.loadConfiguration(syncChestFile);
     }
 
 }

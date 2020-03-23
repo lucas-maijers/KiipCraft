@@ -36,7 +36,7 @@ public class LifeOrbAbility implements Listener {
     public void onThrow(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lifeOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lifeOrb()) || e.getAction() == Action.RIGHT_CLICK_BLOCK && p.getInventory().getItemInMainHand().equals(OrbItems.lifeOrb())) {
             e.setCancelled(true);
         }
     }

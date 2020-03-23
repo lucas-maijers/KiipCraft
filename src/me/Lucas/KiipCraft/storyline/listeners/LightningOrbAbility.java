@@ -40,48 +40,49 @@ public class LightningOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
-            if (p.hasPermission("kiipcraft.storyline")) {
-                World w = p.getWorld();
+        if (e.getAction() == Action.LEFT_CLICK_AIR)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
+                if (p.hasPermission("kiipcraft.storyline")) {
+                    World w = p.getWorld();
 
-                double y = p.getLocation().getY();
+                    double y = p.getLocation().getY();
 
-                Location arrowSpawn = p.getLocation();
-                arrowSpawn.setY(y + 0.8);
-                final Arrow arrow = p.getWorld().spawn(arrowSpawn, Arrow.class);
-                arrow.setShooter(p);
-                arrow.setVelocity(p.getEyeLocation().getDirection().multiply(5));
-                arrow.setDamage(0);
-                arrow.setGravity(false);
+                    Location arrowSpawn = p.getLocation();
+                    arrowSpawn.setY(y + 0.8);
+                    final Arrow arrow = p.getWorld().spawn(arrowSpawn, Arrow.class);
+                    arrow.setShooter(p);
+                    arrow.setVelocity(p.getEyeLocation().getDirection().multiply(5));
+                    arrow.setDamage(0);
+                    arrow.setGravity(false);
 
-                w.playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 50, (float) 0.2);
+                    w.playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 50, (float) 0.2);
 
-                new BukkitRunnable() {
+                    new BukkitRunnable() {
 
-                    @Override
-                    public void run() {
-                        if (!(arrow.isValid())) {
-                            arrow.remove();
-                            this.cancel();
+                        @Override
+                        public void run() {
+                            if (!(arrow.isValid())) {
+                                arrow.remove();
+                                this.cancel();
+                            }
+
+                            if (!(arrow.isOnGround())) {
+                                arrow.getWorld().spawnParticle(Particle.CLOUD, arrow.getLocation(), 20, 0.8, 0.8, 0.8, 0.1);
+                            } else {
+                                w.strikeLightning(arrow.getLocation());
+                                w.strikeLightning(arrow.getLocation());
+                                w.strikeLightning(arrow.getLocation());
+                                w.createExplosion(arrow.getLocation(), (float) 1.5, true, true, p);
+                                w.createExplosion(arrow.getLocation(), 2, false, false);
+                                arrow.remove();
+                                this.cancel();
+                            }
                         }
-
-                        if (!(arrow.isOnGround())) {
-                            arrow.getWorld().spawnParticle(Particle.CLOUD, arrow.getLocation(), 20, 0.8, 0.8, 0.8, 0.1);
-                        } else {
-                            w.strikeLightning(arrow.getLocation());
-                            w.strikeLightning(arrow.getLocation());
-                            w.strikeLightning(arrow.getLocation());
-                            w.createExplosion(arrow.getLocation(), (float) 1.5, true, true, p);
-                            w.createExplosion(arrow.getLocation(), 2, false, false);
-                            arrow.remove();
-                            this.cancel();
-                        }
-                    }
-                }.runTaskTimer(plugin, 0, 1);
-            } else {
-                p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+                    }.runTaskTimer(plugin, 0, 1);
+                } else {
+                    p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+                }
             }
-        }
     }
 
     @EventHandler
@@ -89,101 +90,102 @@ public class LightningOrbAbility implements Listener {
         Player p = e.getPlayer();
         World w = p.getWorld();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
-            e.setCancelled(true);
-            if (p.hasPermission("kiipcraft.storyline")) {
-                Location loc = p.getLocation();
+        if (e.getAction() == Action.RIGHT_CLICK_AIR)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
+                e.setCancelled(true);
+                if (p.hasPermission("kiipcraft.storyline")) {
+                    Location loc = p.getLocation();
 
-                ArmorStand as = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
-                as.setVisible(false);
-                as.setGravity(false);
+                    ArmorStand as = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
+                    as.setVisible(false);
+                    as.setGravity(false);
 
-                double posX = p.getLocation().getX();
-                double posZ = p.getLocation().getZ();
-                Location loc2 = p.getLocation();
-                double y = p.getLocation().getY() + 30;
+                    double posX = p.getLocation().getX();
+                    double posZ = p.getLocation().getZ();
+                    Location loc2 = p.getLocation();
+                    double y = p.getLocation().getY() + 30;
 
-                new BukkitRunnable() {
+                    new BukkitRunnable() {
 
-                    int amount = 96;
+                        int amount = 96;
 
-                    double t = 0;
-                    double t2 = 0;
-                    double r = 20;
+                        double t = 0;
+                        double t2 = 0;
+                        double r = 20;
 
-                    @Override
-                    public void run() {
+                        @Override
+                        public void run() {
 
-                        t = t + Math.PI / amount;
-                        t2 = t2 - Math.PI / amount;
+                            t = t + Math.PI / amount;
+                            t2 = t2 - Math.PI / amount;
 
-                        double x = r * cos(t);
-                        double z = r * sin(t);
+                            double x = r * cos(t);
+                            double z = r * sin(t);
 
-                        double x2 = r * cos(t2);
-                        double z2 = r * sin(t2);
+                            double x2 = r * cos(t2);
+                            double z2 = r * sin(t2);
 
-                        loc.setX(posX + x);
-                        loc.setY(y);
-                        loc.setZ(posZ + z);
+                            loc.setX(posX + x);
+                            loc.setY(y);
+                            loc.setZ(posZ + z);
 
-                        loc2.setX(posX + x2);
-                        loc2.setY(y);
-                        loc2.setZ(posZ + z2);
+                            loc2.setX(posX + x2);
+                            loc2.setY(y);
+                            loc2.setZ(posZ + z2);
 
-                        final Firework fw = w.spawn(loc, Firework.class);
-                        final Firework fw2 = w.spawn(loc2, Firework.class);
-                        fw.setSilent(true);
-                        fw2.setSilent(true);
-                        FireworkMeta fmeta = fw.getFireworkMeta();
-                        FireworkEffect fwEffect = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.BALL).withColor(Color.AQUA).build();
+                            final Firework fw = w.spawn(loc, Firework.class);
+                            final Firework fw2 = w.spawn(loc2, Firework.class);
+                            fw.setSilent(true);
+                            fw2.setSilent(true);
+                            FireworkMeta fmeta = fw.getFireworkMeta();
+                            FireworkEffect fwEffect = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.BALL).withColor(Color.AQUA).build();
 
-                        FireworkMeta fmeta2 = fw.getFireworkMeta();
-                        FireworkEffect fwEffect2 = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.BALL).withColor(Color.AQUA).build();
+                            FireworkMeta fmeta2 = fw.getFireworkMeta();
+                            FireworkEffect fwEffect2 = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.BALL).withColor(Color.AQUA).build();
 
-                        fmeta.addEffect(fwEffect);
-                        fmeta.setPower(0);
-                        fw.setFireworkMeta(fmeta);
+                            fmeta.addEffect(fwEffect);
+                            fmeta.setPower(0);
+                            fw.setFireworkMeta(fmeta);
 
-                        fmeta2.addEffect(fwEffect2);
-                        fmeta2.setPower(0);
-                        fw2.setFireworkMeta(fmeta2);
-
-                        fw.detonate();
-                        fw2.detonate();
-
-                        if (t > Math.PI * 1) {
-
-                            Location asLoc = as.getLocation();
-                            asLoc.setY(as.getLocation().getY() + 18);
-
-                            final Firework endFW = w.spawn(asLoc, Firework.class);
-                            endFW.setSilent(true);
-                            FireworkMeta endFWmeta = endFW.getFireworkMeta();
-                            FireworkEffect endFwEffect = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.STAR).withColor(Color.AQUA).build();
-
-                            endFWmeta.addEffect(endFwEffect);
-                            endFWmeta.setPower(0);
-                            endFW.setFireworkMeta(endFWmeta);
-
-                            endFW.detonate();
+                            fmeta2.addEffect(fwEffect2);
+                            fmeta2.setPower(0);
+                            fw2.setFireworkMeta(fmeta2);
 
                             fw.detonate();
                             fw2.detonate();
-                            for (Entity t : as.getNearbyEntities(r, 30, r)) {
-                                if (t instanceof Player && !(t == p) || t instanceof Monster) {
-                                    t.getWorld().strikeLightning(t.getLocation());
+
+                            if (t > Math.PI * 1) {
+
+                                Location asLoc = as.getLocation();
+                                asLoc.setY(as.getLocation().getY() + 18);
+
+                                final Firework endFW = w.spawn(asLoc, Firework.class);
+                                endFW.setSilent(true);
+                                FireworkMeta endFWmeta = endFW.getFireworkMeta();
+                                FireworkEffect endFwEffect = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.STAR).withColor(Color.AQUA).build();
+
+                                endFWmeta.addEffect(endFwEffect);
+                                endFWmeta.setPower(0);
+                                endFW.setFireworkMeta(endFWmeta);
+
+                                endFW.detonate();
+
+                                fw.detonate();
+                                fw2.detonate();
+                                for (Entity t : as.getNearbyEntities(r, 30, r)) {
+                                    if (t instanceof Player && !(t == p) || t instanceof Monster) {
+                                        t.getWorld().strikeLightning(t.getLocation());
+                                    }
                                 }
+                                as.remove();
+                                this.cancel();
                             }
-                            as.remove();
-                            this.cancel();
                         }
-                    }
-                }.runTaskTimer(plugin, 0, 1);
-            } else {
-                p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+                    }.runTaskTimer(plugin, 0, 1);
+                } else {
+                    p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+                }
             }
-        }
     }
 
     @EventHandler
@@ -191,11 +193,22 @@ public class LightningOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING || e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
-                if (p.hasPermission("kiipcraft.storyline") && p.getInventory().contains(OrbItems.lightningOrb())) {
-                    e.setCancelled(true);
-                }
+                if (p.hasPermission("kiipcraft.storyline"))
+                    if (p.getInventory().contains(OrbItems.lightningOrb())) {
+                        e.setCancelled(true);
+                    }
             }
         }
+    }
+
+    @EventHandler
+    public void throwOrb(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
+                e.setCancelled(true);
+            }
     }
 
     @EventHandler

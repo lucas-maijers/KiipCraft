@@ -13,8 +13,11 @@ import me.Lucas.KiipCraft.bottleXP.command.XpBottleCommand;
 import me.Lucas.KiipCraft.bottleXP.listener.DrinkXPBottle;
 import me.Lucas.KiipCraft.dungeons.listeners.DungeonGateCreation;
 import me.Lucas.KiipCraft.dungeons.listeners.OpenDungeonGate;
+import me.Lucas.KiipCraft.dungeons.recipes.DungeonKeyRecipes;
 import me.Lucas.KiipCraft.events.listener.EventsToolClick;
 import me.Lucas.KiipCraft.events.listener.InventoryClickListener;
+import me.Lucas.KiipCraft.events.listener.SyncChests;
+import me.Lucas.KiipCraft.events.listener.SyncKistCreation;
 import me.Lucas.KiipCraft.events.ui.*;
 import me.Lucas.KiipCraft.managers.CommandManager;
 import me.Lucas.KiipCraft.managers.ConfigManager;
@@ -26,8 +29,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 
-    private ConfigManager cfgm;
     public CommandManager cmdMngr;
+    private ConfigManager cfgm;
 
     @Override
     public void onEnable() {
@@ -52,10 +55,13 @@ public class Main extends JavaPlugin {
         // Listeners
         new DrinkXPBottle(this);
         new InventoryClickListener(this);
+        new SyncKistCreation(this);
+        new SyncChests(this);
         new EventsToolClick(this);
 
         new ServertourMenuClick(this);
         new ServerTourRequestSettings(this);
+        new DungeonKeyRecipes(this);
 
         new FireOrbAbility(this);
         new WaterOrbAbility(this);
@@ -105,6 +111,7 @@ public class Main extends JavaPlugin {
     public void onDisable() {
         cfgm.saveWarps();
         cfgm.saveDungeonGates();
+        cfgm.saveSyncChests();
         saveConfig();
     }
 
@@ -114,9 +121,11 @@ public class Main extends JavaPlugin {
 
         cfgm.saveDungeonGates();
         cfgm.saveWarps();
+        cfgm.saveSyncChests();
 
         cfgm.reloadDungeonGates();
         cfgm.reloadWarps();
+        cfgm.reloadSyncChests();
 
     }
 

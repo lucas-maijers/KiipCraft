@@ -40,47 +40,48 @@ public class FireOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb())) {
-            if (p.hasPermission("kiipcraft.storyline")) {
-                World w = p.getWorld();
+        if (e.getAction() == Action.LEFT_CLICK_AIR)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb())) {
+                if (p.hasPermission("kiipcraft.storyline")) {
+                    World w = p.getWorld();
 
-                double y = p.getLocation().getY();
+                    double y = p.getLocation().getY();
 
-                Location spawnFireBall = p.getLocation();
-                spawnFireBall.setY(y + 0.8);
+                    Location spawnFireBall = p.getLocation();
+                    spawnFireBall.setY(y + 0.8);
 
-                final Fireball fireball = p.getWorld().spawn(spawnFireBall, Fireball.class);
-                fireball.setShooter(p);
-                fireball.setVelocity(p.getEyeLocation().getDirection().multiply(3));
-                fireball.setBounce(false);
-                fireball.setIsIncendiary(true);
-                fireball.setYield(0F);
+                    final Fireball fireball = p.getWorld().spawn(spawnFireBall, Fireball.class);
+                    fireball.setShooter(p);
+                    fireball.setVelocity(p.getEyeLocation().getDirection().multiply(3));
+                    fireball.setBounce(false);
+                    fireball.setIsIncendiary(true);
+                    fireball.setYield(0F);
 
-                new BukkitRunnable() {
+                    new BukkitRunnable() {
 
-                    @Override
-                    public void run() {
-                        if (!(fireball.isValid())) {
-                            w.createExplosion(fireball.getLocation(), 3, true, false, p);
-                            this.cancel();
+                        @Override
+                        public void run() {
+                            if (!(fireball.isValid())) {
+                                w.createExplosion(fireball.getLocation(), 3, true, false, p);
+                                this.cancel();
+                            }
+
+                            if (fireball.isValid()) {
+                                final Firework fw = fireball.getWorld().spawn(fireball.getLocation(), Firework.class);
+                                fw.setSilent(true);
+                                FireworkMeta fmeta = fw.getFireworkMeta();
+                                FireworkEffect fwEffect = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.BALL).withColor(Color.ORANGE).build();
+
+                                fmeta.addEffect(fwEffect);
+                                fw.setFireworkMeta(fmeta);
+                                fw.detonate();
+                            }
                         }
-
-                        if (fireball.isValid()) {
-                            final Firework fw = fireball.getWorld().spawn(fireball.getLocation(), Firework.class);
-                            fw.setSilent(true);
-                            FireworkMeta fmeta = fw.getFireworkMeta();
-                            FireworkEffect fwEffect = FireworkEffect.builder().flicker(false).trail(false).with(FireworkEffect.Type.BALL).withColor(Color.ORANGE).build();
-
-                            fmeta.addEffect(fwEffect);
-                            fw.setFireworkMeta(fmeta);
-                            fw.detonate();
-                        }
-                    }
-                }.runTaskTimer(plugin, 3, 1);
-            } else {
-                p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+                    }.runTaskTimer(plugin, 3, 1);
+                } else {
+                    p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
+                }
             }
-        }
     }
 
     @EventHandler
@@ -88,9 +89,10 @@ public class FireOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.FIRE || e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK || e.getCause() == EntityDamageEvent.DamageCause.LAVA || e.getCause() == EntityDamageEvent.DamageCause.HOT_FLOOR) {
-                if (p.hasPermission("kiipcraft.storyline") && p.getInventory().contains(OrbItems.fireOrb())) {
-                    e.setCancelled(true);
-                }
+                if (p.hasPermission("kiipcraft.storyline"))
+                    if (p.getInventory().contains(OrbItems.fireOrb())) {
+                        e.setCancelled(true);
+                    }
             }
         }
     }
@@ -99,7 +101,7 @@ public class FireOrbAbility implements Listener {
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb()) || e.getAction() == Action.RIGHT_CLICK_BLOCK && p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb())) {
             e.setCancelled(true);
         }
     }

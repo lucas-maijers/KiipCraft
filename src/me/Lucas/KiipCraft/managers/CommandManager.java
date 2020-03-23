@@ -13,9 +13,7 @@ import me.Lucas.KiipCraft.commands.HelpCommand;
 import me.Lucas.KiipCraft.commands.StopLoopsCommand;
 import me.Lucas.KiipCraft.commands.UpdateCommand;
 import me.Lucas.KiipCraft.dungeons.commands.DungeonsCommand;
-import me.Lucas.KiipCraft.events.command.EventTokenCommand;
-import me.Lucas.KiipCraft.events.command.EventsToolCommand;
-import me.Lucas.KiipCraft.events.command.GUICommand;
+import me.Lucas.KiipCraft.events.command.EventsCommand;
 import me.Lucas.KiipCraft.servertour.ServerTourCommand;
 import me.Lucas.KiipCraft.storyline.commands.OrbCommand;
 import me.Lucas.KiipCraft.storyline.commands.ShardCommand;
@@ -31,30 +29,24 @@ import java.util.List;
 
 public class CommandManager implements TabExecutor {
 
-    private ArrayList<SubCommand> commands = new ArrayList<>();
-
-    private Main plugin;
-
-    public CommandManager(Main plugin) {
-        this.plugin = plugin;
-    }
-
     public static ArrayList<String> commandList = new ArrayList<>();
-
     public String main = "kiipcraft";
-
     public String help = "help";
     public String update = "update";
     public String admintool = "admintool";
     public String bottlexp = "bottlexp";
-    public String eventstool = "eventstool";
-    public String eventsadmin = "eventsadmin";
-    public String eventtoken = "eventstoken";
+    public String events = "events";
     public String dungeons = "dungeons";
     public String servertour = "servertour";
     public String orb = "orb";
     public String shard = "shard";
     public String fix = "fix";
+    private ArrayList<SubCommand> commands = new ArrayList<>();
+    private Main plugin;
+
+    public CommandManager(Main plugin) {
+        this.plugin = plugin;
+    }
 
     public void setup() {
         plugin.getCommand(main).setExecutor(this);
@@ -62,10 +54,8 @@ public class CommandManager implements TabExecutor {
         this.commands.add(new HelpCommand(plugin));
         this.commands.add(new UpdateCommand(plugin));
         this.commands.add(new XpBottleCommand(plugin));
-        this.commands.add(new EventsToolCommand(plugin));
-        this.commands.add(new GUICommand(plugin));
-        this.commands.add(new EventTokenCommand(plugin));
         this.commands.add(new AdminToolCommand(plugin));
+        this.commands.add(new EventsCommand(plugin));
         this.commands.add(new DungeonsCommand(plugin));
         this.commands.add(new ServerTourCommand(plugin));
         this.commands.add(new OrbCommand(plugin));
@@ -76,9 +66,7 @@ public class CommandManager implements TabExecutor {
         commandList.add(update);
         commandList.add(admintool);
         commandList.add(bottlexp);
-        commandList.add(eventstool);
-        commandList.add(eventsadmin);
-        commandList.add(eventtoken);
+        commandList.add(events);
         commandList.add(dungeons);
         commandList.add(servertour);
         commandList.add(orb);

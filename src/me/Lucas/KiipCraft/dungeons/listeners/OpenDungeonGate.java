@@ -8,6 +8,7 @@ package me.Lucas.KiipCraft.dungeons.listeners;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.dungeons.items.DungeonItems;
+import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.utils.Utils;
 import net.minecraft.server.v1_15_R1.NBTTagCompound;
 import net.minecraft.server.v1_15_R1.TileEntity;
@@ -16,7 +17,6 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.v1_15_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_15_R1.block.CraftBlock;
 import org.bukkit.entity.Player;
@@ -26,24 +26,20 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 public class OpenDungeonGate implements Listener {
 
     private Main plugin;
+    private ConfigManager cfgm = ConfigManager.getManager();
 
     private int openTime = 30;
 
-    private File dungeonGatesFile;
     private FileConfiguration dungeonGatesCFG;
 
     public OpenDungeonGate(Main plugin) {
         this.plugin = plugin;
-
-        dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
-        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
 
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
@@ -121,7 +117,7 @@ public class OpenDungeonGate implements Listener {
         boolean ignoreX = false;
         boolean ignoreZ = false;
 
-        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+        dungeonGatesCFG = cfgm.getDungeonGatesCFG();
         for (String key : dungeonGatesCFG.getConfigurationSection("Dungeons").getKeys(false)) {
             ConfigurationSection cs = dungeonGatesCFG.getConfigurationSection("Dungeons." + key + ".Keyblock");
             assert cs != null;
@@ -232,7 +228,7 @@ public class OpenDungeonGate implements Listener {
 
     private String getDungeonType(Location kBlock) {
         String type = "";
-        dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+        dungeonGatesCFG = cfgm.getDungeonGatesCFG();
         for (String key : dungeonGatesCFG.getConfigurationSection("Dungeons").getKeys(false)) {
             ConfigurationSection cs = dungeonGatesCFG.getConfigurationSection("Dungeons." + key + ".Keyblock");
             assert cs != null;

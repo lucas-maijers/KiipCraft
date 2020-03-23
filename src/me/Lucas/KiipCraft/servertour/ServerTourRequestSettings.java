@@ -14,7 +14,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -46,7 +45,6 @@ public class ServerTourRequestSettings {
         inv_name = Utils.chat("&6&lServertour Warp Settings");
 
         warpsfile = new File(plugin.getDataFolder(), "warps.yml");
-        warps = YamlConfiguration.loadConfiguration(warpsfile);
 
         warpName = ServerTourRequestsGUI.warpSettingName;
 
@@ -81,6 +79,7 @@ public class ServerTourRequestSettings {
 
 
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
+        warps = cfgm.getWarpsCFG();
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lTELEPORT"))) {
             ConfigurationSection cs = warps.getConfigurationSection("Warps." + warpName);
@@ -89,7 +88,7 @@ public class ServerTourRequestSettings {
 
             assert cs != null;
             p.teleport(new Location(w, cs.getDouble("X"), cs.getDouble("Y"), cs.getDouble("Z")));
-            p.sendMessage(Utils.prefix + "Je teleporteert naar de locatie van de Warp van: §c" + warpName + "§7!");
+            p.sendMessage(Utils.prefix + "Je teleporteert naar de locatie van de warp van: §c" + warpName + "§7!");
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lREMOVE"))) {

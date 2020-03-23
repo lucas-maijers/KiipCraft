@@ -39,24 +39,25 @@ public class LightOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lightOrb())) {
-            if (p.hasPermission("kiipcraft.storyline")) {
-                for (Entity t : p.getNearbyEntities(25, 20, 25)) {
-                    if (t instanceof Player) {
-                        ((Player) t).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20 * 30, 1));
+        if (e.getAction() == Action.LEFT_CLICK_AIR)
+            if (p.getInventory().getItemInMainHand().equals(OrbItems.lightOrb())) {
+                if (p.hasPermission("kiipcraft.storyline")) {
+                    for (Entity t : p.getNearbyEntities(25, 20, 25)) {
+                        if (t instanceof Player) {
+                            ((Player) t).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20 * 30, 1));
+                        }
                     }
+                } else {
+                    p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
-            } else {
-                p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
             }
-        }
     }
 
     @EventHandler
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getItemInHand().equals(OrbItems.lightOrb())) {
+        if (e.getAction() == Action.RIGHT_CLICK_AIR && p.getInventory().getItemInMainHand().equals(OrbItems.lightOrb()) || e.getAction() == Action.RIGHT_CLICK_BLOCK && p.getInventory().getItemInMainHand().equals(OrbItems.lightOrb())) {
             e.setCancelled(true);
         }
     }
