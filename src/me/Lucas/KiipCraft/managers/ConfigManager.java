@@ -21,7 +21,9 @@ public class ConfigManager {
     public File warpsfile;
     public File syncChestFile;
     public File dungeonGatesFile;
+    public File eventsFile;
     public FileConfiguration syncChestCFG;
+    public FileConfiguration eventsCFG;
     public FileConfiguration warpsCFG;
     public FileConfiguration dungeonGatesCFG;
     private Main plugin = Main.getPlugin(Main.class);
@@ -38,6 +40,7 @@ public class ConfigManager {
         warpsfile = new File(plugin.getDataFolder(), "warps.yml");
         syncChestFile = new File(plugin.getDataFolder(), "syncchests.yml");
         dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
+        eventsFile = new File(plugin.getDataFolder(), "events.yml");
 
         if (!warpsfile.exists()) {
             try {
@@ -63,16 +66,32 @@ public class ConfigManager {
             }
         }
 
+        if (!eventsFile.exists()) {
+            try {
+                eventsFile.createNewFile();
+            } catch (IOException e) {
+                Bukkit.getServer().getLogger().log(Level.WARNING, "File could not be created.");
+            }
+        }
+
         warpsCFG = YamlConfiguration.loadConfiguration(warpsfile);
         syncChestCFG = YamlConfiguration.loadConfiguration(syncChestFile);
         dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+        eventsCFG = YamlConfiguration.loadConfiguration(eventsFile);
 
     }
 
+    /* Get Gedeelte */
     public FileConfiguration getWarpsCFG() {
         warpsfile = new File(plugin.getDataFolder(), "warps.yml");
         warpsCFG = YamlConfiguration.loadConfiguration(warpsfile);
         return warpsCFG;
+    }
+
+    public FileConfiguration getEventsCFG() {
+        eventsFile = new File(plugin.getDataFolder(), "events.yml");
+        eventsCFG = YamlConfiguration.loadConfiguration(eventsFile);
+        return eventsCFG;
     }
 
     public FileConfiguration getDungeonGatesCFG() {
@@ -87,6 +106,7 @@ public class ConfigManager {
         return syncChestCFG;
     }
 
+    /* Oplaan Gedeelte */
     public void saveDungeonGates() {
         try {
             dungeonGatesFile = new File(plugin.getDataFolder(), "dungeons.yml");
@@ -95,6 +115,19 @@ public class ConfigManager {
                 dungeonGatesCFG.createSection("Dungeons");
             }
             dungeonGatesCFG.save(dungeonGatesFile);
+        } catch (IOException e) {
+            Bukkit.getServer().getLogger().log(Level.WARNING, "File could not be saved.");
+        }
+    }
+
+    public void saveEvents() {
+        try {
+            eventsFile = new File(plugin.getDataFolder(), "events.yml");
+            eventsCFG = YamlConfiguration.loadConfiguration(eventsFile);
+            if (!eventsCFG.isConfigurationSection("Events")) {
+                eventsCFG.createSection("Events");
+            }
+            eventsCFG.save(eventsFile);
         } catch (IOException e) {
             Bukkit.getServer().getLogger().log(Level.WARNING, "File could not be saved.");
         }
@@ -126,8 +159,13 @@ public class ConfigManager {
         }
     }
 
+    /* Reload Gedeelte */
     public void reloadDungeonGates() {
         dungeonGatesCFG = YamlConfiguration.loadConfiguration(dungeonGatesFile);
+    }
+
+    public void reloadEvents() {
+        eventsCFG = YamlConfiguration.loadConfiguration(eventsFile);
     }
 
     public void reloadWarps() {

@@ -44,7 +44,7 @@ public class EventsCommand extends SubCommand {
         eSubCommands.add("synctool");
         eSubCommands.add("synckist");
         eSubCommands.add("synclist");
-        eSubCommands.add("stopcreation");
+        eSubCommands.add("stopsync");
         eSubCommands.add("selectortool");
         eSubCommands.add("remove");
     }
@@ -65,7 +65,7 @@ public class EventsCommand extends SubCommand {
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events synctool&7: Geeft je de kistsynctool!"));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events synckist&7: Start het kist synchronisatieproces!"));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events synclist&7: Geeft je de lijst met gesynchroniseerde kisten!"));
-                p.sendMessage(Utils.chat(" &7- &3/kiipcraft events stopcreation&7: Stop het synchronisatieproces!"));
+                p.sendMessage(Utils.chat(" &7- &3/kiipcraft events stopsync&7: Stop het synchronisatieproces!"));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events selectortool&7: Geeft je de selectortool!"));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events remove [naam]&7: Verwijderd de kistsynchronisatie met de ingevoerde naam!"));
                 return;
@@ -136,7 +136,7 @@ public class EventsCommand extends SubCommand {
             // Synckist
             if (args[1].equalsIgnoreCase("synckist")) {
                 if (creatingPlayer.contains(p.getName())) {
-                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt het creatieproces al gestart, doe &c/kiipcraft events stopcreation&7om dit te annuleren!"));
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt het creatieproces al gestart, doe &c/kiipcraft events stopsync&7om dit te annuleren!"));
                     return;
                 }
                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt het kist synchronisatie proces gestart, om dit te annuleren doe &c/kiipcraft events stopcreation"));
@@ -147,7 +147,7 @@ public class EventsCommand extends SubCommand {
             }
 
             // Stopcreation
-            if (args[1].equalsIgnoreCase("stopcreation")) {
+            if (args[1].equalsIgnoreCase("stopsync")) {
                 if (creatingPlayer.contains(p.getName())) {
                     p.sendMessage(Utils.prefix + Utils.chat("Je hebt het kist synchronisatie proces gestopt."));
 
@@ -203,6 +203,7 @@ public class EventsCommand extends SubCommand {
     }
 
     private void refreshList() {
+        synced.clear();
         synced.addAll(cfgm.getSyncChestsCFG().getConfigurationSection("SyncedChests").getKeys(false));
     }
 

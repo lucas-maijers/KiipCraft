@@ -112,6 +112,7 @@ public class Main extends JavaPlugin {
         cfgm.saveWarps();
         cfgm.saveDungeonGates();
         cfgm.saveSyncChests();
+        cfgm.saveEvents();
         saveConfig();
     }
 
@@ -122,10 +123,12 @@ public class Main extends JavaPlugin {
         cfgm.saveDungeonGates();
         cfgm.saveWarps();
         cfgm.saveSyncChests();
+        cfgm.saveEvents();
 
         cfgm.reloadDungeonGates();
         cfgm.reloadWarps();
         cfgm.reloadSyncChests();
+        cfgm.reloadEvents();
 
     }
 

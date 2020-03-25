@@ -189,6 +189,7 @@ public class SyncKistCreation implements Listener {
             syncCFG.save(syncFile);
         } catch (IOException e) {
             e.printStackTrace();
+            p.sendMessage(Utils.prefix + Utils.chat("&4&lERROR: Opslaan mislukt!"));
         }
     }
 

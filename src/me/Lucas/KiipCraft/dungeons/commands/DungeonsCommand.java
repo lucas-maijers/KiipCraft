@@ -190,6 +190,7 @@ public class DungeonsCommand extends SubCommand {
     }
 
     private void refreshList() {
+        dungeonList.clear();
         dungeonList.addAll(cfgm.getDungeonGatesCFG().getConfigurationSection("Dungeons").getKeys(false));
     }
 
