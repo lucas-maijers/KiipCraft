@@ -173,8 +173,10 @@ public class LightningOrbAbility implements Listener {
                                 fw.detonate();
                                 fw2.detonate();
                                 for (Entity t : as.getNearbyEntities(r, 30, r)) {
-                                    if (t instanceof Player && !(t == p) || t instanceof Monster) {
-                                        t.getWorld().strikeLightning(t.getLocation());
+                                    if (t instanceof Player || t instanceof Monster || t instanceof Phantom) {
+                                        if (!(t == p)) {
+                                            t.getWorld().strikeLightning(t.getLocation());
+                                        }
                                     }
                                 }
                                 as.remove();
