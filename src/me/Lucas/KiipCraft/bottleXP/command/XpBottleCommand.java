@@ -72,6 +72,11 @@ public class XpBottleCommand extends SubCommand {
                 return;
             }
 
+            if (p.getInventory().firstEmpty() == -1) {
+                p.sendMessage(prefix + Utils.chat("Je inventory zit vol, dus je kan dit momenteel niet doen!"));
+                return;
+            }
+
             if (amount > p.getLevel()) {
                 p.sendMessage(String.format("%sHelaas, het ingevoerde aantal levels heb jij niet, je komt §a%d Levels §7te kort.", prefix, amount - p.getLevel()));
                 return;
@@ -86,11 +91,7 @@ public class XpBottleCommand extends SubCommand {
                     startDelay(p);
                 } else if (!(p.getInventory().contains(Material.GLASS_BOTTLE))) {
                     p.sendMessage(prefix + "Je moet een §6Glass Bottle§7 in je inventory hebben om dit te doen.");
-                } else {
-                    p.sendMessage(prefix + "Je moet minimaal §a10 Levels§7 bottlen.");
                 }
-            } else if (!(p.getInventory().contains(Material.GLASS_BOTTLE))) {
-                p.sendMessage(prefix + "Je moet een §6Glass Bottle§7 in je inventory hebben om dit te doen.");
             } else {
                 p.sendMessage(prefix + "Je moet minimaal §a10 Levels§7 bottlen.");
             }

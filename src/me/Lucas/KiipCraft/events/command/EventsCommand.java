@@ -25,6 +25,7 @@ public class EventsCommand extends SubCommand {
 
     public static int aantal = 64;
     public static Set<String> creatingPlayer = new HashSet<>();
+    public static Map<String, String> selector = new HashMap<>();
     private Main plugin;
     private ConfigManager cfgm = ConfigManager.getManager();
     private File syncFile;
@@ -46,7 +47,9 @@ public class EventsCommand extends SubCommand {
         eSubCommands.add("synclist");
         eSubCommands.add("stopsync");
         eSubCommands.add("selectortool");
+        eSubCommands.add("select");
         eSubCommands.add("remove");
+
     }
 
     @Override
