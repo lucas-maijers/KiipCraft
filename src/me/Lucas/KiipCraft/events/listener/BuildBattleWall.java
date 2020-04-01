@@ -99,7 +99,9 @@ public class BuildBattleWall implements Listener {
                                 p.sendMessage(Utils.chat("&d&lY: &a" + b2.getLocation().getY()));
                                 p.sendMessage(Utils.chat("&d&lZ: &a" + b2.getLocation().getZ()));
                                 p.sendMessage(" ");
-
+                                EventsCommand.selector.remove(p.getName());
+                                System.out.println(EventsCommand.selector.entrySet());
+                                saveToConfig(p);
                                 return;
                             }
                         }

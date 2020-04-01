@@ -32,6 +32,7 @@ public class EventsCommand extends SubCommand {
     private FileConfiguration syncCFG;
     private List<String> synced = new ArrayList<>();
     private ArrayList<String> eSubCommands = new ArrayList<>();
+    private ArrayList<String> selectorTypes = new ArrayList<>();
 
     public EventsCommand(Main plugin) {
         this.plugin = plugin;
@@ -49,6 +50,8 @@ public class EventsCommand extends SubCommand {
         eSubCommands.add("selectortool");
         eSubCommands.add("select");
         eSubCommands.add("remove");
+
+        selectorTypes.add("buildbattlewall");
 
     }
 
@@ -96,6 +99,14 @@ public class EventsCommand extends SubCommand {
                     p.getInventory().removeItem(Utils.selectorTool());
                 }
                 return;
+            }
+
+            // Select
+            if (args[1].equalsIgnoreCase("select")) {
+                if (selectorTypes.contains(args[2])) {
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("Je hebt de selectie gestart voor:&c %s&7!", args[2])));
+                    selector.put(p.getName(), args[2]);
+                }
             }
 
             // Token
