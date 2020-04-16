@@ -14,10 +14,7 @@ import me.Lucas.KiipCraft.bottleXP.listener.DrinkXPBottle;
 import me.Lucas.KiipCraft.dungeons.listeners.DungeonGateCreation;
 import me.Lucas.KiipCraft.dungeons.listeners.OpenDungeonGate;
 import me.Lucas.KiipCraft.dungeons.recipes.DungeonKeyRecipes;
-import me.Lucas.KiipCraft.events.listener.EventsToolClick;
-import me.Lucas.KiipCraft.events.listener.InventoryClickListener;
-import me.Lucas.KiipCraft.events.listener.SyncChests;
-import me.Lucas.KiipCraft.events.listener.SyncKistCreation;
+import me.Lucas.KiipCraft.events.listener.*;
 import me.Lucas.KiipCraft.events.ui.*;
 import me.Lucas.KiipCraft.managers.CommandManager;
 import me.Lucas.KiipCraft.managers.ConfigManager;
@@ -58,6 +55,7 @@ public class Main extends JavaPlugin {
         new SyncKistCreation(this);
         new SyncChests(this);
         new EventsToolClick(this);
+        new BuildBattleSelections(this);
 
         new ServertourMenuClick(this);
         new ServerTourRequestSettings(this);

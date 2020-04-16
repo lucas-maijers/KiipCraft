@@ -49,15 +49,16 @@ public class EventsCommand extends SubCommand {
         eSubCommands.add("stopsync");
         eSubCommands.add("selectortool");
         eSubCommands.add("select");
-        eSubCommands.add("remove");
+        eSubCommands.add("removesync");
 
         selectorTypes.add("buildbattlewall");
+        selectorTypes.add("buildarea");
 
     }
 
     @Override
     public void onCommand(Player p, String[] args) {
-        if (p.hasPermission("kiipcraft.staff")) {
+        if (p.hasPermission("kiipcraft.events")) {
             if (args.length == 1) {
                 p.sendMessage(Utils.prefix + Utils.chat("Je moet een argument invoeren! Doe /kiipcraft events help voor meer info."));
                 return;
@@ -187,7 +188,7 @@ public class EventsCommand extends SubCommand {
             }
 
             // Remove
-            if (args[1].equalsIgnoreCase("remove")) {
+            if (args[1].equalsIgnoreCase("removesync")) {
                 refreshList();
                 if (args.length == 2) {
                     p.sendMessage(Utils.prefix + Utils.chat("Je hebt geen chestsync ingevuld om te verwijderen, probeer het opnieuw!"));
@@ -274,6 +275,21 @@ public class EventsCommand extends SubCommand {
             }
             return synced;
         }
+
+        if (args[1].equals("select")) {
+            List<String> completionList = new ArrayList<>();
+
+            if (!args[2].equals("")) {
+                for (String s : selectorTypes) {
+                    if (s.startsWith(args[2])) {
+                        completionList.add(s);
+                    }
+                }
+                return completionList;
+            }
+            return selectorTypes;
+        }
+
         return null;
     }
 }

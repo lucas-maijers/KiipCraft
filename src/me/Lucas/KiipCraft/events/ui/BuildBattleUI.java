@@ -8,7 +8,6 @@ package me.Lucas.KiipCraft.events.ui;
 
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -48,19 +47,13 @@ public class BuildBattleUI {
         Utils.createItem(invBuildBattle, BLACK_STAINED_GLASS_PANE, 1, 10, " ");
         Utils.createItem(invBuildBattle, BLACK_STAINED_GLASS_PANE, 1, 18, " ");
 
-        if (!bouwen) {
-            Utils.createItemLore(invBuildBattle, GREEN_WOOL, 1, 11, "&a&lBouwen aan", "&7Zet bouwen bij Build Battle aan!");
-        } else {
-            Utils.createItemLore(invBuildBattle, RED_WOOL, 1, 11, "&c&lBouwen uit", "&7Zet bouwen bij Build Battle uit!");
-        }
-
         if (!muur) {
-            Utils.createItemLore(invBuildBattle, BRICKS, 1, 12, "&a&lPlaats muur", "&7Plaatst de muur bij Build Battle!", "  ", "&7We Will Build A Wall!");
+            Utils.createItemLore(invBuildBattle, BRICKS, 1, 11, "&a&lPlaats muur", "&7Plaatst de muur bij Build Battle!", "  ", "&7We Will Build A Wall!");
         } else {
-            Utils.createItemLore(invBuildBattle, IRON_PICKAXE, 1, 12, "&c&lVerwijder muur", "&7Verwijderd de muur bij Build Battle!");
+            Utils.createItemLore(invBuildBattle, IRON_PICKAXE, 1, 11, "&c&lVerwijder muur", "&7Verwijderd de muur bij Build Battle!");
         }
 
-        Utils.createItemLore(invBuildBattle, TNT, 1, 13, "&6&lReset bouwgebied", "&7Reset het bouwgebied weer naar een vlakke status!");
+        Utils.createItemLore(invBuildBattle, TNT, 1, 12, "&6&lReset bouwgebied", "&7Reset het bouwgebied weer naar een vlakke status!");
 
         Utils.createItemLore(invBuildBattle, COMPASS, 1, 17, "&6&lTeleport", "&7Teleporteer naar Build Battle");
 
@@ -74,46 +67,10 @@ public class BuildBattleUI {
 
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
 
-        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lBouwen aan"))) {
-            dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen block-place -w Survival allow");
-            dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen2 block-place -w Survival allow");
-            dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen block-break -w Survival allow");
-            dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen2 block-break -w Survival allow");
-            bouwen = true;
-            p.openInventory(BuildBattleUI.buildBattleGUI(p));
-
-            for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage")) {
-                    plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft §6§lBouwen §aaangezet §7bij Build Battle!");
-                }
-            }
-        }
-
-        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lBouwen uit"))) {
-            dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen block-place -w Survival deny");
-            dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen2 block-place -w Survival deny");
-            dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen block-break -w Survival deny");
-            dispatchCommand(getConsoleSender(), "rg flag -w Survival bouwen2 block-break -w Survival deny");
-            bouwen = false;
-            p.openInventory(BuildBattleUI.buildBattleGUI(p));
-
-            for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage")) {
-                    plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft §6§lBouwen §cuitgezet §7bij Build Battle!");
-                }
-            }
-        }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lVerwijder muur"))) {
-            dispatchCommand(getConsoleSender(), "fill -1382 167 -3335 -1382 183 -3311 air");
             muur = false;
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
-
-            for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage")) {
-                    plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lMuur§7 bij Build Battle §cverwijderd§7!");
-                }
-            }
         }
 
 
@@ -140,7 +97,7 @@ public class BuildBattleUI {
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lTeleport"))) {
-            p.teleport(new Location(Bukkit.getWorld("Survival"), -1364, 167, -3328));
+
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("Terug"))) {

@@ -50,7 +50,7 @@ public class DungeonsCommand extends SubCommand {
 
     @Override
     public void onCommand(Player p, String[] args) {
-        if (p.hasPermission("kiipcraft.staff")) {
+        if (p.hasPermission("kiipcraft.dungeons")) {
             if (args.length == 1) {
                 p.sendMessage(Utils.prefix + Utils.chat("Je moet een argument invoeren! Doe /kiipcraft dungeons help voor meer info."));
                 return;
@@ -159,11 +159,35 @@ public class DungeonsCommand extends SubCommand {
                     p.sendMessage(Utils.chat(String.format("  &7- &a%s &7(&c%s&7)", s, cs.getString("DungeonGateLockType"))));
                 }
             }
+
             /* Remove Gates */
             if (args[1].equalsIgnoreCase("remove")) {
                 refreshList();
+                dungeonGatesCFG = cfgm.getDungeonGatesCFG();
                 if (args.length == 2) {
                     p.sendMessage(Utils.prefix + Utils.chat("Je hebt geen dungeon ingevuld om te verwijderen, probeer het opnieuw!"));
+                    return;
+                }
+
+                if (args.length == 4) {
+                    String dungeon = args[2] + " " + args[3];
+
+                    if (dungeonList.contains(dungeon)) {
+                        ConfigurationSection cs = dungeonGatesCFG.getConfigurationSection("Dungeons");
+
+                        try {
+                            assert cs != null;
+                            cs.set(dungeon, null);
+                            dungeonGatesCFG.save(dungeonGatesFile);
+                            dungeonList.remove(dungeon);
+                        } catch (IOException e) {
+                            p.sendMessage(Utils.prefix + Utils.chat("Error met het verwijderen van deze dungeongate, raadpleeg console voor meer informatie!"));
+                            e.printStackTrace();
+                        }
+                        p.sendMessage(Utils.prefix + Utils.chat(String.format("De dungeongate met de naam: &c%s&7 wordt verwijderd!", dungeon)));
+                    } else {
+                        p.sendMessage(Utils.prefix + Utils.chat(String.format("De dungeongate %s bestaat niet! Doe &c/kiipcraft dungeons list &7voor een lijst met dungeongates.", args[2])));
+                    }
                     return;
                 }
 
