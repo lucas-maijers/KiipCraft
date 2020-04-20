@@ -8,6 +8,7 @@ package me.Lucas.KiipCraft.commands;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.managers.SubCommand;
+import me.Lucas.KiipCraft.storyline.listeners.EarthOrbAbility;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -29,6 +30,7 @@ public class StopLoopsCommand extends SubCommand {
             BukkitScheduler scheduler = Bukkit.getScheduler();
 
             scheduler.cancelTasks(plugin);
+            EarthOrbAbility.stunnedPlayerList.clear();
 
             p.sendMessage(Utils.prefix + Utils.chat("Je hebt alle loops binnen de plugin gestopt"));
         } else {

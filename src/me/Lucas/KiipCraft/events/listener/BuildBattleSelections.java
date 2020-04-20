@@ -44,6 +44,7 @@ public class BuildBattleSelections implements Listener {
     public static Set<String> bbAreaStep1 = new HashSet<>();
     public static Set<String> bbAreaStep2 = new HashSet<>();
     public static Set<String> bbAreaStep3 = new HashSet<>();
+
     private Location bbAreaLeftTopCorner;
     private Location bbAreaLeftBottomCorner;
     private Location bbAreaRightTopCorner;
@@ -61,7 +62,7 @@ public class BuildBattleSelections implements Listener {
     public void createWall(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (p.hasPermission("kiipcraft.staff")) {
+        if (p.hasPermission("kiipcraft.events")) {
             for (Map.Entry<String, String> entry : EventsCommand.selector.entrySet()) {
                 if (entry.getKey().equals(p.getName())) {
                     if (entry.getValue().equals("buildbattlewall")) {
@@ -122,8 +123,7 @@ public class BuildBattleSelections implements Listener {
     public void createBuildArea(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-
-        if (p.hasPermission("kiipcraft.staff")) {
+        if (p.hasPermission("kiipcraft.events")) {
             for (Map.Entry<String, String> entry : EventsCommand.selector.entrySet()) {
                 if (entry.getKey().equals(p.getName())) {
                     if (entry.getValue().equals("buildarea")) {
@@ -305,18 +305,20 @@ public class BuildBattleSelections implements Listener {
         ConfigurationSection areaData = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea");
 
         assert areaData != null;
-        if (!areaSection.isConfigurationSection("LeftBuildArea")) {
-            areaSection.createSection("LeftBuildArea");
+        if (!areaData.isConfigurationSection("LeftBuildArea")) {
+            areaData.createSection("LeftBuildArea");
         }
 
-        if (!areaSection.isConfigurationSection("RightBuildArea")) {
-            areaSection.createSection("RightBuildArea");
+        if (!areaData.isConfigurationSection("RightBuildArea")) {
+            areaData.createSection("RightBuildArea");
         }
 
         // Left Data
         ConfigurationSection leftData = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.LeftBuildArea");
         assert leftData != null;
-        leftData.createSection("TopCorner");
+        if (!leftData.isConfigurationSection("TopCorner")) {
+            leftData.createSection("TopCorner");
+        }
 
         ConfigurationSection leftTopCorner = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.LeftBuildArea.TopCorner");
 
@@ -325,7 +327,9 @@ public class BuildBattleSelections implements Listener {
         leftTopCorner.set("Y", bbAreaLeftTopCorner.getY());
         leftTopCorner.set("Z", bbAreaLeftTopCorner.getZ());
 
-        leftData.createSection("BottomCorner");
+        if (!leftData.isConfigurationSection("BottomCorner")) {
+            leftData.createSection("BottomCorner");
+        }
         ConfigurationSection leftBottomCorner = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.LeftBuildArea.BottomCorner");
 
         assert leftBottomCorner != null;
@@ -336,7 +340,9 @@ public class BuildBattleSelections implements Listener {
         // Right Data
         ConfigurationSection rightData = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.RightBuildArea");
         assert rightData != null;
-        rightData.createSection("TopCorner");
+        if (!rightData.isConfigurationSection("TopCorner")) {
+            rightData.createSection("TopCorner");
+        }
 
         ConfigurationSection rightTopCorner = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.RightBuildArea.TopCorner");
         assert rightTopCorner != null;
@@ -345,7 +351,9 @@ public class BuildBattleSelections implements Listener {
         rightTopCorner.set("Y", bbAreaRightTopCorner.getY());
         rightTopCorner.set("Z", bbAreaRightTopCorner.getZ());
 
-        rightData.createSection("BottomCorner");
+        if (!rightData.isConfigurationSection("BottomCorner")) {
+            rightData.createSection("BottomCorner");
+        }
         ConfigurationSection rightBottomCorner = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.RightBuildArea.BottomCorner");
 
         assert rightBottomCorner != null;

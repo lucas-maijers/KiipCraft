@@ -51,7 +51,6 @@ public class FireOrbAbility implements Listener {
                     spawnFireBall.setY(y + 0.8);
 
                     final Fireball fireball = p.getWorld().spawn(spawnFireBall, Fireball.class);
-                    fireball.setShooter(p);
                     fireball.setVelocity(p.getEyeLocation().getDirection().multiply(3));
                     fireball.setBounce(false);
                     fireball.setIsIncendiary(true);

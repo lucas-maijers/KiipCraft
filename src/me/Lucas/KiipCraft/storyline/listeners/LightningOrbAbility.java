@@ -50,7 +50,6 @@ public class LightningOrbAbility implements Listener {
                     Location arrowSpawn = p.getLocation();
                     arrowSpawn.setY(y + 0.8);
                     final Arrow arrow = p.getWorld().spawn(arrowSpawn, Arrow.class);
-                    arrow.setShooter(p);
                     arrow.setVelocity(p.getEyeLocation().getDirection().multiply(5));
                     arrow.setDamage(0);
                     arrow.setGravity(false);

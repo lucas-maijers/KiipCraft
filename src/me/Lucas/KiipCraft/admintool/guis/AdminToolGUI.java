@@ -39,6 +39,7 @@ public class AdminToolGUI {
 
     public static Inventory adminToolGUI(Player p) {
         Inventory toReturn = Bukkit.createInventory(null, inv_rows, inv_name);
+        inv.clear();
 
         for (int i = 1; i < 10; i++) {
             Utils.createItem(inv, BLACK_STAINED_GLASS_PANE, 1, i, " ");
@@ -60,8 +61,10 @@ public class AdminToolGUI {
         Utils.createItemLore(inv, FIREWORK_ROCKET, 1, 11, "&6&lEvents Menu", "&7Opent het Events Menu!");
         Utils.createItemLore(inv, WRITABLE_BOOK, 1, 12, "&6&lServer Tour Menu", "&7Opent het Servertour menu!");
         Utils.createItemHead(inv, adminHead(p), 1, 13, "&6&lSpelers Menu", "&7Opent een lijst met alle Online Spelers!");
-        Utils.createItemLore(inv, PRISMARINE_SHARD, 1, 14, "&c&lShards Menu", "&7Opent het Menu met alle Shards!");
-        Utils.createItemLore(inv, ENDER_EYE, 1, 15, "&c&lOrbs Menu", "&7Opent het Menu met alle Orbs!");
+        if (p.hasPermission("kiipcraft.storyline")) {
+            Utils.createItemLore(inv, PRISMARINE_SHARD, 1, 14, "&c&lShards Menu", "&7Opent het Menu met alle Shards!");
+            Utils.createItemLore(inv, ENDER_EYE, 1, 15, "&c&lOrbs Menu", "&7Opent het Menu met alle Orbs!");
+        }
 
         Utils.createItem(inv, BARRIER, 1, 32, "&cSluiten");
 
