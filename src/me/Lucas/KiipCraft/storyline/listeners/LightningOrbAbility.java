@@ -23,6 +23,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.logging.Level;
+
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
@@ -62,6 +64,12 @@ public class LightningOrbAbility implements Listener {
                         public void run() {
                             if (!(arrow.isValid())) {
                                 arrow.remove();
+                                this.cancel();
+                            }
+
+                            if (arrow.getTicksLived() == 20 * 30) {
+                                arrow.remove();
+                                Bukkit.getServer().getLogger().log(Level.INFO, "Lightning Arrow leeft langer dan 30 seconden, pijl verwijderen!");
                                 this.cancel();
                             }
 

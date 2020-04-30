@@ -29,7 +29,6 @@ public class DungeonsCommand extends SubCommand {
     public static Set<String> creatingPlayer = new HashSet<>();
     private Main plugin;
     private File dungeonGatesFile;
-    private FileConfiguration dungeonGatesCFG;
     private ConfigManager cfgm = ConfigManager.getManager();
     private List<String> dungeonList = new ArrayList<>();
     private ArrayList<String> dSubCommands = new ArrayList<>();
@@ -150,6 +149,7 @@ public class DungeonsCommand extends SubCommand {
                 }
             }
             /* List Gates */
+            FileConfiguration dungeonGatesCFG;
             if (args[1].equalsIgnoreCase("list")) {
                 refreshList();
                 dungeonGatesCFG = cfgm.getDungeonGatesCFG();

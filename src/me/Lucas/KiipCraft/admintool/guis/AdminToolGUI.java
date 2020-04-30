@@ -16,7 +16,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
 import static org.bukkit.Material.*;
 
 public class AdminToolGUI {
@@ -76,28 +75,28 @@ public class AdminToolGUI {
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lEvents Menu"))) {
-            p.sendMessage(prefix + Utils.chat("Je opent het &6&lEvents Menu&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je opent het &6&lEvents Menu&7!"));
             p.openInventory(MainEventsUI.mainGUI(p));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lServer Tour Menu"))) {
-            p.sendMessage(prefix + Utils.chat("Je opent het &6&lServertour Menu&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je opent het &6&lServertour Menu&7!"));
             ServerTourRequestsGUI.initialize();
             p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lSpelers Menu"))) {
-            p.sendMessage(prefix + Utils.chat("Je opent het &6&lSpelers Menu&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je opent het &6&lSpelers Menu&7!"));
             p.openInventory(AdminToolPlayersGUI.spelersMenu(p));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShards Menu"))) {
-            p.sendMessage(prefix + Utils.chat("Je opent het &c&lShards Menu&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je opent het &c&lShards Menu&7!"));
             p.openInventory(AdminToolShardsMenu.shardsMenu(p));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lOrbs Menu"))) {
-            p.sendMessage(prefix + Utils.chat("Je opent het &c&lOrbs Menu&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je opent het &c&lOrbs Menu&7!"));
             p.openInventory(AdminToolOrbMenu.orbMenu(p));
         }
 

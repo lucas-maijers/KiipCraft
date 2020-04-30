@@ -78,7 +78,6 @@ public class Main extends JavaPlugin {
         // UIs
         new TheQuizUI(this);
         new VloerIsLavaUI(this);
-        new ServerTourRequestsGUI(this);
         // Admin Tool
         new AdminToolGUI(this);
         new AdminToolOrbMenu(this);

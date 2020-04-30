@@ -9,12 +9,10 @@ package me.Lucas.KiipCraft.commands;
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.SpigotPluginUpdater;
 import me.Lucas.KiipCraft.managers.SubCommand;
+import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.util.List;
-
-import static me.Lucas.KiipCraft.utils.Utils.noPermission;
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class UpdateCommand extends SubCommand {
 
@@ -28,19 +26,19 @@ public class UpdateCommand extends SubCommand {
     @Override
     public void onCommand(Player p, String[] args) {
         if (p.hasPermission("kiipcraft.staff")) {
-            p.sendMessage(prefix + "Checken voor KiipCraft plugin updates.");
+            p.sendMessage(Utils.prefix + "Checken voor KiipCraft plugin updates.");
             SpigotPluginUpdater spu = new SpigotPluginUpdater(plugin, "http://51.68.47.8/pluginupdate/plugin.html");
 
             // Checkt voor Update
             if (spu.needsUpdate()) {
-                p.sendMessage(prefix + "Update gevonden, start update!");
-                p.sendMessage(prefix + "De update wordt bij de eerstvolgende restart toegepast.");
+                p.sendMessage(Utils.prefix + "Update gevonden, start update!");
+                p.sendMessage(Utils.prefix + "De update wordt bij de eerstvolgende restart toegepast.");
                 spu.update();
             } else {
-                p.sendMessage(prefix + "Geen update gevonden");
+                p.sendMessage(Utils.prefix + "Geen update gevonden");
             }
         } else {
-            p.sendMessage(noPermission);
+            p.sendMessage(Utils.noPermission);
         }
     }
 

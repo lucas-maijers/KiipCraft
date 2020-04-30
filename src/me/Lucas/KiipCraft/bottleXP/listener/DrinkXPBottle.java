@@ -16,8 +16,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
-
 
 public class DrinkXPBottle implements Listener {
 
@@ -37,7 +35,7 @@ public class DrinkXPBottle implements Listener {
         for (int i = 0; i < XpBottleCommand.amountList.size() + 1; i++) {
             if (p.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(Utils.chat("&aExperience Bottle &7(&9" + i + " Levels&7)"))) {
                 p.setLevel(p.getLevel() + i);
-                p.sendMessage(String.format("%sJe hebt een flesje van §a%d Experience Levels §7opgedronken en de levels gekregen.", prefix, i));
+                p.sendMessage(String.format("%sJe hebt een flesje van §a%d Experience Levels §7opgedronken en de levels gekregen.", Utils.prefix, i));
                 p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 1);
                 return;
             }

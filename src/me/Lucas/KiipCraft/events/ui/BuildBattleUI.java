@@ -6,14 +6,14 @@
 
 package me.Lucas.KiipCraft.events.ui;
 
+import me.Lucas.KiipCraft.events.listener.BuildBattleSelections;
+import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
-import static org.bukkit.Bukkit.*;
 import static org.bukkit.Material.*;
 
 public class BuildBattleUI {
@@ -21,17 +21,16 @@ public class BuildBattleUI {
     public static Inventory invBuildBattle;
     public static String inventory_name;
     public static int inv_rows = 3 * 9;
-    private static boolean bouwen = false;
-    private static boolean muur = true;
+    private static ConfigManager cfgm = ConfigManager.getManager();
 
     public static void initialize() {
         inventory_name = Utils.chat("&6&lBuild Battle Controls");
 
-        invBuildBattle = createInventory(null, inv_rows);
+        invBuildBattle = Bukkit.createInventory(null, inv_rows);
     }
 
     public static Inventory buildBattleGUI(Player p) {
-        Inventory toReturn = createInventory(null, inv_rows, inventory_name);
+        Inventory toReturn = Bukkit.createInventory(null, inv_rows, inventory_name);
 
         for (int i = 1; i < 10; i++) {
             Utils.createItem(invBuildBattle, BLACK_STAINED_GLASS_PANE, 1, i, " ");
@@ -47,7 +46,7 @@ public class BuildBattleUI {
         Utils.createItem(invBuildBattle, BLACK_STAINED_GLASS_PANE, 1, 10, " ");
         Utils.createItem(invBuildBattle, BLACK_STAINED_GLASS_PANE, 1, 18, " ");
 
-        if (!muur) {
+        if (cfgm.getEventsCFG().getConfigurationSection("Events.BuildBattle.Wall").getBoolean("WallRemoved")) {
             Utils.createItemLore(invBuildBattle, BRICKS, 1, 11, "&a&lPlaats muur", "&7Plaatst de muur bij Build Battle!", "  ", "&7We Will Build A Wall!");
         } else {
             Utils.createItemLore(invBuildBattle, IRON_PICKAXE, 1, 11, "&c&lVerwijder muur", "&7Verwijderd de muur bij Build Battle!");
@@ -69,29 +68,36 @@ public class BuildBattleUI {
 
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lVerwijder muur"))) {
-            muur = false;
+            BuildBattleSelections.removeWall(p);
+            initialize();
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
+
+            for (Player plr : Bukkit.getOnlinePlayers()) {
+                if (plr.hasPermission("kiipcraft.events")) {
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("De Build Battle muur is door &d%s &7weggehaald!", p.getName())));
+                }
+            }
         }
 
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lPlaats muur"))) {
-            dispatchCommand(getConsoleSender(), "clone -1389 51 -3403 -1389 35 -3379 -1382 167 -3335 replace force");
-            muur = true;
+            BuildBattleSelections.replaceWall(p);
+            initialize();
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage")) {
-                    plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft de §6§lMuur§7 bij Build Battle §ageplaatst§7!");
+                if (plr.hasPermission("kiipcraft.events")) {
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("De Build Battle muur is door &d%s &7terug geplaatst!", p.getName())));
                 }
             }
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lReset bouwgebied"))) {
-            dispatchCommand(getConsoleSender(), "clone -1405 36 -3360 -1379 50 -3335 -1395 166 -3335 replace");
+            BuildBattleSelections.resetBuildArea(p);
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage")) {
-                    plr.sendMessage(prefix + "§b§l" + p.getName() + "§7 heeft het §6§lBouwgebied §cgereset§7!");
+                if (plr.hasPermission("kiipcraft.events")) {
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("Het Build Battle bouwgebied is door &d%s&7 gereset!", p.getName())));
                 }
             }
         }
@@ -101,7 +107,7 @@ public class BuildBattleUI {
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("Terug"))) {
-            p.sendMessage(prefix + "Je keert terug naar de §3§lEvents Admin§f...");
+            p.sendMessage(Utils.prefix + Utils.chat("Je keert terug naar het &3Events Menu&7!"));
             p.openInventory(MainEventsUI.mainGUI(p));
         }
 

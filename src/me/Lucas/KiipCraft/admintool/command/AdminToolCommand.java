@@ -8,11 +8,10 @@ package me.Lucas.KiipCraft.admintool.command;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.managers.SubCommand;
+import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.util.List;
-
-import static me.Lucas.KiipCraft.utils.Utils.*;
 
 public class AdminToolCommand extends SubCommand {
 
@@ -26,17 +25,17 @@ public class AdminToolCommand extends SubCommand {
     @Override
     public void onCommand(Player p, String[] args) {
         if (p.hasPermission("kiipcraft.staff")) {
-            if (!(p.getInventory().contains(adminTool()))) {
-                p.sendMessage(prefix + chat("Je hebt zojuist de &4&lAdmin Tool&7 ontvangen!"));
-                p.getInventory().addItem(adminTool());
-            } else if (p.getInventory().contains(adminTool())) {
-                p.sendMessage(prefix + chat("Je hebt zojuist je &4&lAdmin Tool&7 verwijderd!"));
-                p.getInventory().remove(adminTool());
+            if (!(p.getInventory().contains(Utils.adminTool()))) {
+                p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist de &4&lAdmin Tool&7 ontvangen!"));
+                p.getInventory().addItem(Utils.adminTool());
+            } else if (p.getInventory().contains(Utils.adminTool())) {
+                p.sendMessage(Utils.prefix + Utils.chat("Je hebt zojuist je &4&lAdmin Tool&7 verwijderd!"));
+                p.getInventory().remove(Utils.adminTool());
             } else {
-                p.sendMessage(noPermission);
+                p.sendMessage(Utils.noPermission);
             }
         } else {
-            p.sendMessage(noPermission);
+            p.sendMessage(Utils.noPermission);
         }
     }
 

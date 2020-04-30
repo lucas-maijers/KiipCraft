@@ -12,7 +12,10 @@ import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Item;
@@ -27,14 +30,13 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class BuildBattleSelections implements Listener {
 
     public static Set<String> phase1 = new HashSet<>();
-    private Main plugin;
+    private static ConfigManager cfgman = ConfigManager.getManager();
+    private static Main plugin;
     private ConfigManager cfgm = ConfigManager.getManager();
     private File eventsFile;
     private FileConfiguration eventsCFG;
@@ -51,7 +53,7 @@ public class BuildBattleSelections implements Listener {
     private Location bbAreaRightBottomCorner;
 
     public BuildBattleSelections(Main plugin) {
-        this.plugin = plugin;
+        BuildBattleSelections.plugin = plugin;
 
         eventsFile = new File(plugin.getDataFolder(), "events.yml");
 
@@ -368,6 +370,231 @@ public class BuildBattleSelections implements Listener {
             e.printStackTrace();
             p.sendMessage(Utils.prefix + Utils.chat("&4&lERROR: &7Er is een fout opgetreden tijdens het opslaan, raadpleeg console voor meer informatie!"));
         }
+    }
+
+    public static void removeWall(Player p) {
+        FileConfiguration eventsCFG = cfgman.getEventsCFG();
+        File eventsFile = new File(plugin.getDataFolder(), "events.yml");
+        List<String> blocks = new ArrayList<>();
+
+        World w = p.getWorld();
+
+        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
+
+        assert path != null;
+        if (!path.isConfigurationSection("BuildBattle")) {
+            p.sendMessage(Utils.prefix + Utils.chat("Er is nog geen muur geselecteerd!"));
+            return;
+        }
+
+        ConfigurationSection savedWall = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall");
+
+        assert savedWall != null;
+        savedWall.set("WallRemoved", true);
+
+        if (!savedWall.isConfigurationSection("WallCopy")) {
+            savedWall.createSection("WallCopy");
+        }
+
+        ConfigurationSection wallData = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall.WallCopy");
+        assert wallData != null;
+
+        ConfigurationSection leftTopCorner = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall.TopCorner");
+
+        assert leftTopCorner != null;
+
+        double topX = leftTopCorner.getDouble("X");
+        double topY = leftTopCorner.getDouble("Y");
+        double topZ = leftTopCorner.getDouble("Z");
+
+        ConfigurationSection leftBottomCorner = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall.BottomCorner");
+
+        assert leftBottomCorner != null;
+
+        double bottomX = leftBottomCorner.getDouble("X");
+        double bottomY = leftBottomCorner.getDouble("Y");
+        double bottomZ = leftBottomCorner.getDouble("Z");
+
+        double highestX = Math.max(topX, bottomX);
+        double highestY = Math.max(topY, bottomY);
+        double highestZ = Math.max(topZ, bottomZ);
+
+        double lowestX = Math.min(topX, bottomX);
+        double lowestY = Math.min(topY, bottomY);
+        double lowestZ = Math.min(topZ, bottomZ);
+
+        for (double x = lowestX; x <= highestX; x++) {
+            for (double y = lowestY; y <= highestY; y++) {
+                for (double z = lowestZ; z <= highestZ; z++) {
+                    Block b = w.getBlockAt((int) x, (int) y, (int) z);
+                    blocks.add(b.getBlockData().getAsString());
+                    b.setType(Material.AIR);
+                }
+            }
+        }
+
+        wallData.set("Blocks", blocks);
+
+        try {
+            eventsCFG.save(eventsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void replaceWall(Player p) {
+        cfgman.reloadEvents();
+        FileConfiguration eventsCFG = cfgman.getEventsCFG();
+        File eventsFile = new File(plugin.getDataFolder(), "events.yml");
+
+        World w = p.getWorld();
+
+        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
+
+        assert path != null;
+        if (!path.isConfigurationSection("BuildBattle")) {
+            p.sendMessage(Utils.prefix + Utils.chat("Er is nog geen muur geselecteerd!"));
+            return;
+        }
+
+        ConfigurationSection savedWall = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall");
+
+        assert savedWall != null;
+        savedWall.set("WallRemoved", false);
+
+        ConfigurationSection wallData = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall.WallCopy");
+        assert wallData != null;
+
+        ConfigurationSection leftTopCorner = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall.TopCorner");
+
+        assert leftTopCorner != null;
+
+        double topX = leftTopCorner.getDouble("X");
+        double topY = leftTopCorner.getDouble("Y");
+        double topZ = leftTopCorner.getDouble("Z");
+
+        ConfigurationSection leftBottomCorner = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall.BottomCorner");
+
+        assert leftBottomCorner != null;
+
+        double bottomX = leftBottomCorner.getDouble("X");
+        double bottomY = leftBottomCorner.getDouble("Y");
+        double bottomZ = leftBottomCorner.getDouble("Z");
+
+        double highestX = Math.max(topX, bottomX);
+        double highestY = Math.max(topY, bottomY);
+        double highestZ = Math.max(topZ, bottomZ);
+
+        double lowestX = Math.min(topX, bottomX);
+        double lowestY = Math.min(topY, bottomY);
+        double lowestZ = Math.min(topZ, bottomZ);
+
+        String[] blocks;
+        blocks = ((List<String>) wallData.get("Blocks")).toArray(new String[0]);
+        int i = 0;
+
+        for (double x = lowestX; x <= highestX; x++) {
+            for (double y = lowestY; y <= highestY; y++) {
+                for (double z = lowestZ; z <= highestZ; z++) {
+                    BlockData data = Bukkit.getServer().createBlockData(blocks[i]);
+                    Block b = w.getBlockAt((int) x, (int) y, (int) z);
+                    b.setType(data.getMaterial());
+
+                    b.setBlockData(Bukkit.getServer().createBlockData(blocks[i]));
+                    i++;
+                }
+            }
+        }
+
+        ConfigurationSection clearWallData = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall");
+
+        assert clearWallData != null;
+        clearWallData.set("WallCopy", null);
+
+        try {
+            eventsCFG.save(eventsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void resetBuildArea(Player p) {
+        World w = p.getWorld();
+        FileConfiguration eventsCFG = cfgman.getEventsCFG();
+
+        ConfigurationSection leftAreaTop = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.LeftBuildArea.TopCorner");
+
+        assert leftAreaTop != null;
+        double leftTopX = leftAreaTop.getDouble("X");
+        double leftTopY = leftAreaTop.getDouble("Y");
+        double leftTopZ = leftAreaTop.getDouble("Z");
+
+        ConfigurationSection leftAreaBottom = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.LeftBuildArea.BottomCorner");
+
+        assert leftAreaBottom != null;
+        double leftBottomX = leftAreaBottom.getDouble("X");
+        double leftBottomY = leftAreaBottom.getDouble("Y");
+        double leftBottomZ = leftAreaBottom.getDouble("Z");
+
+        double highestLeftX = Math.max(leftTopX, leftBottomX);
+        double highestLeftY = Math.max(leftTopY, leftBottomY);
+        double highestLeftZ = Math.max(leftTopZ, leftBottomZ);
+
+        double lowestLeftX = Math.min(leftTopX, leftBottomX);
+        double lowestLeftY = Math.min(leftTopY, leftBottomY);
+        double lowestLeftZ = Math.min(leftTopZ, leftBottomZ);
+
+        ConfigurationSection rightAreaTop = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.RightBuildArea.TopCorner");
+
+        assert rightAreaTop != null;
+        double rightTopX = rightAreaTop.getDouble("X");
+        double rightTopY = rightAreaTop.getDouble("Y");
+        double rightTopZ = rightAreaTop.getDouble("Z");
+
+        ConfigurationSection rightAreaBottom = eventsCFG.getConfigurationSection("Events.BuildBattle.BuildArea.RightBuildArea.BottomCorner");
+
+        assert rightAreaBottom != null;
+        double rightBottomX = rightAreaBottom.getDouble("X");
+        double rightBottomY = rightAreaBottom.getDouble("Y");
+        double rightBottomZ = rightAreaBottom.getDouble("Z");
+
+        double highestRightX = Math.max(rightTopX, rightBottomX);
+        double highestRightY = Math.max(rightTopY, rightBottomY);
+        double highestRightZ = Math.max(rightTopZ, rightBottomZ);
+
+        double lowestRightX = Math.min(rightTopX, rightBottomX);
+        double lowestRightY = Math.min(rightTopY, rightBottomY);
+        double lowestRightZ = Math.min(rightTopZ, rightBottomZ);
+
+        // Clear Left Side
+
+        for (double x = lowestLeftX; x <= highestLeftX; x++) {
+            for (double y = lowestLeftY; y <= highestLeftY; y++) {
+                for (double z = lowestLeftZ; z <= highestLeftZ; z++) {
+                    Block b = w.getBlockAt((int) x, (int) y, (int) z);
+
+                    if (!(b.getType() == Material.CHEST)) {
+                        b.setType(Material.AIR);
+                    }
+                }
+            }
+        }
+
+        // Clear Right Side
+
+        for (double x = lowestRightX; x <= highestRightX; x++) {
+            for (double y = lowestRightY; y <= highestRightY; y++) {
+                for (double z = lowestRightZ; z <= highestRightZ; z++) {
+                    Block b = w.getBlockAt((int) x, (int) y, (int) z);
+
+                    if (!(b.getType() == Material.CHEST)) {
+                        b.setType(Material.AIR);
+                    }
+                }
+            }
+        }
+
+
     }
 
     @EventHandler

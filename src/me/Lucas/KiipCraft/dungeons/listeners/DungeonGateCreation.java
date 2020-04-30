@@ -44,7 +44,6 @@ public class DungeonGateCreation implements Listener {
     private Main plugin;
     private ConfigManager cfgm = ConfigManager.getManager();
     private File dungeonGatesFile;
-    private FileConfiguration dungeonGatesCFG;
     private String dungeonGateName;
     private String dungeonType;
 
@@ -268,7 +267,7 @@ public class DungeonGateCreation implements Listener {
     }
 
     public void saveToConfig(Player p) {
-        dungeonGatesCFG = cfgm.getDungeonGatesCFG();
+        FileConfiguration dungeonGatesCFG = cfgm.getDungeonGatesCFG();
 
         if (!dungeonGatesCFG.isConfigurationSection("Dungeons")) {
             dungeonGatesCFG.createSection("Dungeons");

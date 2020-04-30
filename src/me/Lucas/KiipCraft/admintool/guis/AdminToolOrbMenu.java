@@ -18,7 +18,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
 import static org.bukkit.Material.*;
 
 public class AdminToolOrbMenu {
@@ -79,41 +78,41 @@ public class AdminToolOrbMenu {
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&4&lFire &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.fireOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &4&lFire &c&lOrb&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &4&lFire &c&lOrb&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&1&lWater &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.waterOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &1&lWater &c&lOrb&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &1&lWater &c&lOrb&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&r&lAir &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.airOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &f&lAir &c&lOrb&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &f&lAir &c&lOrb&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lEarth &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.earthOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &6&lEarth &c&lOrb&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &6&lEarth &c&lOrb&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&b&lLight&e&lning &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.lightningOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &b&lLight&e&lning &c&lOrb&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &b&lLight&e&lning &c&lOrb&7!"));
         }
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&e&lLight &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.lightOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &e&lLight &c&lOrb&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &e&lLight &c&lOrb&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&5&lDark&0&lness &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.darknessOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &5&lDark&0&lness &c&lOrb&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &5&lDark&0&lness &c&lOrb&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&a&lLife &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.lifeOrb());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &a&lLife &c&lOrb&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &a&lLife &c&lOrb&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("Terug"))) {

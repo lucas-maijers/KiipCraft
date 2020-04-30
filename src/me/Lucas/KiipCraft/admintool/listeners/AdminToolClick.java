@@ -21,9 +21,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import static me.Lucas.KiipCraft.utils.Utils.adminTool;
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
-
 public class AdminToolClick implements Listener {
 
     private Main plugin;
@@ -41,10 +38,10 @@ public class AdminToolClick implements Listener {
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(Utils.adminTool())) {
                 if (p.hasPermission("kiipcraft.staff")) {
-                    p.sendMessage(prefix + Utils.chat("Je opent het &4&lAdmin Tool Menu&7!"));
+                    p.sendMessage(Utils.prefix + Utils.chat("Je opent het &4&lAdmin Tool Menu&7!"));
                     p.openInventory(AdminToolGUI.adminToolGUI(p));
                 } else {
-                    p.sendMessage(prefix + Utils.chat("Dat is niet de bedoeling, jij mag dit item niet gebruiken, hoe kom je hier eigenlijk aan?!"));
+                    p.sendMessage(Utils.prefix + Utils.chat("Dat is niet de bedoeling, jij mag dit item niet gebruiken, hoe kom je hier eigenlijk aan?!"));
                     p.getInventory().remove(Utils.adminTool());
                 }
             }
@@ -56,8 +53,8 @@ public class AdminToolClick implements Listener {
         Player p = e.getPlayer();
         Item i = e.getItemDrop();
 
-        if (i.getItemStack().equals(adminTool())) {
-            p.sendMessage(prefix + "Helaas, je kan dit item niet droppen.");
+        if (i.getItemStack().equals(Utils.adminTool())) {
+            p.sendMessage(Utils.prefix + "Helaas, je kan dit item niet droppen.");
             e.setCancelled(true);
         }
     }
@@ -66,7 +63,7 @@ public class AdminToolClick implements Listener {
     public void breakBlock(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getInventory().getItemInMainHand().equals(adminTool())) {
+        if (p.getInventory().getItemInMainHand().equals(Utils.adminTool())) {
             e.setCancelled(true);
         }
     }
@@ -74,8 +71,8 @@ public class AdminToolClick implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         for (ItemStack droppedItem : e.getDrops()) {
-            if (droppedItem.equals(adminTool())) {
-                e.getDrops().remove(adminTool());
+            if (droppedItem.equals(Utils.adminTool())) {
+                e.getDrops().remove(Utils.adminTool());
             }
         }
     }

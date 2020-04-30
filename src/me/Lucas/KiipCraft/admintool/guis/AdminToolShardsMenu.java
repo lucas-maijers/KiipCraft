@@ -18,7 +18,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
 import static org.bukkit.Material.*;
 
 public class AdminToolShardsMenu {
@@ -79,41 +78,41 @@ public class AdminToolShardsMenu {
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShard of &4&lFire"))) {
             p.getInventory().addItem(ShardItems.fireShard());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &4&lFire&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &c&lShard of &4&lFire&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShard of &1&lWater"))) {
             p.getInventory().addItem(ShardItems.waterShard());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &1&lWater&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &c&lShard of &1&lWater&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShard of &f&lAir"))) {
             p.getInventory().addItem(ShardItems.airShard());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &f&lAir&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &c&lShard of &f&lAir&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShard of &6&lEarth"))) {
             p.getInventory().addItem(ShardItems.earthShard());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &6&lEarth&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &c&lShard of &6&lEarth&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShard of &b&lLight&e&lning"))) {
             p.getInventory().addItem(ShardItems.lightningShard());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &b&lLight&e&lning&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &c&lShard of &b&lLight&e&lning&7!"));
         }
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShard of &e&lLight"))) {
             p.getInventory().addItem(ShardItems.lightShard());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &e&lLight&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &c&lShard of &e&lLight&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShard of &5&lDark&0&lness"))) {
             p.getInventory().addItem(ShardItems.darknessShard());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &5&lDark&0&lness&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &c&lShard of &5&lDark&0&lness&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&c&lShard of &a&lLife"))) {
             p.getInventory().addItem(ShardItems.lifeShard());
-            p.sendMessage(prefix + Utils.chat("Je ontvangt de &c&lShard of &a&lLife&7!"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &c&lShard of &a&lLife&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("Terug"))) {

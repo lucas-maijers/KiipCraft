@@ -8,6 +8,7 @@ package me.Lucas.KiipCraft.events.listener;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.events.ui.MainEventsUI;
+import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -19,9 +20,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-
-import static me.Lucas.KiipCraft.utils.Utils.eventsTool;
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class EventsToolClick implements Listener {
 
@@ -39,8 +37,8 @@ public class EventsToolClick implements Listener {
 
         if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             if (p.hasPermission("kiipcraft.events"))
-                if (p.getInventory().getItemInMainHand().equals(eventsTool())) {
-                    p.sendMessage(prefix + "Bezig met het openen van de §3§lEventsAdmin GUI§7...");
+                if (p.getInventory().getItemInMainHand().equals(Utils.eventsTool())) {
+                    p.sendMessage(Utils.prefix + "Bezig met het openen van de §3§lEventsAdmin GUI§7...");
                     p.openInventory(MainEventsUI.mainGUI(p));
                 }
         }
@@ -51,8 +49,8 @@ public class EventsToolClick implements Listener {
         Player p = e.getPlayer();
         Item i = e.getItemDrop();
 
-        if (i.getItemStack().equals(eventsTool())) {
-            p.sendMessage(prefix + "Helaas, je kan dit item niet droppen.");
+        if (i.getItemStack().equals(Utils.eventsTool())) {
+            p.sendMessage(Utils.prefix + "Helaas, je kan dit item niet droppen.");
             e.setCancelled(true);
         }
     }
@@ -61,7 +59,7 @@ public class EventsToolClick implements Listener {
     public void blockBreak(BlockBreakEvent e) {
         Player p = e.getPlayer();
 
-        if (p.getItemInHand().equals(eventsTool())) {
+        if (p.getItemInHand().equals(Utils.eventsTool())) {
             e.setCancelled(true);
         }
     }
@@ -69,8 +67,8 @@ public class EventsToolClick implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent e) {
         for (ItemStack droppedItem : e.getDrops()) {
-            if (droppedItem.equals(eventsTool())) {
-                e.getDrops().remove(eventsTool());
+            if (droppedItem.equals(Utils.eventsTool())) {
+                e.getDrops().remove(Utils.eventsTool());
             }
         }
     }

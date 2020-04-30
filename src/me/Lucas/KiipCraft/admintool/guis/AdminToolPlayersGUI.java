@@ -37,6 +37,7 @@ public class AdminToolPlayersGUI {
 
     public static Inventory spelersMenu(Player p) {
         Inventory toReturn = Bukkit.createInventory(null, inv_rows, inv_name);
+        inv.clear();
 
         for (int j = 37; j < 41; j++) {
             Utils.createItem(inv, BLACK_STAINED_GLASS_PANE, 1, j, " ");
@@ -47,7 +48,6 @@ public class AdminToolPlayersGUI {
         }
 
         int i = 1;
-        inv.remove(PLAYER_HEAD);
         for (Player plr : Bukkit.getOnlinePlayers()) {
             if (plr.getName().equals(p.getName())) {
                 Utils.createItemHead(inv, playerHead(plr), 1, i, "&6&l" + plr.getName(), " ", "&c&lHealth: &c" + plr.getHealth(), "&b&lX: &a" + plr.getLocation().getX(), "&b&lY: &a" + plr.getLocation().getY(), "&b&lZ: &a" + plr.getLocation().getZ(), " ", "&5Dit ben jij zelf!");

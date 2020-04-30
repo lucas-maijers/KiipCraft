@@ -15,9 +15,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
-import static me.Lucas.KiipCraft.utils.Utils.noPermission;
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
-
 public class XpBottleCommand extends SubCommand {
 
     public static Set<Integer> amountList = new HashSet<>();
@@ -43,7 +40,7 @@ public class XpBottleCommand extends SubCommand {
         bottler = p.getName();
 
         if (args.length == 1) {
-            p.sendMessage(prefix + "Je moet een getal invoeren.");
+            p.sendMessage(Utils.prefix + "Je moet een getal invoeren.");
             return;
         }
 
@@ -53,7 +50,7 @@ public class XpBottleCommand extends SubCommand {
         try {
             amount = Integer.parseInt(args[1]);
         } catch (NumberFormatException ex) {
-            p.sendMessage(prefix + "Verkeerde invoer, de invoer moet een geheel getal zijn.");
+            p.sendMessage(Utils.prefix + "Verkeerde invoer, de invoer moet een geheel getal zijn.");
             return;
         }
 
@@ -61,42 +58,42 @@ public class XpBottleCommand extends SubCommand {
 
         // Max Amount Check
         if (amount > maxAmount) {
-            p.sendMessage(prefix + "Je kan maximaal §a50 Levels §7in een flesje stoppen.");
+            p.sendMessage(Utils.prefix + "Je kan maximaal §a50 Levels §7in een flesje stoppen.");
             return;
         }
 
         if (p.hasPermission("kiipcraft.donator")) {
 
             if (delayPlayers.contains(p.getName())) {
-                p.sendMessage(prefix + Utils.chat("Dit commando zit nog op cooldown!"));
+                p.sendMessage(Utils.prefix + Utils.chat("Dit commando zit nog op cooldown!"));
                 return;
             }
 
             if (p.getInventory().firstEmpty() == -1) {
-                p.sendMessage(prefix + Utils.chat("Je inventory zit vol, dus je kan dit momenteel niet doen!"));
+                p.sendMessage(Utils.prefix + Utils.chat("Je inventory zit vol, dus je kan dit momenteel niet doen!"));
                 return;
             }
 
             if (amount > p.getLevel()) {
-                p.sendMessage(String.format("%sHelaas, het ingevoerde aantal levels heb jij niet, je komt §a%d Levels §7te kort.", prefix, amount - p.getLevel()));
+                p.sendMessage(Utils.prefix + Utils.chat(String.format("Helaas, het ingevoerde aantal levels heb jij niet, je komt &a%d Levels &7te kort.", amount - p.getLevel())));
                 return;
             }
             if (amount >= 10) {
                 if (p.getInventory().contains(Material.GLASS_BOTTLE)) {
-                    p.sendMessage(prefix + "Je hebt zojuist §a" + amount + " Levels §7gebottled.");
+                    p.sendMessage(Utils.prefix + "Je hebt zojuist §a" + amount + " Levels §7gebottled.");
                     p.setLevel(p.getLevel() - amount);
                     p.getInventory().removeItem(Utils.glasFlesje());
                     p.getInventory().addItem(Utils.xpDrinkFles());
                     delayPlayers.add(p.getName());
                     startDelay(p);
                 } else if (!(p.getInventory().contains(Material.GLASS_BOTTLE))) {
-                    p.sendMessage(prefix + "Je moet een §6Glass Bottle§7 in je inventory hebben om dit te doen.");
+                    p.sendMessage(Utils.prefix + "Je moet een §6Glass Bottle§7 in je inventory hebben om dit te doen.");
                 }
             } else {
-                p.sendMessage(prefix + "Je moet minimaal §a10 Levels§7 bottlen.");
+                p.sendMessage(Utils.prefix + "Je moet minimaal §a10 Levels§7 bottlen.");
             }
         } else {
-            p.sendMessage(noPermission);
+            p.sendMessage(Utils.noPermission);
         }
     }
 

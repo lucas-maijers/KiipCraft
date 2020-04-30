@@ -26,6 +26,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.logging.Level;
+
 public class FireOrbAbility implements Listener {
 
     private Main plugin;
@@ -62,6 +64,12 @@ public class FireOrbAbility implements Listener {
                         public void run() {
                             if (!(fireball.isValid())) {
                                 w.createExplosion(fireball.getLocation(), 3, true, false, p);
+                                this.cancel();
+                            }
+
+                            if (fireball.getTicksLived() == 20 * 30) {
+                                fireball.remove();
+                                Bukkit.getServer().getLogger().log(Level.INFO, "Fireball leeft langer dan 30 seconden, fireball verwijderen!");
                                 this.cancel();
                             }
 

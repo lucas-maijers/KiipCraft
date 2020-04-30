@@ -9,8 +9,8 @@ package me.Lucas.KiipCraft.servertour;
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.managers.SubCommand;
+import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -18,16 +18,16 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
-import static me.Lucas.KiipCraft.utils.Utils.noPermission;
-import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class ServerTourCommand extends SubCommand {
 
     private Main plugin;
     private ConfigManager cfgm = ConfigManager.getManager();
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     private FileConfiguration warps;
     private File warpsfile;
@@ -42,18 +42,18 @@ public class ServerTourCommand extends SubCommand {
     @Override
     public void onCommand(Player p, String[] args) {
         Location loc = p.getLocation();
-        World w = p.getWorld();
+        Date date = new Date();
 
         if (args == null || args.length == 1) {
             try {
-                makeNewWarp(loc, p);
+                makeNewWarp(loc, formatter.format(date), p);
                 ServerTourRequestsGUI.initialize();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (args[1].equals("menu")) {
             if (p.hasPermission("kiipcraft.staff")) {
-                p.sendMessage(prefix + "Je opent het Servertour Menu.");
+                p.sendMessage(Utils.prefix + "Je opent het Servertour Menu.");
                 warps = YamlConfiguration.loadConfiguration(warpsfile);
                 try {
                     warps.save(warpsfile);
@@ -63,10 +63,10 @@ public class ServerTourCommand extends SubCommand {
                 ServerTourRequestsGUI.initialize();
                 p.openInventory(ServerTourRequestsGUI.serverTourUI(p));
             } else {
-                p.sendMessage(noPermission);
+                p.sendMessage(Utils.noPermission);
             }
         } else {
-            p.sendMessage(noPermission);
+            p.sendMessage(Utils.noPermission);
         }
     }
 
@@ -85,7 +85,7 @@ public class ServerTourCommand extends SubCommand {
         return new String[0];
     }
 
-    private void makeNewWarp(Location loc, Player creator) throws IOException {
+    private void makeNewWarp(Location loc, String date, Player creator) throws IOException {
         warps = cfgm.getWarpsCFG();
 
         if (!warps.isConfigurationSection("Warps")) {
@@ -96,10 +96,10 @@ public class ServerTourCommand extends SubCommand {
         ConfigurationSection cs = warps.getConfigurationSection("Warps");
         assert cs != null;
         if (cs.isConfigurationSection(creator.getName())) {
-            creator.sendMessage(prefix + "Sorry, maar jij kan dit commando nu niet uitvoeren, je hebt al een servertour locatie!");
+            creator.sendMessage(Utils.prefix + "Sorry, maar jij kan dit commando nu niet uitvoeren, je hebt al een servertour locatie!");
             return;
         } else {
-            creator.sendMessage(prefix + "Succes, je hebt een locatie aangemaakt voor de servertour.");
+            creator.sendMessage(Utils.prefix + "Succes, je hebt een locatie aangemaakt voor de servertour.");
         }
         cs.createSection(creator.getName());
         ConfigurationSection warp = warps.getConfigurationSection("Warps." + creator.getName());
@@ -109,6 +109,7 @@ public class ServerTourCommand extends SubCommand {
         warp.set("Y", loc.getY());
         warp.set("Z", loc.getZ());
         warp.set("world", loc.getWorld().getName());
+        warp.set("Date", date);
         warp.set("creator", creator.getName());
         warps.save(warpsfile);
     }
