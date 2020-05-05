@@ -55,7 +55,9 @@ public class Main extends JavaPlugin {
         new SyncKistCreation(this);
         new SyncChests(this);
         new EventsToolClick(this);
+
         new BuildBattleSelections(this);
+        new SpleefSelections(this);
 
         new ServertourMenuClick(this);
         new ServerTourRequestSettings(this);

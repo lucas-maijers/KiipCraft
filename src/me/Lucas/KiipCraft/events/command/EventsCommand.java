@@ -7,6 +7,8 @@
 package me.Lucas.KiipCraft.events.command;
 
 import me.Lucas.KiipCraft.Main;
+import me.Lucas.KiipCraft.events.listener.BuildBattleSelections;
+import me.Lucas.KiipCraft.events.listener.SpleefSelections;
 import me.Lucas.KiipCraft.events.listener.SyncKistCreation;
 import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.managers.SubCommand;
@@ -33,6 +35,7 @@ public class EventsCommand extends SubCommand {
     private List<String> synced = new ArrayList<>();
     private ArrayList<String> eSubCommands = new ArrayList<>();
     private ArrayList<String> selectorTypes = new ArrayList<>();
+    private ArrayList<String> eventTPs = new ArrayList<>();
 
     public EventsCommand(Main plugin) {
         this.plugin = plugin;
@@ -47,12 +50,19 @@ public class EventsCommand extends SubCommand {
         eSubCommands.add("synckist");
         eSubCommands.add("synclist");
         eSubCommands.add("stopsync");
+        eSubCommands.add("stopselection");
         eSubCommands.add("selectortool");
         eSubCommands.add("select");
+        eSubCommands.add("setteleport");
         eSubCommands.add("removesync");
 
         selectorTypes.add("buildbattlewall");
         selectorTypes.add("buildarea");
+        selectorTypes.add("spleef");
+        selectorTypes.add("geluksgravers");
+
+        eventTPs.add("buildbattle");
+        eventTPs.add("spleef");
 
     }
 
@@ -73,8 +83,11 @@ public class EventsCommand extends SubCommand {
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events synckist&7: Start het kist synchronisatieproces!"));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events synclist&7: Geeft je de lijst met gesynchroniseerde kisten!"));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events stopsync&7: Stop het synchronisatieproces!"));
+                p.sendMessage(Utils.chat(" &7- &3/kiipcraft events stopselection&7: Stop het selectionproces!"));
                 p.sendMessage(Utils.chat(" &7- &3/kiipcraft events selectortool&7: Geeft je de selectortool!"));
-                p.sendMessage(Utils.chat(" &7- &3/kiipcraft events remove [naam]&7: Verwijderd de kistsynchronisatie met de ingevoerde naam!"));
+                p.sendMessage(Utils.chat(" &7- &3/kiipcraft events select [event]&7: Start het selectieproces voor een event!"));
+                p.sendMessage(Utils.chat(" &7- &3/kiipcraft events setteleport [event]&7: Zet de teleport voor dat event!"));
+                p.sendMessage(Utils.chat(" &7- &3/kiipcraft events removesync [naam]&7: Verwijderd de kistsynchronisatie met de ingevoerde naam!"));
                 return;
             }
 
@@ -110,6 +123,13 @@ public class EventsCommand extends SubCommand {
                 }
             }
 
+            if (args[1].equalsIgnoreCase("stopselection")) {
+                if (selectorTypes.contains(p.getName())) {
+                    selectorTypes.remove(p.getName());
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt je selectie geannuleerd!"));
+                }
+            }
+
             // Token
             if (args[1].equalsIgnoreCase("token")) {
                 if (args.length == 2) {
@@ -132,6 +152,19 @@ public class EventsCommand extends SubCommand {
                         } else if (!Bukkit.getOnlinePlayers().contains(plr)) {
                             p.sendMessage(Utils.prefix + Utils.chat("Deze speler is niet gevonden!"));
                         }
+                    }
+                }
+            }
+
+            // Setteleport
+            if (args[1].equalsIgnoreCase("setteleport")) {
+                if (eventTPs.contains(args[2])) {
+                    if (args[2].equalsIgnoreCase("buildbattle")) {
+                        BuildBattleSelections.saveTeleportLocation(p);
+                    }
+
+                    if (args[2].equalsIgnoreCase("spleef")) {
+                        SpleefSelections.saveTeleportLocation(p);
                     }
                 }
             }
@@ -288,6 +321,20 @@ public class EventsCommand extends SubCommand {
                 return completionList;
             }
             return selectorTypes;
+        }
+
+        if (args[1].equals("setteleport")) {
+            List<String> completionList = new ArrayList<>();
+
+            if (!args[2].equals("")) {
+                for (String s : eventTPs) {
+                    if (s.startsWith(args[2])) {
+                        completionList.add(s);
+                    }
+                }
+                return completionList;
+            }
+            return eventTPs;
         }
 
         return null;

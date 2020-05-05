@@ -229,6 +229,45 @@ public class BuildBattleSelections implements Listener {
         }
     }
 
+    public static void saveTeleportLocation(Player p) {
+        FileConfiguration eventsCFG = cfgman.getEventsCFG();
+        File eventsFile = new File(plugin.getDataFolder(), "events.yml");
+
+        if (!eventsCFG.isConfigurationSection("Events")) {
+            eventsCFG.createSection("Events");
+        }
+
+        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
+
+        assert path != null;
+
+        if (!path.isConfigurationSection("BuildBattle")) {
+            path.createSection("BuildBattle");
+        }
+
+        ConfigurationSection teleport = eventsCFG.getConfigurationSection("Events.BuildBattle");
+
+        assert teleport != null;
+        if (!teleport.isConfigurationSection("Teleport")) {
+            teleport.createSection("Teleport");
+        }
+
+        ConfigurationSection cs = eventsCFG.getConfigurationSection("Events.BuildBattle.Teleport");
+
+        assert cs != null;
+        cs.set("X", p.getLocation().getX());
+        cs.set("Y", p.getLocation().getY());
+        cs.set("Z", p.getLocation().getZ());
+
+        try {
+            p.sendMessage(Utils.prefix + Utils.chat("De teleport locatie aangemaakt!"));
+            eventsCFG.save(eventsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            p.sendMessage(Utils.prefix + Utils.chat("&4&lERROR: &7Er is een fout opgetreden tijdens het opslaan, raadpleeg console voor meer informatie!"));
+        }
+    }
+
     private void saveWallToConfig(Player p) {
         eventsCFG = cfgm.getEventsCFG();
 
@@ -256,7 +295,9 @@ public class BuildBattleSelections implements Listener {
         assert wallData != null;
 
         // Corner One
-        wallData.createSection("TopCorner");
+        if (!wallData.isConfigurationSection("TopCorner")) {
+            wallData.createSection("TopCorner");
+        }
         ConfigurationSection cornerOne = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall.TopCorner");
 
         assert cornerOne != null;
@@ -265,7 +306,9 @@ public class BuildBattleSelections implements Listener {
         cornerOne.set("Z", leftCorner.getZ());
 
         // Corner Two
-        wallData.createSection("BottomCorner");
+        if (!wallData.isConfigurationSection("BottomCorner")) {
+            wallData.createSection("BottomCorner");
+        }
         ConfigurationSection cornerTwo = eventsCFG.getConfigurationSection("Events.BuildBattle.Wall.BottomCorner");
 
         assert cornerTwo != null;
@@ -593,8 +636,6 @@ public class BuildBattleSelections implements Listener {
                 }
             }
         }
-
-
     }
 
     @EventHandler
