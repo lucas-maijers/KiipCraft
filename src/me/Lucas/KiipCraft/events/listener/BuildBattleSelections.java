@@ -260,7 +260,7 @@ public class BuildBattleSelections implements Listener {
         cs.set("Z", p.getLocation().getZ());
 
         try {
-            p.sendMessage(Utils.prefix + Utils.chat("De teleport locatie aangemaakt!"));
+            p.sendMessage(Utils.prefix + Utils.chat("De teleport locatie is aangemaakt!"));
             eventsCFG.save(eventsFile);
         } catch (IOException e) {
             e.printStackTrace();

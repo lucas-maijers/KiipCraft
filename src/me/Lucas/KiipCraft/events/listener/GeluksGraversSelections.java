@@ -46,88 +46,6 @@ public class GeluksGraversSelections implements Listener {
         Bukkit.getPluginManager().registerEvents(this, plugin);
     }
 
-    public static void saveTeleportLocation(Player p) {
-        FileConfiguration eventsCFG = cfgm.getEventsCFG();
-        File eventsFile = new File(plugin.getDataFolder(), "events.yml");
-
-        if (!eventsCFG.isConfigurationSection("Events")) {
-            eventsCFG.createSection("Events");
-        }
-
-        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
-
-        assert path != null;
-
-        if (!path.isConfigurationSection("GeluksGravers")) {
-            path.createSection("GeluksGravers");
-        }
-
-        ConfigurationSection teleport = eventsCFG.getConfigurationSection("Events.GeluksGravers");
-
-        assert teleport != null;
-        if (!teleport.isConfigurationSection("Teleport")) {
-            teleport.createSection("Teleport");
-        }
-
-        ConfigurationSection cs = eventsCFG.getConfigurationSection("Events.GeluksGravers.Teleport");
-
-        assert cs != null;
-        cs.set("X", p.getLocation().getX());
-        cs.set("Y", p.getLocation().getY());
-        cs.set("Z", p.getLocation().getZ());
-
-        try {
-            p.sendMessage(Utils.prefix + Utils.chat("De teleport locatie aangemaakt!"));
-            eventsCFG.save(eventsFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            p.sendMessage(Utils.prefix + Utils.chat("&4&lERROR: &7Er is een fout opgetreden tijdens het opslaan, raadpleeg console voor meer informatie!"));
-        }
-    }
-
-    public static void resetPillars(Player p) {
-        FileConfiguration eventsCFG = cfgm.getEventsCFG();
-        World w = p.getWorld();
-        String[] blocks;
-
-        if (!eventsCFG.isConfigurationSection("Events.GeluksGravers")) {
-            p.sendMessage(Utils.prefix + Utils.chat("Er zijn nog geen Geluks Gravers pilaren ingesteld!"));
-            return;
-        }
-
-        ConfigurationSection preset = eventsCFG.getConfigurationSection("Events.GeluksGravers.Preset");
-
-        blocks = ((List<String>) preset.get("Blocks")).toArray(new String[0]);
-
-        for (String key : eventsCFG.getConfigurationSection("Events.GeluksGravers.Pilaren").getKeys(false)) {
-            ConfigurationSection cs = eventsCFG.getConfigurationSection("Events.GeluksGravers.Pilaren." + key);
-            assert cs != null;
-
-            Location loc = (Location) cs.get("Data");
-
-            assert loc != null;
-            int x = loc.getBlockX();
-            int y = loc.getBlockY();
-            int z = loc.getBlockZ();
-
-            for (int i = 0; i <= 53; i++) {
-
-                if (i != 0) {
-                    y--;
-                }
-                BlockData data = Bukkit.getServer().createBlockData(blocks[i]);
-                Block b = w.getBlockAt(x, y, z);
-
-                b.setType(data.getMaterial());
-
-                b.setBlockData(Bukkit.getServer().createBlockData(blocks[i]));
-            }
-
-        }
-
-
-    }
-
     @EventHandler
     public void selectGeluksGraversPillar(PlayerInteractEvent e) {
         Player p = e.getPlayer();
@@ -188,6 +106,86 @@ public class GeluksGraversSelections implements Listener {
         }
     }
 
+    public static void saveTeleportLocation(Player p) {
+        FileConfiguration eventsCFG = cfgm.getEventsCFG();
+        File eventsFile = new File(plugin.getDataFolder(), "events.yml");
+
+        if (!eventsCFG.isConfigurationSection("Events")) {
+            eventsCFG.createSection("Events");
+        }
+
+        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
+
+        assert path != null;
+
+        if (!path.isConfigurationSection("GeluksGravers")) {
+            path.createSection("GeluksGravers");
+        }
+
+        ConfigurationSection teleport = eventsCFG.getConfigurationSection("Events.GeluksGravers");
+
+        assert teleport != null;
+        if (!teleport.isConfigurationSection("Teleport")) {
+            teleport.createSection("Teleport");
+        }
+
+        ConfigurationSection cs = eventsCFG.getConfigurationSection("Events.GeluksGravers.Teleport");
+
+        assert cs != null;
+        cs.set("X", p.getLocation().getX());
+        cs.set("Y", p.getLocation().getY());
+        cs.set("Z", p.getLocation().getZ());
+
+        try {
+            p.sendMessage(Utils.prefix + Utils.chat("De teleport locatie is aangemaakt!"));
+            eventsCFG.save(eventsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            p.sendMessage(Utils.prefix + Utils.chat("&4&lERROR: &7Er is een fout opgetreden tijdens het opslaan, raadpleeg console voor meer informatie!"));
+        }
+    }
+
+    public static void resetPillars(Player p) {
+        FileConfiguration eventsCFG = cfgm.getEventsCFG();
+        World w = p.getWorld();
+        String[] blocks;
+
+        if (!eventsCFG.isConfigurationSection("Events.GeluksGravers")) {
+            p.sendMessage(Utils.prefix + Utils.chat("Er zijn nog geen Geluks Gravers pilaren ingesteld!"));
+            return;
+        }
+
+        ConfigurationSection preset = eventsCFG.getConfigurationSection("Events.GeluksGravers.Preset");
+
+        blocks = ((List<String>) preset.get("Blocks")).toArray(new String[0]);
+
+        for (String key : eventsCFG.getConfigurationSection("Events.GeluksGravers.Pilaren").getKeys(false)) {
+            ConfigurationSection cs = eventsCFG.getConfigurationSection("Events.GeluksGravers.Pilaren." + key);
+            assert cs != null;
+
+            Location loc = (Location) cs.get("Data");
+
+            assert loc != null;
+            int x = loc.getBlockX();
+            int y = loc.getBlockY();
+            int z = loc.getBlockZ();
+
+            for (int i = 0; i <= 53; i++) {
+
+                if (i != 0) {
+                    y--;
+                }
+                BlockData data = Bukkit.getServer().createBlockData(blocks[i]);
+                Block b = w.getBlockAt(x, y, z);
+
+                b.setType(data.getMaterial());
+
+                b.setBlockData(Bukkit.getServer().createBlockData(blocks[i]));
+            }
+
+        }
+    }
+
     private void saveToConfig(Player p) {
         FileConfiguration eventsCFG = cfgm.getEventsCFG();
         List<String> pillarBlocks = new ArrayList<>();
@@ -229,8 +227,6 @@ public class GeluksGraversSelections implements Listener {
 
             assert cs != null;
             cs.set("Data", loc);
-            System.out.println(loc);
-            System.out.println(loc.getY());
 
             ++pillarAmount;
         }
@@ -250,7 +246,7 @@ public class GeluksGraversSelections implements Listener {
 
         try {
             eventsCFG.save(eventsFile);
-            p.sendMessage(Utils.prefix + Utils.chat("Data is succesvol opgeslagen!"));
+            p.sendMessage(Utils.prefix + Utils.chat("De selectie is succesvol opgeslagen!"));
             pillarLocations.clear();
         } catch (IOException e) {
             e.printStackTrace();
