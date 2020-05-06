@@ -8,6 +8,7 @@ package me.Lucas.KiipCraft.events.command;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.events.listener.BuildBattleSelections;
+import me.Lucas.KiipCraft.events.listener.GeluksGraversSelections;
 import me.Lucas.KiipCraft.events.listener.SpleefSelections;
 import me.Lucas.KiipCraft.events.listener.SyncKistCreation;
 import me.Lucas.KiipCraft.managers.ConfigManager;
@@ -63,6 +64,7 @@ public class EventsCommand extends SubCommand {
 
         eventTPs.add("buildbattle");
         eventTPs.add("spleef");
+        eventTPs.add("geluksgravers");
 
     }
 
@@ -118,14 +120,18 @@ public class EventsCommand extends SubCommand {
             // Select
             if (args[1].equalsIgnoreCase("select")) {
                 if (selectorTypes.contains(args[2])) {
-                    p.sendMessage(Utils.prefix + Utils.chat(String.format("Je hebt de selectie gestart voor:&c %s&7!", args[2])));
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("Je hebt de selectie gestart voor: &c%s&7!", args[2])));
                     selector.put(p.getName(), args[2]);
+
+                    if (args[2].equalsIgnoreCase("geluksgravers")) {
+                        GeluksGraversSelections.pillarSelection.add(p.getName());
+                    }
                 }
             }
 
             if (args[1].equalsIgnoreCase("stopselection")) {
-                if (selectorTypes.contains(p.getName())) {
-                    selectorTypes.remove(p.getName());
+                if (selector.containsKey(p.getName())) {
+                    selector.remove(p.getName());
                     p.sendMessage(Utils.prefix + Utils.chat("Je hebt je selectie geannuleerd!"));
                 }
             }
@@ -165,6 +171,10 @@ public class EventsCommand extends SubCommand {
 
                     if (args[2].equalsIgnoreCase("spleef")) {
                         SpleefSelections.saveTeleportLocation(p);
+                    }
+
+                    if (args[2].equalsIgnoreCase("geluksgravers")) {
+                        GeluksGraversSelections.saveTeleportLocation(p);
                     }
                 }
             }

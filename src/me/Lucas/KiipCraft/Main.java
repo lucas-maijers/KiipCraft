@@ -58,6 +58,7 @@ public class Main extends JavaPlugin {
 
         new BuildBattleSelections(this);
         new SpleefSelections(this);
+        new GeluksGraversSelections(this);
 
         new ServertourMenuClick(this);
         new ServerTourRequestSettings(this);
@@ -88,7 +89,7 @@ public class Main extends JavaPlugin {
         new AdminToolPlayerSettings(this);
 
         MainEventsUI.initialize();
-        AnvilDropUI.initialize();
+        GeluksGraversUI.initialize();
         SpleefUI.initialize();
         ColosseumUI.initialize();
         TheQuizUI.initialize();

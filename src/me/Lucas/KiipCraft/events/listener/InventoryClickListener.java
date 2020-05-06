@@ -45,13 +45,13 @@ public class InventoryClickListener implements Listener {
         }
 
         // Anvil Drop UI
-        if (title.equals(AnvilDropUI.inventory_name)) {
+        if (title.equals(GeluksGraversUI.inventory_name)) {
             e.setCancelled(true);
             if (e.getCurrentItem() == null) {
                 return;
             }
-            if (title.equals(AnvilDropUI.inventory_name)) {
-                AnvilDropUI.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
+            if (title.equals(GeluksGraversUI.inventory_name)) {
+                GeluksGraversUI.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
             }
         }
 

@@ -54,7 +54,7 @@ public class SpleefUI {
 
         Utils.createItem(invSpleef, Material.BLACK_STAINED_GLASS_PANE, 1, 10, " ");
         Utils.createItem(invSpleef, Material.BLACK_STAINED_GLASS_PANE, 1, 18, " ");
-        Utils.createItemLore(invSpleef, Material.RED_WOOL, 1, 11, "&c&lReset SpleefArea", "&7Stopt het Spleef Event!");
+        Utils.createItemLore(invSpleef, Material.RED_WOOL, 1, 11, "&c&lReset SpleefArea", "&7Reset de Spleef Area!");
 
         if (!schepGegeven) {
             Utils.createItemLore(invSpleef, Material.DIAMOND_SHOVEL, 1, 12, "&b&lSpleef Schep", "&7Geeft iedereen een SpleefSchep!");
@@ -74,11 +74,11 @@ public class SpleefUI {
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&b&lSpleef Schep"))) {
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage")) {
+                if (plr.hasPermission("kiipcraft.events")) {
                     if (!schepGegeven) {
-                        plr.sendMessage(Utils.prefix + "§b§l" + p.getName() + "§7 heeft iedereen bij de §6§lSpleef §7een §b§lSpleefSchep §7gegeven!");
+                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d&l%s&7 heeft iedereen een &b&lSpleef Schep &7gegeven!", p.getName())));
                     } else {
-                        plr.sendMessage(Utils.prefix + "§b§l" + p.getName() + "§7 heeft iedereen bij de §6§lSpleef §7zijn §b§lSpleefSchep §7afgenomen!");
+                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d&l%s&7 heeft iedereen zijn &b&lSpleef Schep &7afgenomen!", p.getName())));
                     }
                 }
             }
@@ -111,8 +111,8 @@ public class SpleefUI {
             SpleefSelections.regenerateCircle(p);
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
-                if (plr.hasPermission("kiipcraft.infomessage")) {
-                    plr.sendMessage(Utils.prefix + "§b§l" + p.getName() + "§7 heeft het §6§lSpleef Event §cgestopt§7!");
+                if (plr.hasPermission("kiipcraft.events")) {
+                    plr.sendMessage(Utils.prefix + Utils.chat(String.format("De &cSpleef Area &7is gereset door &d&l%s&7!", p.getName())));
                 }
             }
         }
@@ -122,7 +122,7 @@ public class SpleefUI {
 
             assert cs != null;
             p.teleport(new Location(p.getWorld(), cs.getDouble("X"), cs.getDouble("Y"), cs.getDouble("Z")));
-            p.sendMessage(Utils.prefix + Utils.chat("Je teleporteert naar de Spleef"));
+            p.sendMessage(Utils.prefix + Utils.chat("Je teleporteert naar de &cSpleef&7!"));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("Terug"))) {

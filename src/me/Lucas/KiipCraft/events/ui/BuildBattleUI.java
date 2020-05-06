@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class BuildBattleUI {
 
-    public static Inventory invBuildBattle;
+    public static Inventory inv;
     public static String inventory_name;
     public static int inv_rows = 3 * 9;
     private static ConfigManager cfgm = ConfigManager.getManager();
@@ -27,40 +27,40 @@ public class BuildBattleUI {
     public static void initialize() {
         inventory_name = Utils.chat("&6&lBuild Battle Controls");
 
-        invBuildBattle = Bukkit.createInventory(null, inv_rows);
+        inv = Bukkit.createInventory(null, inv_rows);
     }
 
     public static Inventory buildBattleGUI(Player p) {
         Inventory toReturn = Bukkit.createInventory(null, inv_rows, inventory_name);
 
         for (int i = 1; i < 10; i++) {
-            Utils.createItem(invBuildBattle, Material.BLACK_STAINED_GLASS_PANE, 1, i, " ");
+            Utils.createItem(inv, Material.BLACK_STAINED_GLASS_PANE, 1, i, " ");
         }
 
         for (int j = 19; j < 21 + 1; j++) {
-            Utils.createItem(invBuildBattle, Material.BLACK_STAINED_GLASS_PANE, 1, j, " ");
+            Utils.createItem(inv, Material.BLACK_STAINED_GLASS_PANE, 1, j, " ");
         }
         for (int k = 24; k < inv_rows + 1; k++) {
-            Utils.createItem(invBuildBattle, Material.BLACK_STAINED_GLASS_PANE, 1, k, " ");
+            Utils.createItem(inv, Material.BLACK_STAINED_GLASS_PANE, 1, k, " ");
         }
 
-        Utils.createItem(invBuildBattle, Material.BLACK_STAINED_GLASS_PANE, 1, 10, " ");
-        Utils.createItem(invBuildBattle, Material.BLACK_STAINED_GLASS_PANE, 1, 18, " ");
+        Utils.createItem(inv, Material.BLACK_STAINED_GLASS_PANE, 1, 10, " ");
+        Utils.createItem(inv, Material.BLACK_STAINED_GLASS_PANE, 1, 18, " ");
 
         if (cfgm.getEventsCFG().getConfigurationSection("Events.BuildBattle.Wall").getBoolean("WallRemoved")) {
-            Utils.createItemLore(invBuildBattle, Material.BRICKS, 1, 11, "&a&lPlaats muur", "&7Plaatst de muur bij Build Battle!", "  ", "&7We Will Build A Wall!");
+            Utils.createItemLore(inv, Material.BRICKS, 1, 11, "&a&lPlaats muur", "&7Plaatst de muur bij Build Battle!", "  ", "&7We Will Build A Wall!");
         } else {
-            Utils.createItemLore(invBuildBattle, Material.IRON_PICKAXE, 1, 11, "&c&lVerwijder muur", "&7Verwijderd de muur bij Build Battle!");
+            Utils.createItemLore(inv, Material.IRON_PICKAXE, 1, 11, "&c&lVerwijder muur", "&7Verwijderd de muur bij Build Battle!");
         }
 
-        Utils.createItemLore(invBuildBattle, Material.TNT, 1, 12, "&6&lReset bouwgebied", "&7Reset het bouwgebied weer naar een vlakke status!");
+        Utils.createItemLore(inv, Material.TNT, 1, 12, "&6&lReset bouwgebied", "&7Reset het bouwgebied weer naar een vlakke status!");
 
-        Utils.createItemLore(invBuildBattle, Material.COMPASS, 1, 17, "&6&lTeleport", "&7Teleporteer naar Build Battle");
+        Utils.createItemLore(inv, Material.COMPASS, 1, 17, "&6&lTeleport", "&7Teleporteer naar Build Battle");
 
-        Utils.createItem(invBuildBattle, Material.ARROW, 1, 22, "Terug");
-        Utils.createItem(invBuildBattle, Material.BARRIER, 1, 23, "&cSluiten");
+        Utils.createItem(inv, Material.ARROW, 1, 22, "Terug");
+        Utils.createItem(inv, Material.BARRIER, 1, 23, "&cSluiten");
 
-        toReturn.setContents(invBuildBattle.getContents());
+        toReturn.setContents(inv.getContents());
         return toReturn;
     }
 
