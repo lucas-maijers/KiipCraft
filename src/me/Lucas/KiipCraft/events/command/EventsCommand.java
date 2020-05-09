@@ -7,10 +7,7 @@
 package me.Lucas.KiipCraft.events.command;
 
 import me.Lucas.KiipCraft.Main;
-import me.Lucas.KiipCraft.events.listener.BuildBattleSelections;
-import me.Lucas.KiipCraft.events.listener.GeluksGraversSelections;
-import me.Lucas.KiipCraft.events.listener.SpleefSelections;
-import me.Lucas.KiipCraft.events.listener.SyncKistCreation;
+import me.Lucas.KiipCraft.events.listener.*;
 import me.Lucas.KiipCraft.managers.ConfigManager;
 import me.Lucas.KiipCraft.managers.SubCommand;
 import me.Lucas.KiipCraft.utils.Utils;
@@ -61,10 +58,12 @@ public class EventsCommand extends SubCommand {
         selectorTypes.add("buildarea");
         selectorTypes.add("spleef");
         selectorTypes.add("geluksgravers");
+        selectorTypes.add("triathlon");
 
         eventTPs.add("buildbattle");
         eventTPs.add("spleef");
         eventTPs.add("geluksgravers");
+        eventTPs.add("triathlon");
 
     }
 
@@ -126,6 +125,10 @@ public class EventsCommand extends SubCommand {
                     if (args[2].equalsIgnoreCase("geluksgravers")) {
                         GeluksGraversSelections.pillarSelection.add(p.getName());
                     }
+
+                    if (args[2].equalsIgnoreCase("triathlon")) {
+                        TriathlonSelections.horseSelections.add(p.getName());
+                    }
                 }
             }
 
@@ -175,6 +178,10 @@ public class EventsCommand extends SubCommand {
 
                     if (args[2].equalsIgnoreCase("geluksgravers")) {
                         GeluksGraversSelections.saveTeleportLocation(p);
+                    }
+
+                    if (args[2].equalsIgnoreCase("triathlon")) {
+                        TriathlonSelections.saveTeleportLocation(p);
                     }
                 }
             }

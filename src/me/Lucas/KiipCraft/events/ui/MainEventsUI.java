@@ -48,23 +48,19 @@ public class MainEventsUI {
         Utils.createItem(inv, Material.BLACK_STAINED_GLASS_PANE, 1, 19, " ");
         Utils.createItem(inv, Material.BLACK_STAINED_GLASS_PANE, 1, 27, " ");
 
-        // AnvilDrop
-        Utils.createItemLore(inv, Material.DIAMOND_ORE, 1, 11, "&6&lGeluks Gravers", "&7Geluks Gravers Controls!");
 
-        // Colloseum
-        Utils.createItemLore(inv, Material.DIAMOND_SWORD, 1, 12, "&6&lColosseum", "&7Colosseum Controls!");
+        Utils.createItemLore(inv, Material.CRAFTING_TABLE, 1, 11, "&6&lBuild Battle", "&7Build Battle Controls!");
 
-        // Spleef
-        Utils.createItemLore(inv, Material.DIAMOND_SHOVEL, 1, 13, "&6&lSpleef", "&7Spleef Controls!");
+        Utils.createItemLore(inv, Material.DIAMOND_ORE, 1, 12, "&6&lGeluks Gravers", "&7Geluks Gravers Controls!");
 
-        // The Quiz
-        Utils.createItemLore(inv, Material.WRITABLE_BOOK, 1, 14, "&6&lThe Quiz", "&7The Quiz Controls!");
+        Utils.createItemLore(inv, Material.WRITABLE_BOOK, 1, 13, "&6&lThe Quiz", "&7The Quiz Controls!");
 
-        // Vloer is Lava
-        Utils.createItemLore(inv, Material.LAVA_BUCKET, 1, 15, "&6&lDe vloer is lava", "&7De vloer is lava Controls!");
+        Utils.createItemLore(inv, Material.DIAMOND_SHOVEL, 1, 14, "&6&lSpleef", "&7Spleef Controls!");
 
-        // Build Battle
-        Utils.createItemLore(inv, Material.CRAFTING_TABLE, 1, 16, "&6&lBuild Battle", "&7Build Battle Controls!");
+        Utils.createItemLore(inv, Material.DIAMOND_SWORD, 1, 15, "&6&lTriathlon", "&7Triathlon Controls!");
+
+        Utils.createItemLore(inv, Material.LAVA_BUCKET, 1, 16, "&6&lDe vloer is lava", "&7De vloer is lava Controls!");
+
 
         // Close GUI
         Utils.createItem(inv, Material.BARRIER, 1, 32, "&cSluiten");
@@ -75,38 +71,38 @@ public class MainEventsUI {
 
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
 
-        // Anvil Drop
+
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lGeluks Gravers"))) {
             p.sendMessage(Utils.prefix + Utils.chat("Je opent de &c&lGeluks Gravers Controls&7!"));
             p.openInventory(GeluksGraversUI.geluksGraversGUI(p));
         }
-        // Colosseum
-        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lColosseum"))) {
-            p.sendMessage(Utils.prefix + "Je opent de §6§lColosseum Controls§7...");
-            p.openInventory(ColosseumUI.colosseumGUI(p));
+
+        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lTriathlon"))) {
+            p.sendMessage(Utils.prefix + Utils.chat("Je opent de &c&lTriathlon Controls&7!"));
+            p.openInventory(TriathlonUI.triathlonGUI(p));
         }
-        // Spleef
+
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lSpleef"))) {
             p.sendMessage(Utils.prefix + Utils.chat("Je opent de &c&lSpleef Controls&7!"));
             p.openInventory((SpleefUI.spleefGUI(p)));
         }
-        // The Quiz
+
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lThe Quiz"))) {
             p.sendMessage(Utils.prefix + "Je opent de §6§lQuiz Controls§7...");
             p.openInventory(TheQuizUI.theQuizUI(p));
         }
-        // Vloer is lava
+
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lDe vloer is lava"))) {
             p.sendMessage(Utils.prefix + "Je opent de §6§lVloer is Lava Controls§7...");
             p.openInventory(VloerIsLavaUI.vloerislavaGUI(p));
         }
-        // Build Battle
+
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lBuild Battle"))) {
             p.sendMessage(Utils.prefix + Utils.chat("Je opent de &cBuild Battle Controls&7!"));
             p.openInventory(BuildBattleUI.buildBattleGUI(p));
         }
 
-        // Close GUI
+
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&cSluiten"))) {
             p.closeInventory();
         }

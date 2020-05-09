@@ -76,9 +76,9 @@ public class SpleefUI {
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.events")) {
                     if (!schepGegeven) {
-                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d&l%s&7 heeft iedereen een &b&lSpleef Schep &7gegeven!", p.getName())));
+                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d%s&7 heeft iedereen een &b&lSpleef Schep &7gegeven!", p.getName())));
                     } else {
-                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d&l%s&7 heeft iedereen zijn &b&lSpleef Schep &7afgenomen!", p.getName())));
+                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d%s&7 heeft iedereen zijn &b&lSpleef Schep &7afgenomen!", p.getName())));
                     }
                 }
             }
@@ -112,7 +112,7 @@ public class SpleefUI {
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.events")) {
-                    plr.sendMessage(Utils.prefix + Utils.chat(String.format("De &cSpleef Area &7is gereset door &d&l%s&7!", p.getName())));
+                    plr.sendMessage(Utils.prefix + Utils.chat(String.format("De &cSpleef Area &7is gereset door &d%s&7!", p.getName())));
                 }
             }
         }

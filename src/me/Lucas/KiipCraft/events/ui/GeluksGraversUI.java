@@ -80,7 +80,7 @@ public class GeluksGraversUI {
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.events")) {
-                    plr.sendMessage(Utils.prefix + Utils.chat(String.format("De &cGeluks Gravers Pilaren&7 zijn gereset door &d&l%s&7!", p.getName())));
+                    plr.sendMessage(Utils.prefix + Utils.chat(String.format("De &cGeluks Gravers Pilaren&7 zijn gereset door &d%s&7!", p.getName())));
                 }
             }
         }
@@ -89,9 +89,9 @@ public class GeluksGraversUI {
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.events")) {
                     if (!toolsGegeven) {
-                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d&l%s&7 heeft iedereen de &b&lGeluks Gravers Tools &7gegeven!", p.getName())));
+                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d%s&7 heeft iedereen de &b&lGeluks Gravers Tools &7gegeven!", p.getName())));
                     } else {
-                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d&l%s&7 heeft iedereen de &b&lGeluks Gravers Tools &7afgenomen!", p.getName())));
+                        plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d%s&7 heeft iedereen de &b&lGeluks Gravers Tools &7afgenomen!", p.getName())));
                     }
                 }
             }

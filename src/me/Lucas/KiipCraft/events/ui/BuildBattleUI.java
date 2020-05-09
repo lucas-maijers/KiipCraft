@@ -75,7 +75,7 @@ public class BuildBattleUI {
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.events")) {
-                    p.sendMessage(Utils.prefix + Utils.chat(String.format("De Build Battle muur is door &d%s &7weggehaald!", p.getName())));
+                    plr.sendMessage(Utils.prefix + Utils.chat(String.format("De Build Battle muur is door &d%s &7weggehaald!", p.getName())));
                 }
             }
         }
@@ -88,7 +88,7 @@ public class BuildBattleUI {
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.events")) {
-                    p.sendMessage(Utils.prefix + Utils.chat(String.format("De Build Battle muur is door &d%s &7terug geplaatst!", p.getName())));
+                    plr.sendMessage(Utils.prefix + Utils.chat(String.format("De Build Battle muur is door &d%s &7terug geplaatst!", p.getName())));
                 }
             }
         }
@@ -98,7 +98,7 @@ public class BuildBattleUI {
 
             for (Player plr : Bukkit.getOnlinePlayers()) {
                 if (plr.hasPermission("kiipcraft.events")) {
-                    p.sendMessage(Utils.prefix + Utils.chat(String.format("Het Build Battle bouwgebied is door &d%s&7 gereset!", p.getName())));
+                    plr.sendMessage(Utils.prefix + Utils.chat(String.format("Het Build Battle bouwgebied is door &d%s&7 gereset!", p.getName())));
                 }
             }
         }

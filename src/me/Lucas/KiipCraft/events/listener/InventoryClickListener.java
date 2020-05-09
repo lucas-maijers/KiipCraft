@@ -65,13 +65,13 @@ public class InventoryClickListener implements Listener {
             }
         }
 
-        if (title.equals(ColosseumUI.inventory_name)) {
+        if (title.equals(TriathlonUI.inventory_name)) {
             e.setCancelled(true);
             if (e.getCurrentItem() == null) {
                 return;
             }
-            if (title.equals(ColosseumUI.inventory_name)) {
-                ColosseumUI.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
+            if (title.equals(TriathlonUI.inventory_name)) {
+                TriathlonUI.clicked((Player) e.getWhoClicked(), e.getSlot(), e.getCurrentItem(), e.getInventory());
             }
         }
 

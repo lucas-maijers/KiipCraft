@@ -59,6 +59,7 @@ public class Main extends JavaPlugin {
         new BuildBattleSelections(this);
         new SpleefSelections(this);
         new GeluksGraversSelections(this);
+        new TriathlonSelections(this);
 
         new ServertourMenuClick(this);
         new ServerTourRequestSettings(this);
@@ -91,7 +92,7 @@ public class Main extends JavaPlugin {
         MainEventsUI.initialize();
         GeluksGraversUI.initialize();
         SpleefUI.initialize();
-        ColosseumUI.initialize();
+        TriathlonUI.initialize();
         TheQuizUI.initialize();
         VloerIsLavaUI.initialize();
         BuildBattleUI.initialize();
