@@ -53,13 +53,9 @@ public class MainEventsUI {
 
         Utils.createItemLore(inv, Material.DIAMOND_ORE, 1, 12, "&6&lGeluks Gravers", "&7Geluks Gravers Controls!");
 
-        Utils.createItemLore(inv, Material.WRITABLE_BOOK, 1, 13, "&6&lThe Quiz", "&7The Quiz Controls!");
+        Utils.createItemLore(inv, Material.DIAMOND_SHOVEL, 1, 13, "&6&lSpleef", "&7Spleef Controls!");
 
-        Utils.createItemLore(inv, Material.DIAMOND_SHOVEL, 1, 14, "&6&lSpleef", "&7Spleef Controls!");
-
-        Utils.createItemLore(inv, Material.DIAMOND_SWORD, 1, 15, "&6&lTriathlon", "&7Triathlon Controls!");
-
-        Utils.createItemLore(inv, Material.LAVA_BUCKET, 1, 16, "&6&lDe vloer is lava", "&7De vloer is lava Controls!");
+        Utils.createItemLore(inv, Material.DIAMOND_SWORD, 1, 14, "&6&lTriathlon", "&7Triathlon Controls!");
 
 
         // Close GUI
@@ -85,16 +81,6 @@ public class MainEventsUI {
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lSpleef"))) {
             p.sendMessage(Utils.prefix + Utils.chat("Je opent de &c&lSpleef Controls&7!"));
             p.openInventory((SpleefUI.spleefGUI(p)));
-        }
-
-        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lThe Quiz"))) {
-            p.sendMessage(Utils.prefix + "Je opent de §6§lQuiz Controls§7...");
-            p.openInventory(TheQuizUI.theQuizUI(p));
-        }
-
-        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lDe vloer is lava"))) {
-            p.sendMessage(Utils.prefix + "Je opent de §6§lVloer is Lava Controls§7...");
-            p.openInventory(VloerIsLavaUI.vloerislavaGUI(p));
         }
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lBuild Battle"))) {

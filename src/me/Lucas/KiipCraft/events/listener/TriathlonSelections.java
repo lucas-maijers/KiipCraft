@@ -57,7 +57,7 @@ public class TriathlonSelections implements Listener {
             if (e.getType() == EntityType.HORSE) {
                 Horse h = (Horse) e;
 
-                if (h.getCustomName().equals(Utils.chat("&7[&cEVENT&7] &3Triathlon Paard"))) {
+                if (h.isGlowing()) {
                     h.remove();
                 }
             }
@@ -66,7 +66,7 @@ public class TriathlonSelections implements Listener {
 
         for (Player plr : Bukkit.getOnlinePlayers()) {
             if (plr.hasPermission("kiipcraft.events")) {
-                plr.sendMessage(Utils.prefix + Utils.chat(String.format("&b&l%s&7 heeft de &6&lEvent Paarden &7gekilled!", p.getName())));
+                plr.sendMessage(Utils.prefix + Utils.chat(String.format("&d%s&7 heeft de &6&lEvent Paarden &7gekilled!", p.getName())));
             }
         }
     }
@@ -186,6 +186,7 @@ public class TriathlonSelections implements Listener {
             Horse horse = p.getWorld().spawn(new Location(p.getWorld(), cs.getInt("X"), cs.getInt("Y"), cs.getInt("Z")), Horse.class);
             horse.setAdult();
             horse.setCustomName(Utils.chat("&7[&cEVENT&7] &3Triathlon Paard"));
+            horse.setGlowing(true);
             horse.setCustomNameVisible(true);
             horse.setTamed(true);
             horse.setJumpStrength(0.4);

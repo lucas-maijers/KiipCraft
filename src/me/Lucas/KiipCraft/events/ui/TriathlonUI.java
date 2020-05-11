@@ -81,7 +81,7 @@ public class TriathlonUI {
     public static void clicked(Player p, int slot, ItemStack clicked, Inventory inv) {
 
         if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&6&lElytras"))) {
-            
+
             if (!elytraGiven) {
                 for (Entity e : p.getNearbyEntities(50, 50, 50)) {
                     if (e instanceof Player) {

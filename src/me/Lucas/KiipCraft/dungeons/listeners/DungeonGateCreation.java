@@ -15,6 +15,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Item;
@@ -122,11 +123,6 @@ public class DungeonGateCreation implements Listener {
                             assert keyBlock != null;
                             sleutelBlock = keyBlock.getLocation();
 
-                            if (!(keyBlock.getType() == Material.STRUCTURE_BLOCK)) {
-                                p.sendMessage(Utils.prefix + Utils.chat("Dit is geen dungeon slot blok, probeer het opnieuw!"));
-                                return;
-                            }
-
                             p.sendMessage(Utils.prefix + Utils.chat("Je hebt het Sleutelblok van de dungeon gate geselecteerd."));
                             p.sendMessage(" ");
                             p.sendMessage(Utils.chat("&7De coordinaten van dat blok zijn:"));
@@ -185,18 +181,25 @@ public class DungeonGateCreation implements Listener {
         Player p = e.getPlayer();
 
         if (lockType.contains(p.getName())) {
+            BlockData gateBlock;
             e.setCancelled(true);
 
             String message = e.getMessage();
 
             switch (message.toUpperCase()) {
                 case "GOLD":
+
+                    gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=data]");
                     dungeonType = "Gold";
                     p.sendMessage(Utils.prefix + Utils.chat("Het Slot Type dat je hebt ingevuld is: &6&lGold&7!"));
                     p.sendMessage(" ");
                     p.sendMessage(Utils.prefix + Utils.chat("Voer nu de naam voor de dungeon gate in via de chat."));
 
                     lockType.remove(p.getName());
+
+                    sleutelBlock.getBlock().setType(Material.STRUCTURE_BLOCK);
+                    sleutelBlock.getBlock().setBlockData(gateBlock);
+
                     new BukkitRunnable() {
                         @Override
                         public void run() {
@@ -205,12 +208,18 @@ public class DungeonGateCreation implements Listener {
                     }.runTaskLater(plugin, 10);
                     break;
                 case "DIAMOND":
+                    gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=save]");
                     dungeonType = "Diamond";
                     p.sendMessage(Utils.prefix + Utils.chat("Het Slot Type dat je hebt ingevuld is: &b&lDiamond&7!"));
                     p.sendMessage(" ");
                     p.sendMessage(Utils.prefix + Utils.chat("Voer nu de naam voor de dungeon gate in via de chat."));
 
                     lockType.remove(p.getName());
+
+                    sleutelBlock.getBlock().setType(Material.STRUCTURE_BLOCK);
+
+                    sleutelBlock.getBlock().setBlockData(gateBlock);
+
                     new BukkitRunnable() {
                         @Override
                         public void run() {
@@ -219,6 +228,8 @@ public class DungeonGateCreation implements Listener {
                     }.runTaskLater(plugin, 10);
                     break;
                 case "EMERALD":
+
+                    gateBlock = Bukkit.createBlockData(Material.STRUCTURE_BLOCK, "[mode=load]");
                     dungeonType = "Emerald";
                     p.sendMessage(Utils.prefix + Utils.chat("Het Slot Type dat je hebt ingevuld is: &a&lEmerald&7!"));
                     p.sendMessage(" ");
@@ -226,6 +237,10 @@ public class DungeonGateCreation implements Listener {
                     p.sendMessage(" ");
 
                     lockType.remove(p.getName());
+
+                    sleutelBlock.getBlock().setType(Material.STRUCTURE_BLOCK);
+
+                    sleutelBlock.getBlock().setBlockData(gateBlock);
                     new BukkitRunnable() {
                         @Override
                         public void run() {

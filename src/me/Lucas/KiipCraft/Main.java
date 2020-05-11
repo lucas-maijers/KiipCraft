@@ -93,8 +93,6 @@ public class Main extends JavaPlugin {
         GeluksGraversUI.initialize();
         SpleefUI.initialize();
         TriathlonUI.initialize();
-        TheQuizUI.initialize();
-        VloerIsLavaUI.initialize();
         BuildBattleUI.initialize();
 
         XpBottleCommand.initializelist();
