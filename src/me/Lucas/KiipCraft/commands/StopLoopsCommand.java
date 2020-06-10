@@ -18,7 +18,7 @@ import java.util.List;
 
 public class StopLoopsCommand extends SubCommand {
 
-    private Main plugin;
+    private final Main plugin;
 
     public StopLoopsCommand(Main plugin) {
         this.plugin = plugin;

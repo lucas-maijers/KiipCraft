@@ -36,9 +36,9 @@ public class SyncKistCreation implements Listener {
 
     public static Set<String> phase1 = new HashSet<>();
     public static Set<String> phase2 = new HashSet<>();
-    private Main plugin;
-    private ConfigManager cfgm = ConfigManager.getManager();
-    private File syncFile;
+    private final Main plugin;
+    private final ConfigManager cfgm = ConfigManager.getManager();
+    private final File syncFile;
     private FileConfiguration syncCFG;
     private Block kist1;
     private Block kist2;

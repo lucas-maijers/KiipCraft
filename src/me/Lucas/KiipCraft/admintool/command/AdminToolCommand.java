@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AdminToolCommand extends SubCommand {
 
-    private Main plugin;
+    private final Main plugin;
 
     public AdminToolCommand(Main plugin) {
         this.plugin = plugin;

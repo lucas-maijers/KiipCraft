@@ -30,7 +30,7 @@ import java.util.logging.Level;
 
 public class FireOrbAbility implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public FireOrbAbility(Main plugin) {
         this.plugin = plugin;
@@ -42,7 +42,7 @@ public class FireOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR)
+        if (e.getAction() == Action.LEFT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.fireOrb())) {
                 if (p.hasPermission("kiipcraft.storyline")) {
                     World w = p.getWorld();
@@ -89,6 +89,7 @@ public class FireOrbAbility implements Listener {
                     p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
             }
+        }
     }
 
     @EventHandler
@@ -96,10 +97,11 @@ public class FireOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.FIRE || e.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK || e.getCause() == EntityDamageEvent.DamageCause.LAVA || e.getCause() == EntityDamageEvent.DamageCause.HOT_FLOOR) {
-                if (p.hasPermission("kiipcraft.storyline"))
+                if (p.hasPermission("kiipcraft.storyline")) {
                     if (p.getInventory().contains(OrbItems.fireOrb())) {
                         e.setCancelled(true);
                     }
+                }
             }
         }
     }

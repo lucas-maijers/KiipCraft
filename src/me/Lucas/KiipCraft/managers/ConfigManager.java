@@ -17,7 +17,7 @@ import java.util.logging.Level;
 
 public class ConfigManager {
 
-    private static ConfigManager manager = new ConfigManager();
+    private static final ConfigManager manager = new ConfigManager();
     public File warpsfile;
     public File syncChestFile;
     public File dungeonGatesFile;
@@ -26,7 +26,7 @@ public class ConfigManager {
     public FileConfiguration eventsCFG;
     public FileConfiguration warpsCFG;
     public FileConfiguration dungeonGatesCFG;
-    private Main plugin = Main.getPlugin(Main.class);
+    private final Main plugin = Main.getPlugin(Main.class);
 
     public static ConfigManager getManager() {
         return manager;

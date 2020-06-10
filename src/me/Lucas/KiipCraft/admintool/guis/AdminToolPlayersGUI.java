@@ -22,7 +22,7 @@ public class AdminToolPlayersGUI {
     public static String inv_name;
     public static Player plrData = null;
     private static Main plugin;
-    private static int row_now = 5;
+    private static final int row_now = 5;
     public static int inv_rows = row_now * 9;
 
     public AdminToolPlayersGUI(Main plugin) {

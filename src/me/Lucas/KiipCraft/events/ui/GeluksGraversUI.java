@@ -24,14 +24,11 @@ import java.util.Set;
 public class GeluksGraversUI {
 
     public static Inventory inv;
-
-    private static ConfigManager cfgm = ConfigManager.getManager();
     public static String inventory_name;
-
-    private static boolean toolsGegeven = false;
-
-    private static Set<Player> geluksGraversPlayers = new HashSet<>();
     public static int inv_rows = 3 * 9;
+    private static final ConfigManager cfgm = ConfigManager.getManager();
+    private static final Set<Player> geluksGraversPlayers = new HashSet<>();
+    private static boolean toolsGegeven = false;
 
     public static void initialize() {
         inventory_name = Utils.chat("&6&lGeluks Gravers Controls");

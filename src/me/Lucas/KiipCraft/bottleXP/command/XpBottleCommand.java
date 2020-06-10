@@ -20,10 +20,10 @@ public class XpBottleCommand extends SubCommand {
     public static Set<Integer> amountList = new HashSet<>();
     public static int amountGet;
     public static String bottler;
-    private static int maxAmount = 50;
-    private Main plugin;
+    private static final int maxAmount = 50;
+    private final Main plugin;
 
-    private Set<String> delayPlayers = new HashSet<>();
+    private final Set<String> delayPlayers = new HashSet<>();
 
     public XpBottleCommand(Main plugin) {
         this.plugin = plugin;

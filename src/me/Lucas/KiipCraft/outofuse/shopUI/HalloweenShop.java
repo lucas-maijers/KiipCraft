@@ -27,17 +27,17 @@ public class HalloweenShop {
     public static String inventory_name;
     public static int inv_rows = 3 * 9;
     private static Main plugin;
-    private static Set<String> witchPakje1 = new HashSet<>();
-    private static Set<String> witchPakje2 = new HashSet<>();
+    private static final Set<String> witchPakje1 = new HashSet<>();
+    private static final Set<String> witchPakje2 = new HashSet<>();
 
-    private static Set<String> vogelPakje1 = new HashSet<>();
-    private static Set<String> vogelPakje2 = new HashSet<>();
+    private static final Set<String> vogelPakje1 = new HashSet<>();
+    private static final Set<String> vogelPakje2 = new HashSet<>();
 
-    private static Set<String> skellyPakje1 = new HashSet<>();
-    private static Set<String> skellyPakje2 = new HashSet<>();
+    private static final Set<String> skellyPakje1 = new HashSet<>();
+    private static final Set<String> skellyPakje2 = new HashSet<>();
 
-    private static Set<String> zombiePakje1 = new HashSet<>();
-    private static Set<String> zombiePakje2 = new HashSet<>();
+    private static final Set<String> zombiePakje1 = new HashSet<>();
+    private static final Set<String> zombiePakje2 = new HashSet<>();
 
     public HalloweenShop(Main plugin) {
         HalloweenShop.plugin = plugin;

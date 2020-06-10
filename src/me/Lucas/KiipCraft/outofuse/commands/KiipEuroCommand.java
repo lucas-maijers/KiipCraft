@@ -19,7 +19,7 @@ import static me.Lucas.KiipCraft.utils.Utils.prefix;
 public class KiipEuroCommand implements CommandExecutor {
 
     public static int aantalKiipEuros;
-    private Main plugin;
+    private final Main plugin;
 
     public KiipEuroCommand(Main plugin) {
         this.plugin = plugin;

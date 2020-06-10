@@ -27,9 +27,9 @@ import org.bukkit.inventory.InventoryHolder;
 
 public class SyncChests implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
-    private ConfigManager cfgm = ConfigManager.getManager();
+    private final ConfigManager cfgm = ConfigManager.getManager();
 
     private FileConfiguration syncCFG;
 

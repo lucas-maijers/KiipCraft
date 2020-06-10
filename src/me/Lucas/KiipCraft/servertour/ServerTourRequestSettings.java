@@ -28,8 +28,8 @@ public class ServerTourRequestSettings {
     public static Inventory inv;
     public static String inv_name;
     private static Main plugin;
-    private static ConfigManager cfgm = ConfigManager.getManager();
-    private static int row_now = 3;
+    private static final ConfigManager cfgm = ConfigManager.getManager();
+    private static final int row_now = 3;
     public static int inv_rows = row_now * 9;
 
     private static FileConfiguration warps;

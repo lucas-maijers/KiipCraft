@@ -22,7 +22,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class LifeOrbAbility implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public LifeOrbAbility(Main plugin) {
         this.plugin = plugin;

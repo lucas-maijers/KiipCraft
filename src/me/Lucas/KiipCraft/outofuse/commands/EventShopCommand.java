@@ -17,7 +17,7 @@ import static me.Lucas.KiipCraft.utils.Utils.prefix;
 
 public class EventShopCommand implements CommandExecutor {
 
-    private Main plugin;
+    private final Main plugin;
 
     public EventShopCommand(Main plugin) {
         this.plugin = plugin;

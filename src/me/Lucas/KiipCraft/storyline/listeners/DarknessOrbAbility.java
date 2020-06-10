@@ -26,7 +26,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class DarknessOrbAbility implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public DarknessOrbAbility(Main plugin) {
         this.plugin = plugin;
@@ -38,7 +38,7 @@ public class DarknessOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR)
+        if (e.getAction() == Action.LEFT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.darknessOrb())) {
                 if (p.hasPermission("kiipcraft.storyline")) {
                     for (Entity t : p.getNearbyEntities(25, 20, 25)) {
@@ -50,6 +50,7 @@ public class DarknessOrbAbility implements Listener {
                     p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
             }
+        }
     }
 
     @EventHandler

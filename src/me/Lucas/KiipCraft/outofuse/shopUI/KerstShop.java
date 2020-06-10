@@ -28,20 +28,20 @@ public class KerstShop {
     public static String inventory_name;
     public static int inv_rows = 3 * 9;
     private static Main plugin;
-    private static Set<String> grinchPakje1 = new HashSet<>();
-    private static Set<String> grinchPakje2 = new HashSet<>();
+    private static final Set<String> grinchPakje1 = new HashSet<>();
+    private static final Set<String> grinchPakje2 = new HashSet<>();
 
-    private static Set<String> elfPakje1 = new HashSet<>();
-    private static Set<String> elfPakje2 = new HashSet<>();
+    private static final Set<String> elfPakje1 = new HashSet<>();
+    private static final Set<String> elfPakje2 = new HashSet<>();
 
-    private static Set<String> spPakje1 = new HashSet<>();
-    private static Set<String> spPakje2 = new HashSet<>();
+    private static final Set<String> spPakje1 = new HashSet<>();
+    private static final Set<String> spPakje2 = new HashSet<>();
 
-    private static Set<String> rdPakje1 = new HashSet<>();
-    private static Set<String> rdPakje2 = new HashSet<>();
+    private static final Set<String> rdPakje1 = new HashSet<>();
+    private static final Set<String> rdPakje2 = new HashSet<>();
 
-    private static Set<String> scPakje1 = new HashSet<>();
-    private static Set<String> scPakje2 = new HashSet<>();
+    private static final Set<String> scPakje1 = new HashSet<>();
+    private static final Set<String> scPakje2 = new HashSet<>();
 
     public KerstShop(Main plugin) {
         KerstShop.plugin = plugin;

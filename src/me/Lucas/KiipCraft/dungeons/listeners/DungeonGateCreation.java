@@ -42,9 +42,9 @@ public class DungeonGateCreation implements Listener {
     public static Set<String> phase3 = new HashSet<>();
     public static Set<String> phasesComplete = new HashSet<>();
     public static Set<String> lockType = new HashSet<>();
-    private Main plugin;
-    private ConfigManager cfgm = ConfigManager.getManager();
-    private File dungeonGatesFile;
+    private final Main plugin;
+    private final ConfigManager cfgm = ConfigManager.getManager();
+    private final File dungeonGatesFile;
     private String dungeonGateName;
     private String dungeonType;
 

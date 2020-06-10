@@ -16,7 +16,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class AdminToolGUIClick implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public AdminToolGUIClick(Main plugin) {
         this.plugin = plugin;

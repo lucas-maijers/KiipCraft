@@ -23,7 +23,7 @@ public class AdminToolGUI {
     public static Inventory inv;
     public static String inv_name;
     private static Main plugin;
-    private static int row_now = 4;
+    private static final int row_now = 4;
     public static int inv_rows = row_now * 9;
 
     public AdminToolGUI(Main plugin) {

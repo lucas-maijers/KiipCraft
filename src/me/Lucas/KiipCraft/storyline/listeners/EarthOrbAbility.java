@@ -34,7 +34,7 @@ import static java.lang.Math.sin;
 public class EarthOrbAbility implements Listener {
 
     public static Set<String> stunnedPlayerList = new HashSet<>();
-    private Main plugin;
+    private final Main plugin;
 
     public EarthOrbAbility(Main plugin) {
         this.plugin = plugin;
@@ -48,7 +48,7 @@ public class EarthOrbAbility implements Listener {
 
         BukkitScheduler scheduler = Bukkit.getScheduler();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR)
+        if (e.getAction() == Action.LEFT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.earthOrb())) {
                 if (p.hasPermission("kiipcraft.storyline")) {
                     World w = p.getWorld();
@@ -58,18 +58,18 @@ public class EarthOrbAbility implements Listener {
                             stunnedPlayerList.add(target.getName());
 
                             scheduler.scheduleSyncRepeatingTask(plugin, () -> new BukkitRunnable() {
-                                Location loc = target.getLocation();
-                                Location loc2 = target.getLocation();
-                                float red = 121;
-                                float green = 96;
-                                float blue = 76;
+                                final Location loc = target.getLocation();
+                                final Location loc2 = target.getLocation();
+                                final float red = 121;
+                                final float green = 96;
+                                final float blue = 76;
 
-                                float red2 = 87;
-                                float green2 = 65;
-                                float blue2 = 47;
+                                final float red2 = 87;
+                                final float green2 = 65;
+                                final float blue2 = 47;
 
                                 double t = 0;
-                                double r = 1;
+                                final double r = 1;
 
                                 @Override
                                 public void run() {
@@ -109,6 +109,7 @@ public class EarthOrbAbility implements Listener {
                     p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
             }
+        }
     }
 
     @EventHandler

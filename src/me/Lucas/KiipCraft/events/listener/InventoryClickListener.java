@@ -21,7 +21,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class InventoryClickListener implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public InventoryClickListener(Main plugin) {
         this.plugin = plugin;

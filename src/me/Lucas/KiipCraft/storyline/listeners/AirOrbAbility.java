@@ -30,7 +30,7 @@ import org.bukkit.util.Vector;
 
 public class AirOrbAbility implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
     private boolean cooldown;
     private String cooldownMessage = "";
     private int timeratNow = 120;
@@ -45,7 +45,7 @@ public class AirOrbAbility implements Listener {
     public void onLeftClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR)
+        if (e.getAction() == Action.LEFT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
                 if (p.hasPermission("kiipcraft.storyline")) {
                     p.getWorld().playSound(p.getLocation(), Sound.ENTITY_WITHER_SHOOT, 20, (float) 1.8);
@@ -65,13 +65,14 @@ public class AirOrbAbility implements Listener {
                     p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
             }
+        }
     }
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR)
+        if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
                 e.setCancelled(true);
                 if (p.hasPermission("kiipcraft.storyline")) {
@@ -179,29 +180,31 @@ public class AirOrbAbility implements Listener {
                     p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
             }
+        }
     }
 
     @EventHandler
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK)
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.airOrb())) {
                 e.setCancelled(true);
             }
+        }
     }
-
 
     @EventHandler
     public void onFallDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
-            if (p.getInventory().contains(OrbItems.airOrb()))
+            if (p.getInventory().contains(OrbItems.airOrb())) {
                 if (e.getCause() == EntityDamageEvent.DamageCause.FALL) {
                     if (p.hasPermission("kiipcraft.storyline")) {
                         e.setCancelled(true);
                     }
                 }
+            }
         }
     }
 

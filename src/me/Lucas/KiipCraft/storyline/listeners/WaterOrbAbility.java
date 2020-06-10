@@ -30,7 +30,7 @@ import org.bukkit.util.Vector;
 
 public class WaterOrbAbility implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
     private boolean cooldown;
     private String cooldownMessage = "";
     private int timeratNow = 10;
@@ -46,7 +46,7 @@ public class WaterOrbAbility implements Listener {
         Player p = e.getPlayer();
         Block target;
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR)
+        if (e.getAction() == Action.LEFT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.waterOrb())) {
                 if (p.hasPermission("kiipcraft.storyline")) {
                     if (cooldown) {
@@ -61,6 +61,7 @@ public class WaterOrbAbility implements Listener {
                     p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
             }
+        }
     }
 
     @EventHandler
@@ -68,10 +69,11 @@ public class WaterOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.DROWNING) {
-                if (p.hasPermission("kiipcraft.storyline"))
+                if (p.hasPermission("kiipcraft.storyline")) {
                     if (p.getInventory().contains(OrbItems.waterOrb())) {
                         e.setCancelled(true);
                     }
+                }
             }
         }
     }

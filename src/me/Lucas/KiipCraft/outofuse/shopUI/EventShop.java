@@ -28,11 +28,11 @@ public class EventShop {
     public static String inventory_name;
     public static int inv_rows = 3 * 9;
     private static Main plugin;
-    private static Set<String> demoKiipPakje1 = new HashSet<>();
-    private static Set<String> demoKiipPakje2 = new HashSet<>();
+    private static final Set<String> demoKiipPakje1 = new HashSet<>();
+    private static final Set<String> demoKiipPakje2 = new HashSet<>();
 
-    private static Set<String> heiligKiipPakje1 = new HashSet<>();
-    private static Set<String> heiligKiipPakje2 = new HashSet<>();
+    private static final Set<String> heiligKiipPakje1 = new HashSet<>();
+    private static final Set<String> heiligKiipPakje2 = new HashSet<>();
 
     public EventShop(Main plugin) {
         EventShop.plugin = plugin;

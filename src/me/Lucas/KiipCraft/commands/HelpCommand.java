@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class HelpCommand extends SubCommand {
-    private Main plugin;
+    private final Main plugin;
 
     public HelpCommand(Main plugin) {
         this.plugin = plugin;

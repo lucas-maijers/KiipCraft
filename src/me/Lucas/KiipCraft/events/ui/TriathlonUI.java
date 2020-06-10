@@ -29,10 +29,10 @@ public class TriathlonUI {
     public static String inventory_name;
     public static int inv_rows = 3 * 9;
     public static boolean areHorsesSpawned = false;
-    private static ConfigManager cfgm = ConfigManager.getManager();
+    private static final ConfigManager cfgm = ConfigManager.getManager();
     private static boolean elytraGiven = false;
 
-    private static Set<Player> triathlonPlayers = new HashSet<>();
+    private static final Set<Player> triathlonPlayers = new HashSet<>();
 
 
     public static void initialize() {

@@ -25,12 +25,12 @@ import java.util.List;
 
 public class ServerTourCommand extends SubCommand {
 
-    private Main plugin;
-    private ConfigManager cfgm = ConfigManager.getManager();
-    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    private final Main plugin;
+    private final ConfigManager cfgm = ConfigManager.getManager();
+    private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     private FileConfiguration warps;
-    private File warpsfile;
+    private final File warpsfile;
 
     public ServerTourCommand(Main plugin) {
         this.plugin = plugin;

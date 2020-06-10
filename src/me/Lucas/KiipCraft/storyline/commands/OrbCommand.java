@@ -17,8 +17,8 @@ import java.util.List;
 
 public class OrbCommand extends SubCommand {
 
-    private static List<String> types = new ArrayList<>();
-    private Main plugin;
+    private static final List<String> types = new ArrayList<>();
+    private final Main plugin;
 
     public OrbCommand(Main plugin) {
         this.plugin = plugin;

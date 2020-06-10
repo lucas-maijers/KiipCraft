@@ -22,7 +22,7 @@ public class BuildBattleUI {
     public static Inventory inv;
     public static String inventory_name;
     public static int inv_rows = 3 * 9;
-    private static ConfigManager cfgm = ConfigManager.getManager();
+    private static final ConfigManager cfgm = ConfigManager.getManager();
 
     public static void initialize() {
         inventory_name = Utils.chat("&6&lBuild Battle Controls");

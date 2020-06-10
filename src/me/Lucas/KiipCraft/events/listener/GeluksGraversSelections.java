@@ -32,11 +32,11 @@ public class GeluksGraversSelections implements Listener {
 
     public static Set<String> pillarSelection = new HashSet<>();
     private static Main plugin;
-    private static ConfigManager cfgm = ConfigManager.getManager();
-    private File eventsFile;
+    private static final ConfigManager cfgm = ConfigManager.getManager();
+    private final File eventsFile;
     private Location firstLocation;
 
-    private Set<Location> pillarLocations = new HashSet<>();
+    private final Set<Location> pillarLocations = new HashSet<>();
 
     public GeluksGraversSelections(Main plugin) {
         GeluksGraversSelections.plugin = plugin;
@@ -44,66 +44,6 @@ public class GeluksGraversSelections implements Listener {
         eventsFile = new File(plugin.getDataFolder(), "events.yml");
 
         Bukkit.getPluginManager().registerEvents(this, plugin);
-    }
-
-    @EventHandler
-    public void selectGeluksGraversPillar(PlayerInteractEvent e) {
-        Player p = e.getPlayer();
-
-        if (p.hasPermission("kiipcraft.events")) {
-            for (Map.Entry<String, String> entry : EventsCommand.selector.entrySet()) {
-                if (entry.getKey().equals(p.getName())) {
-                    if (entry.getValue().equals("geluksgravers")) {
-                        if (p.getInventory().getItemInMainHand().equals(Utils.selectorTool())) {
-                            if (pillarSelection.contains(p.getName())) {
-                                if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
-                                    e.setCancelled(true);
-
-                                    Block b = e.getClickedBlock();
-
-                                    assert b != null;
-                                    Location loc = b.getLocation();
-                                    pillarLocations.add(loc);
-
-                                    if (pillarLocations.size() == 1) {
-                                        firstLocation = loc;
-                                    }
-
-                                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt een pilaar van de Geluks Gravers geselecteerd!"));
-                                    p.sendMessage(Utils.chat("&7Deze pilaar bevindt zich op de locatie:"));
-                                    p.sendMessage(Utils.chat("&aX: &d" + loc.getBlockX()));
-                                    p.sendMessage(Utils.chat("&aY: &d" + loc.getBlockY()));
-                                    p.sendMessage(Utils.chat("&aZ: &d" + loc.getBlockZ()));
-                                    p.sendMessage("");
-                                    p.sendMessage(Utils.chat("&7Om de operatie af te ronden en de pilaren op te slaan, typ dan &a\"Done\" &7in de chat!"));
-                                    p.sendMessage(Utils.chat("&7Al wil je nog meer pilaren selecteren, klik dan met &cLinker Muisknop &7op de volgende pilaar!"));
-                                    p.sendMessage("");
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    @EventHandler
-    public void onChatMessage(PlayerChatEvent e) {
-        Player p = e.getPlayer();
-        String message = e.getMessage();
-
-        if (p.hasPermission("kiipcraft.events")) {
-            if (pillarSelection.contains(p.getName())) {
-                if (message.equals("Done")) {
-                    e.setCancelled(true);
-                    pillarSelection.remove(p.getName());
-                    EventsCommand.selector.remove(p.getName());
-                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt de pilaren selectie afgerond, de data zal nu worden opgeslagen!"));
-                    saveToConfig(p);
-                }
-            }
-        }
     }
 
     public static void saveTeleportLocation(Player p) {
@@ -183,6 +123,66 @@ public class GeluksGraversSelections implements Listener {
                 b.setBlockData(Bukkit.getServer().createBlockData(blocks[i]));
             }
 
+        }
+    }
+
+    @EventHandler
+    public void selectGeluksGraversPillar(PlayerInteractEvent e) {
+        Player p = e.getPlayer();
+
+        if (p.hasPermission("kiipcraft.events")) {
+            for (Map.Entry<String, String> entry : EventsCommand.selector.entrySet()) {
+                if (entry.getKey().equals(p.getName())) {
+                    if (entry.getValue().equals("geluksgravers")) {
+                        if (p.getInventory().getItemInMainHand().equals(Utils.selectorTool())) {
+                            if (pillarSelection.contains(p.getName())) {
+                                if (e.getAction() == Action.LEFT_CLICK_BLOCK) {
+                                    e.setCancelled(true);
+
+                                    Block b = e.getClickedBlock();
+
+                                    assert b != null;
+                                    Location loc = b.getLocation();
+                                    pillarLocations.add(loc);
+
+                                    if (pillarLocations.size() == 1) {
+                                        firstLocation = loc;
+                                    }
+
+                                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt een pilaar van de Geluks Gravers geselecteerd!"));
+                                    p.sendMessage(Utils.chat("&7Deze pilaar bevindt zich op de locatie:"));
+                                    p.sendMessage(Utils.chat("&aX: &d" + loc.getBlockX()));
+                                    p.sendMessage(Utils.chat("&aY: &d" + loc.getBlockY()));
+                                    p.sendMessage(Utils.chat("&aZ: &d" + loc.getBlockZ()));
+                                    p.sendMessage("");
+                                    p.sendMessage(Utils.chat("&7Om de operatie af te ronden en de pilaren op te slaan, typ dan &a\"Done\" &7in de chat!"));
+                                    p.sendMessage(Utils.chat("&7Al wil je nog meer pilaren selecteren, klik dan met &cLinker Muisknop &7op de volgende pilaar!"));
+                                    p.sendMessage("");
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onChatMessage(PlayerChatEvent e) {
+        Player p = e.getPlayer();
+        String message = e.getMessage();
+
+        if (p.hasPermission("kiipcraft.events")) {
+            if (pillarSelection.contains(p.getName())) {
+                if (message.equals("Done")) {
+                    e.setCancelled(true);
+                    pillarSelection.remove(p.getName());
+                    EventsCommand.selector.remove(p.getName());
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt de pilaren selectie afgerond, de data zal nu worden opgeslagen!"));
+                    saveToConfig(p);
+                }
+            }
         }
     }
 

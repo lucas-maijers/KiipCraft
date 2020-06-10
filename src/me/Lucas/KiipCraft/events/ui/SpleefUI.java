@@ -24,13 +24,12 @@ import java.util.Set;
 public class SpleefUI {
 
     public static Inventory invSpleef;
-
-    private static ConfigManager cfgm = ConfigManager.getManager();
     public static String inventory_name;
     public static int inv_rows = 3 * 9;
+    private static final ConfigManager cfgm = ConfigManager.getManager();
     private static boolean schepGegeven = false;
 
-    private static Set<Player> spleefPlayers = new HashSet<>();
+    private static final Set<Player> spleefPlayers = new HashSet<>();
 
     public static void initialize() {
         inventory_name = Utils.chat("&6&lSpleef Controls");

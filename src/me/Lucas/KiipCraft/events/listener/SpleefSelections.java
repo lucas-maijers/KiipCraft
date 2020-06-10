@@ -35,14 +35,14 @@ public class SpleefSelections implements Listener {
 
     private static Main plugin;
 
-    private static ConfigManager cfgm = ConfigManager.getManager();
+    private static final ConfigManager cfgm = ConfigManager.getManager();
 
-    private File eventsFile;
+    private final File eventsFile;
 
     private Location middleBlock;
     private Location outerBlock;
 
-    private Set<String> phase1 = new HashSet<>();
+    private final Set<String> phase1 = new HashSet<>();
 
     public SpleefSelections(Main plugin) {
         SpleefSelections.plugin = plugin;
@@ -50,6 +50,91 @@ public class SpleefSelections implements Listener {
         eventsFile = new File(plugin.getDataFolder(), "events.yml");
 
         Bukkit.getPluginManager().registerEvents(this, plugin);
+    }
+
+    public static void saveTeleportLocation(Player p) {
+        FileConfiguration eventsCFG = cfgm.getEventsCFG();
+        File eventsFile = new File(plugin.getDataFolder(), "events.yml");
+
+        if (!eventsCFG.isConfigurationSection("Events")) {
+            eventsCFG.createSection("Events");
+        }
+
+        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
+
+        assert path != null;
+
+        if (!path.isConfigurationSection("Spleef")) {
+            path.createSection("Spleef");
+        }
+
+        ConfigurationSection teleport = eventsCFG.getConfigurationSection("Events.Spleef");
+
+        assert teleport != null;
+        if (!teleport.isConfigurationSection("Teleport")) {
+            teleport.createSection("Teleport");
+        }
+
+        ConfigurationSection cs = eventsCFG.getConfigurationSection("Events.Spleef.Teleport");
+
+        assert cs != null;
+        cs.set("X", p.getLocation().getX());
+        cs.set("Y", p.getLocation().getY());
+        cs.set("Z", p.getLocation().getZ());
+
+        try {
+            p.sendMessage(Utils.prefix + Utils.chat("De teleport locatie is aangemaakt!"));
+            eventsCFG.save(eventsFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+            p.sendMessage(Utils.prefix + Utils.chat("&4&lERROR: &7Er is een fout opgetreden tijdens het opslaan, raadpleeg console voor meer informatie!"));
+        }
+    }
+
+    public static void regenerateCircle(Player p) {
+        FileConfiguration eventsCFG = cfgm.getEventsCFG();
+        World w = p.getWorld();
+
+        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
+
+        assert path != null;
+        if (!path.isConfigurationSection("Spleef")) {
+            p.sendMessage(Utils.prefix + Utils.chat("Er is nog geen spleef area aangegeven, het gebied kan dus niet worden gereset!"));
+            return;
+        }
+
+        ConfigurationSection data = eventsCFG.getConfigurationSection("Events.Spleef.Locations");
+
+        assert data != null;
+        double radius = data.getDouble("Radius");
+        int r = (int) radius + 1;
+
+        ConfigurationSection middleData = eventsCFG.getConfigurationSection("Events.Spleef.Locations.Middle");
+
+        assert middleData != null;
+        int cx = middleData.getInt("X");
+        int y = middleData.getInt("Y");
+        int cz = middleData.getInt("Z");
+
+        int rSquared = r * r;
+
+        for (int x = cx - r; x <= cx + r; x++) {
+            for (int z = cz - r; z <= cz + r; z++) {
+                if ((cx - x) * (cx - x) + (cz - z) * (cz - z) <= rSquared) {
+                    if (w.getBlockAt(x, y, z).getType() == Material.AIR) {
+                        Random random = new Random();
+                        int clay = random.nextInt(2);
+
+                        if (clay == 1) {
+                            w.getBlockAt(x, y, z).setType(Material.CLAY);
+                        } else {
+                            w.getBlockAt(x, y, z).setType(Material.SNOW_BLOCK);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 
     @EventHandler
@@ -123,45 +208,6 @@ public class SpleefSelections implements Listener {
         return false;
     }
 
-    public static void saveTeleportLocation(Player p) {
-        FileConfiguration eventsCFG = cfgm.getEventsCFG();
-        File eventsFile = new File(plugin.getDataFolder(), "events.yml");
-
-        if (!eventsCFG.isConfigurationSection("Events")) {
-            eventsCFG.createSection("Events");
-        }
-
-        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
-
-        assert path != null;
-
-        if (!path.isConfigurationSection("Spleef")) {
-            path.createSection("Spleef");
-        }
-
-        ConfigurationSection teleport = eventsCFG.getConfigurationSection("Events.Spleef");
-
-        assert teleport != null;
-        if (!teleport.isConfigurationSection("Teleport")) {
-            teleport.createSection("Teleport");
-        }
-
-        ConfigurationSection cs = eventsCFG.getConfigurationSection("Events.Spleef.Teleport");
-
-        assert cs != null;
-        cs.set("X", p.getLocation().getX());
-        cs.set("Y", p.getLocation().getY());
-        cs.set("Z", p.getLocation().getZ());
-
-        try {
-            p.sendMessage(Utils.prefix + Utils.chat("De teleport locatie is aangemaakt!"));
-            eventsCFG.save(eventsFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            p.sendMessage(Utils.prefix + Utils.chat("&4&lERROR: &7Er is een fout opgetreden tijdens het opslaan, raadpleeg console voor meer informatie!"));
-        }
-    }
-
     private void saveToConfig(Player p, Location center, Location edge) {
         FileConfiguration eventsCFG = cfgm.getEventsCFG();
 
@@ -202,51 +248,5 @@ public class SpleefSelections implements Listener {
             e.printStackTrace();
             p.sendMessage(Utils.prefix + Utils.chat("&4&lERROR: &7Er is een fout opgetreden tijdens het opslaan, raadpleeg console voor meer informatie!"));
         }
-    }
-
-    public static void regenerateCircle(Player p) {
-        FileConfiguration eventsCFG = cfgm.getEventsCFG();
-        World w = p.getWorld();
-
-        ConfigurationSection path = eventsCFG.getConfigurationSection("Events");
-
-        assert path != null;
-        if (!path.isConfigurationSection("Spleef")) {
-            p.sendMessage(Utils.prefix + Utils.chat("Er is nog geen spleef area aangegeven, het gebied kan dus niet worden gereset!"));
-            return;
-        }
-
-        ConfigurationSection data = eventsCFG.getConfigurationSection("Events.Spleef.Locations");
-
-        assert data != null;
-        double radius = data.getDouble("Radius");
-        int r = (int) radius + 1;
-
-        ConfigurationSection middleData = eventsCFG.getConfigurationSection("Events.Spleef.Locations.Middle");
-
-        assert middleData != null;
-        int cx = middleData.getInt("X");
-        int y = middleData.getInt("Y");
-        int cz = middleData.getInt("Z");
-
-        int rSquared = r * r;
-
-        for (int x = cx - r; x <= cx + r; x++) {
-            for (int z = cz - r; z <= cz + r; z++) {
-                if ((cx - x) * (cx - x) + (cz - z) * (cz - z) <= rSquared) {
-                    if (w.getBlockAt(x, y, z).getType() == Material.AIR) {
-                        Random random = new Random();
-                        int clay = random.nextInt(2);
-
-                        if (clay == 1) {
-                            w.getBlockAt(x, y, z).setType(Material.CLAY);
-                        } else {
-                            w.getBlockAt(x, y, z).setType(Material.SNOW_BLOCK);
-                        }
-                    }
-                }
-            }
-        }
-
     }
 }

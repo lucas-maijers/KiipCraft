@@ -16,7 +16,7 @@ import java.util.List;
 
 public class UpdateCommand extends SubCommand {
 
-    private Main plugin;
+    private final Main plugin;
 
     public UpdateCommand(Main plugin) {
         this.plugin = plugin;

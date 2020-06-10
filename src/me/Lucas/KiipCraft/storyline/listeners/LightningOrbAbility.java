@@ -30,7 +30,7 @@ import static java.lang.Math.sin;
 
 public class LightningOrbAbility implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public LightningOrbAbility(Main plugin) {
         this.plugin = plugin;
@@ -42,7 +42,7 @@ public class LightningOrbAbility implements Listener {
     public void onClick(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.LEFT_CLICK_AIR)
+        if (e.getAction() == Action.LEFT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
                 if (p.hasPermission("kiipcraft.storyline")) {
                     World w = p.getWorld();
@@ -90,6 +90,7 @@ public class LightningOrbAbility implements Listener {
                     p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
             }
+        }
     }
 
     @EventHandler
@@ -97,7 +98,7 @@ public class LightningOrbAbility implements Listener {
         Player p = e.getPlayer();
         World w = p.getWorld();
 
-        if (e.getAction() == Action.RIGHT_CLICK_AIR)
+        if (e.getAction() == Action.RIGHT_CLICK_AIR) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
                 e.setCancelled(true);
                 if (p.hasPermission("kiipcraft.storyline")) {
@@ -114,11 +115,11 @@ public class LightningOrbAbility implements Listener {
 
                     new BukkitRunnable() {
 
-                        int amount = 96;
+                        final int amount = 96;
 
                         double t = 0;
                         double t2 = 0;
-                        double r = 20;
+                        final double r = 20;
 
                         @Override
                         public void run() {
@@ -195,6 +196,7 @@ public class LightningOrbAbility implements Listener {
                     p.sendMessage(Utils.prefix + Utils.chat("Jij kan de krachten van deze orb niet gebruiken!"));
                 }
             }
+        }
     }
 
     @EventHandler
@@ -202,10 +204,11 @@ public class LightningOrbAbility implements Listener {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (e.getCause() == EntityDamageEvent.DamageCause.LIGHTNING || e.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) {
-                if (p.hasPermission("kiipcraft.storyline"))
+                if (p.hasPermission("kiipcraft.storyline")) {
                     if (p.getInventory().contains(OrbItems.lightningOrb())) {
                         e.setCancelled(true);
                     }
+                }
             }
         }
     }
@@ -214,10 +217,11 @@ public class LightningOrbAbility implements Listener {
     public void throwOrb(PlayerInteractEvent e) {
         Player p = e.getPlayer();
 
-        if (e.getAction() == Action.RIGHT_CLICK_BLOCK)
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (p.getInventory().getItemInMainHand().equals(OrbItems.lightningOrb())) {
                 e.setCancelled(true);
             }
+        }
     }
 
     @EventHandler

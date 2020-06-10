@@ -26,14 +26,14 @@ public class EventsCommand extends SubCommand {
     public static int aantal = 64;
     public static Set<String> creatingPlayer = new HashSet<>();
     public static Map<String, String> selector = new HashMap<>();
-    private Main plugin;
-    private ConfigManager cfgm = ConfigManager.getManager();
-    private File syncFile;
-    private FileConfiguration syncCFG;
-    private List<String> synced = new ArrayList<>();
-    private ArrayList<String> eSubCommands = new ArrayList<>();
-    private ArrayList<String> selectorTypes = new ArrayList<>();
-    private ArrayList<String> eventTPs = new ArrayList<>();
+    private final Main plugin;
+    private final ConfigManager cfgm = ConfigManager.getManager();
+    private final File syncFile;
+    private final FileConfiguration syncCFG;
+    private final List<String> synced = new ArrayList<>();
+    private final ArrayList<String> eSubCommands = new ArrayList<>();
+    private final ArrayList<String> selectorTypes = new ArrayList<>();
+    private final ArrayList<String> eventTPs = new ArrayList<>();
 
     public EventsCommand(Main plugin) {
         this.plugin = plugin;

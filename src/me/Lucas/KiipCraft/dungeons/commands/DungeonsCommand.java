@@ -27,11 +27,11 @@ import java.util.Set;
 public class DungeonsCommand extends SubCommand {
 
     public static Set<String> creatingPlayer = new HashSet<>();
-    private Main plugin;
-    private File dungeonGatesFile;
-    private ConfigManager cfgm = ConfigManager.getManager();
-    private List<String> dungeonList = new ArrayList<>();
-    private ArrayList<String> dSubCommands = new ArrayList<>();
+    private final Main plugin;
+    private final File dungeonGatesFile;
+    private final ConfigManager cfgm = ConfigManager.getManager();
+    private final List<String> dungeonList = new ArrayList<>();
+    private final ArrayList<String> dSubCommands = new ArrayList<>();
 
     public DungeonsCommand(Main plugin) {
         this.plugin = plugin;
@@ -169,44 +169,30 @@ public class DungeonsCommand extends SubCommand {
                     return;
                 }
 
-                if (args.length == 4) {
-                    String dungeon = args[2] + " " + args[3];
+                StringBuilder dungeon = new StringBuilder();
 
-                    if (dungeonList.contains(dungeon)) {
-                        ConfigurationSection cs = dungeonGatesCFG.getConfigurationSection("Dungeons");
-
-                        try {
-                            assert cs != null;
-                            cs.set(dungeon, null);
-                            dungeonGatesCFG.save(dungeonGatesFile);
-                            dungeonList.remove(dungeon);
-                        } catch (IOException e) {
-                            p.sendMessage(Utils.prefix + Utils.chat("Error met het verwijderen van deze dungeongate, raadpleeg console voor meer informatie!"));
-                            e.printStackTrace();
-                        }
-                        p.sendMessage(Utils.prefix + Utils.chat(String.format("De dungeongate met de naam: &c%s&7 wordt verwijderd!", dungeon)));
-                    } else {
-                        p.sendMessage(Utils.prefix + Utils.chat(String.format("De dungeongate %s bestaat niet! Doe &c/kiipcraft dungeons list &7voor een lijst met dungeongates.", args[2])));
-                    }
-                    return;
+                for (int i = 2; i < args.length; i++) {
+                    dungeon.append(String.format("%s ", args[i]));
                 }
+                dungeon.deleteCharAt(dungeon.length() - 1);
 
-                if (dungeonList.contains(args[2])) {
+                if (dungeonList.contains(dungeon.toString())) {
                     ConfigurationSection cs = dungeonGatesCFG.getConfigurationSection("Dungeons");
 
                     try {
                         assert cs != null;
-                        cs.set(args[2], null);
+                        cs.set(dungeon.toString(), null);
                         dungeonGatesCFG.save(dungeonGatesFile);
-                        dungeonList.remove(args[2]);
+                        dungeonList.remove(dungeon.toString());
                     } catch (IOException e) {
                         p.sendMessage(Utils.prefix + Utils.chat("Error met het verwijderen van deze dungeongate, raadpleeg console voor meer informatie!"));
                         e.printStackTrace();
                     }
-                    p.sendMessage(Utils.prefix + Utils.chat(String.format("De dungeongate met de naam: &c%s&7 wordt verwijderd!", args[2])));
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("De dungeongate met de naam: &c%s&7 wordt verwijderd!", dungeon.toString())));
                 } else {
-                    p.sendMessage(Utils.prefix + Utils.chat(String.format("De dungeongate %s bestaat niet! Doe &c/kiipcraft dungeons list &7voor een lijst met dungeongates.", args[2])));
+                    p.sendMessage(Utils.prefix + Utils.chat(String.format("De dungeongate &c%s &7bestaat niet! Doe &c/kiipcraft dungeons list &7voor een lijst met dungeongates.", dungeon.toString())));
                 }
+
             }
         } else {
             p.sendMessage(Utils.noPermission);

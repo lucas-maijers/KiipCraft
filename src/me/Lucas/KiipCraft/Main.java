@@ -22,6 +22,7 @@ import me.Lucas.KiipCraft.servertour.ServerTourRequestSettings;
 import me.Lucas.KiipCraft.servertour.ServerTourRequestsGUI;
 import me.Lucas.KiipCraft.servertour.ServertourMenuClick;
 import me.Lucas.KiipCraft.storyline.listeners.*;
+import me.Lucas.KiipCraft.texturepack.abilities.HoneySuitAbility;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -55,6 +56,8 @@ public class Main extends JavaPlugin {
         new SyncKistCreation(this);
         new SyncChests(this);
         new EventsToolClick(this);
+
+        new HoneySuitAbility(this);
 
         new BuildBattleSelections(this);
         new SpleefSelections(this);

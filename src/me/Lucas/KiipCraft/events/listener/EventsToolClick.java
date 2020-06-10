@@ -23,7 +23,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class EventsToolClick implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public EventsToolClick(Main plugin) {
         this.plugin = plugin;

@@ -23,7 +23,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class AdminToolClick implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public AdminToolClick(Main plugin) {
         this.plugin = plugin;

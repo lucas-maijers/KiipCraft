@@ -16,7 +16,7 @@ import static org.bukkit.Material.*;
 
 public class DungeonKeyRecipes {
 
-    private Main plugin;
+    private final Main plugin;
 
     public DungeonKeyRecipes(Main plugin) {
         this.plugin = plugin;

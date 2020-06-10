@@ -15,7 +15,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class ServertourMenuClick implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public ServertourMenuClick(Main plugin) {
         this.plugin = plugin;

@@ -31,10 +31,10 @@ import java.util.Map;
 
 public class OpenDungeonGate implements Listener {
 
-    private Main plugin;
-    private ConfigManager cfgm = ConfigManager.getManager();
+    private final Main plugin;
+    private final ConfigManager cfgm = ConfigManager.getManager();
 
-    private int openTime = 30;
+    private final int openTime = 30;
 
     private FileConfiguration dungeonGatesCFG;
 

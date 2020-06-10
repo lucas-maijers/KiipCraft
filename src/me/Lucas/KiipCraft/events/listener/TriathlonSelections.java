@@ -40,8 +40,8 @@ public class TriathlonSelections implements Listener {
     public static Set<String> horseSelections = new HashSet<>();
     public static Set<String> spawnHorse = new HashSet<>();
     private static Main plugin;
-    private static ConfigManager cfgm = ConfigManager.getManager();
-    private File eventsFile;
+    private static final ConfigManager cfgm = ConfigManager.getManager();
+    private final File eventsFile;
     private FileConfiguration eventsCFG;
 
     public TriathlonSelections(Main plugin) {

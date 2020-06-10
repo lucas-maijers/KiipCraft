@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 public class DrinkXPBottle implements Listener {
 
-    private Main plugin;
+    private final Main plugin;
 
     public DrinkXPBottle(Main plugin) {
         this.plugin = plugin;
