@@ -17,6 +17,7 @@ import me.Lucas.KiipCraft.events.command.EventsCommand;
 import me.Lucas.KiipCraft.servertour.ServerTourCommand;
 import me.Lucas.KiipCraft.storyline.commands.OrbCommand;
 import me.Lucas.KiipCraft.storyline.commands.ShardCommand;
+import me.Lucas.KiipCraft.texturepack.commands.FragmentCommand;
 import me.Lucas.KiipCraft.texturepack.commands.OutfitCommand;
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.command.Command;
@@ -42,8 +43,11 @@ public class CommandManager implements TabExecutor {
     public String orb = "orb";
     public String shard = "shard";
     public String fix = "fix";
+    public String fragment = "fragment";
+
     private final ArrayList<SubCommand> commands = new ArrayList<>();
     private final Main plugin;
+
     public String outfit = "outfit";
 
     public CommandManager(Main plugin) {
@@ -64,6 +68,7 @@ public class CommandManager implements TabExecutor {
         this.commands.add(new ShardCommand(plugin));
         this.commands.add(new StopLoopsCommand(plugin));
         this.commands.add(new OutfitCommand(plugin));
+        this.commands.add(new FragmentCommand(plugin));
 
         commandList.add(help);
         commandList.add(update);
@@ -75,6 +80,7 @@ public class CommandManager implements TabExecutor {
         commandList.add(orb);
         commandList.add(shard);
         commandList.add(fix);
+        commandList.add(fragment);
         commandList.add(outfit);
     }
 

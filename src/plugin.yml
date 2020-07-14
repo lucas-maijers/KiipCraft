@@ -1,8 +1,8 @@
 name: KiipCraft
-version: 2.1
+version: 2.4
 author: Thunderkookie15
 main: me.Lucas.KiipCraft.Main
-api-version: 1.15
+api-version: 1.16
 description: De KiipCraft Plugin.
 
 commands:

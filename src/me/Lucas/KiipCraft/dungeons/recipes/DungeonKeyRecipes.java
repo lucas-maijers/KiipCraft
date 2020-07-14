@@ -9,10 +9,9 @@ package me.Lucas.KiipCraft.dungeons.recipes;
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.dungeons.items.DungeonItems;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
-
-import static org.bukkit.Material.*;
 
 public class DungeonKeyRecipes {
 
@@ -30,8 +29,8 @@ public class DungeonKeyRecipes {
         ShapedRecipe goldKeyRecipe = new ShapedRecipe(goldDungeonKey, DungeonItems.goldKey());
 
         goldKeyRecipe.shape("II ", "IG ", "  I");
-        goldKeyRecipe.setIngredient('I', IRON_INGOT);
-        goldKeyRecipe.setIngredient('G', GOLD_INGOT);
+        goldKeyRecipe.setIngredient('I', Material.IRON_INGOT);
+        goldKeyRecipe.setIngredient('G', Material.GOLD_INGOT);
 
         Bukkit.addRecipe(goldKeyRecipe);
     }
@@ -41,8 +40,8 @@ public class DungeonKeyRecipes {
         ShapedRecipe diamondKeyRecipe = new ShapedRecipe(diamondDungeonKey, DungeonItems.diamondKey());
 
         diamondKeyRecipe.shape("II ", "ID ", "  I");
-        diamondKeyRecipe.setIngredient('I', IRON_INGOT);
-        diamondKeyRecipe.setIngredient('D', DIAMOND);
+        diamondKeyRecipe.setIngredient('I', Material.IRON_INGOT);
+        diamondKeyRecipe.setIngredient('D', Material.DIAMOND);
 
         Bukkit.addRecipe(diamondKeyRecipe);
     }
@@ -52,8 +51,8 @@ public class DungeonKeyRecipes {
         ShapedRecipe emeraldKeyRecipe = new ShapedRecipe(emeraldDungeonKey, DungeonItems.emeraldKey());
 
         emeraldKeyRecipe.shape("II ", "IE ", "  I");
-        emeraldKeyRecipe.setIngredient('I', IRON_INGOT);
-        emeraldKeyRecipe.setIngredient('E', EMERALD);
+        emeraldKeyRecipe.setIngredient('I', Material.IRON_INGOT);
+        emeraldKeyRecipe.setIngredient('E', Material.EMERALD);
 
         Bukkit.addRecipe(emeraldKeyRecipe);
     }

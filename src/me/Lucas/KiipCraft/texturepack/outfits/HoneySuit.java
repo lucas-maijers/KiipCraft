@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-package me.Lucas.KiipCraft.texturepack.pakjes;
+package me.Lucas.KiipCraft.texturepack.outfits;
 
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Material;
@@ -25,11 +25,12 @@ public class HoneySuit {
         lore.add(" ");
         lore.add(" ");
         lore.add(Utils.chat("&6&lVOLLEDIGE SET BONUS:"));
-        lore.add(Utils.chat("  &9Wanneer je de volledige &6Honey Set&9 aan hebt ontvang je geen fall damage!"));
+        lore.add(Utils.chat("  &9Geen fall damage!"));
 
         assert meta != null;
         meta.setDisplayName(Utils.chat("&6Honey Helmet"));
         meta.setLore(lore);
+        meta.setUnbreakable(true);
         i.setItemMeta(meta);
         return i;
     }
@@ -44,11 +45,12 @@ public class HoneySuit {
         lore.add(" ");
         lore.add(" ");
         lore.add(Utils.chat("&6&lVOLLEDIGE SET BONUS:"));
-        lore.add(Utils.chat("  &9Wanneer je de volledige &6Honey Set&9 aan hebt ontvang je geen fall damage!"));
+        lore.add(Utils.chat("  &9Geen fall damage!"));
 
         assert meta != null;
         meta.setDisplayName(Utils.chat("&6Honey Chestplate"));
         meta.setLore(lore);
+        meta.setUnbreakable(true);
         i.setItemMeta(meta);
         return i;
     }
@@ -63,11 +65,12 @@ public class HoneySuit {
         lore.add(" ");
         lore.add(" ");
         lore.add(Utils.chat("&6&lVOLLEDIGE SET BONUS:"));
-        lore.add(Utils.chat("  &9Wanneer je de volledige &6Honey Set&9 aan hebt ontvang je geen fall damage!"));
+        lore.add(Utils.chat("  &9Geen fall damage!"));
 
         assert meta != null;
         meta.setDisplayName(Utils.chat("&6Honey Leggings"));
         meta.setLore(lore);
+        meta.setUnbreakable(true);
         i.setItemMeta(meta);
         return i;
     }
@@ -82,11 +85,12 @@ public class HoneySuit {
         lore.add(" ");
         lore.add(" ");
         lore.add(Utils.chat("&6&lVOLLEDIGE SET BONUS:"));
-        lore.add(Utils.chat("  &9Wanneer je de volledige &6Honey Set&9 aan hebt ontvang je geen fall damage!"));
+        lore.add(Utils.chat("  &9Geen fall damage!"));
 
         assert meta != null;
         meta.setDisplayName(Utils.chat("&6Honey Boots"));
         meta.setLore(lore);
+        meta.setUnbreakable(true);
         i.setItemMeta(meta);
         return i;
     }

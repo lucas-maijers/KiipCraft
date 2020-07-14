@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-package me.Lucas.KiipCraft.texturepack.pakjes;
+package me.Lucas.KiipCraft.texturepack.outfits;
 
 import me.Lucas.KiipCraft.utils.Utils;
 import org.bukkit.Material;

@@ -23,6 +23,9 @@ import me.Lucas.KiipCraft.servertour.ServerTourRequestsGUI;
 import me.Lucas.KiipCraft.servertour.ServertourMenuClick;
 import me.Lucas.KiipCraft.storyline.listeners.*;
 import me.Lucas.KiipCraft.texturepack.abilities.HoneySuitAbility;
+import me.Lucas.KiipCraft.texturepack.abilities.ZwembrilAbility;
+import me.Lucas.KiipCraft.texturepack.elements.effects.FireSuitAbility;
+import me.Lucas.KiipCraft.texturepack.elements.effects.WaterSuitAbility;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -37,14 +40,6 @@ public class Main extends JavaPlugin {
 
         loadConfig();
 
-        // Update
-        SpigotPluginUpdater spu = new SpigotPluginUpdater(this, "http://51.68.47.8/pluginupdate/plugin.html");
-        spu.enableOut();
-
-        if (spu.needsUpdate()) {
-            spu.update();
-        }
-
         cmdMngr = new CommandManager(this);
         cmdMngr.setup();
 
@@ -58,6 +53,9 @@ public class Main extends JavaPlugin {
         new EventsToolClick(this);
 
         new HoneySuitAbility(this);
+        new FireSuitAbility(this);
+        new WaterSuitAbility(this);
+        new ZwembrilAbility(this);
 
         new BuildBattleSelections(this);
         new SpleefSelections(this);
@@ -116,6 +114,13 @@ public class Main extends JavaPlugin {
         cfgm.saveSyncChests();
         cfgm.saveEvents();
         saveConfig();
+
+        SpigotPluginUpdater spu = new SpigotPluginUpdater(this, "http://51.68.47.8/pluginupdate/plugin.html");
+        spu.enableOut();
+
+        if (spu.needsUpdate()) {
+            spu.update();
+        }
     }
 
     public void loadConfigManager() {
