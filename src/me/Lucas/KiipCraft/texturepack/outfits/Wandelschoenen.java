@@ -32,7 +32,9 @@ public class Wandelschoenen {
 
         assert meta != null;
         meta.setDisplayName(Utils.chat("&6Wandelschoenen"));
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(), "generic.armor", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.FEET));
         meta.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED, new AttributeModifier(UUID.randomUUID(), "generic.movementSpeed", .2, AttributeModifier.Operation.ADD_SCALAR, EquipmentSlot.FEET));
+        meta.setUnbreakable(true);
 
         meta.setLore(lore);
         i.setItemMeta(meta);

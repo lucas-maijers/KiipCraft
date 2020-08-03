@@ -51,7 +51,7 @@ public class OrbCommand extends SubCommand {
                     p.getInventory().addItem(OrbItems.waterOrb());
                     return;
                 case "air":
-                    p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &l&fAir &c&lOrb&7!"));
+                    p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &f&lAir &c&lOrb&7!"));
                     p.getInventory().addItem(OrbItems.airOrb());
                     return;
                 case "earth":

@@ -142,7 +142,7 @@ public class EventsCommand extends SubCommand {
             // Token
             if (args[1].equalsIgnoreCase("token")) {
                 if (args.length == 2) {
-                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt jezelf Event Tokens gegeven"));
+                    p.sendMessage(Utils.prefix + Utils.chat("Je hebt jezelf Event Tokens gegeven!"));
                     p.getInventory().addItem(Utils.eventToken());
                 } else if (args.length == 3) {
                     try {
@@ -191,7 +191,7 @@ public class EventsCommand extends SubCommand {
                 p.sendMessage(Utils.prefix + Utils.chat("Je hebt de &6&lSyncTool &7ontvangen!"));
                 p.getInventory().addItem(Utils.syncTool());
                 p.sendMessage(" ");
-                p.sendMessage(Utils.prefix + Utils.chat("Je hebt het kist synchronisatie proces gestart, om dit te annuleren doe &c/kiipcraft events stopcreation"));
+                p.sendMessage(Utils.prefix + Utils.chat("Je hebt het kist synchronisatie proces gestart, om dit te annuleren doe &c/kiipcraft events stopcreation!"));
                 p.sendMessage(" ");
                 p.sendMessage(Utils.prefix + Utils.chat("Selecteer de kist waarvan gesynchroniseerd moet worden met je &c&l&nLinker&7 &c&l&nMuisknop&7!"));
                 creatingPlayer.add(p.getName());
@@ -204,7 +204,7 @@ public class EventsCommand extends SubCommand {
                     p.sendMessage(Utils.prefix + Utils.chat("Je hebt het creatieproces al gestart, doe &c/kiipcraft events stopsync&7om dit te annuleren!"));
                     return;
                 }
-                p.sendMessage(Utils.prefix + Utils.chat("Je hebt het kist synchronisatie proces gestart, om dit te annuleren doe &c/kiipcraft events stopcreation"));
+                p.sendMessage(Utils.prefix + Utils.chat("Je hebt het kist synchronisatie proces gestart, om dit te annuleren doe &c/kiipcraft events stopcreation!"));
                 p.sendMessage(" ");
                 p.sendMessage(Utils.prefix + Utils.chat("Selecteer de kist waarvan gesynchroniseerd moet worden met je &c&l&nLinker&7 &c&l&nMuisknop&7!"));
                 creatingPlayer.add(p.getName());

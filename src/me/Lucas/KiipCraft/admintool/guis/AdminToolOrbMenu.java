@@ -61,7 +61,7 @@ public class AdminToolOrbMenu {
 
         Utils.createItemHead(inv, orb(), 1, 11, "&4&lFire &c&lOrb", "&7Geeft je de Fire Orb!");
         Utils.createItemHead(inv, orb(), 1, 12, "&1&lWater &c&lOrb", "&7Geeft je de Water Orb!");
-        Utils.createItemHead(inv, orb(), 1, 13, "&r&lAir &c&lOrb", "&7Geeft je de Air Orb!");
+        Utils.createItemHead(inv, orb(), 1, 13, "&f&lAir &c&lOrb", "&7Geeft je de Air Orb!");
         Utils.createItemHead(inv, orb(), 1, 14, "&6&lEarth &c&lOrb", "&7Geeft je de Earth Orb!");
         Utils.createItemHead(inv, orb(), 1, 15, "&b&lLight&e&lning &c&lOrb", "&7Geeft je de Lightning Orb!");
         Utils.createItemHead(inv, orb(), 1, 16, "&e&lLight &c&lOrb", "&7Geeft je de Light Orb!");
@@ -86,7 +86,7 @@ public class AdminToolOrbMenu {
             p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &1&lWater &c&lOrb&7!"));
         }
 
-        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&r&lAir &c&lOrb"))) {
+        if (clicked.getItemMeta().getDisplayName().equalsIgnoreCase(Utils.chat("&f&lAir &c&lOrb"))) {
             p.getInventory().addItem(OrbItems.airOrb());
             p.sendMessage(Utils.prefix + Utils.chat("Je ontvangt de &f&lAir &c&lOrb&7!"));
         }

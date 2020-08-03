@@ -8,7 +8,7 @@ package me.Lucas.KiipCraft.texturepack.commands;
 
 import me.Lucas.KiipCraft.Main;
 import me.Lucas.KiipCraft.managers.SubCommand;
-import me.Lucas.KiipCraft.texturepack.elements.suits.WaterSuit;
+import me.Lucas.KiipCraft.texturepack.elements.suits.DarknessSuit;
 import org.bukkit.entity.Player;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class OutfitCommand extends SubCommand {
     @Override
     public void onCommand(Player player, String[] args) {
         if (player.hasPermission("kiipcraft.staff")) {
-            player.getInventory().addItem(WaterSuit.waterHelmet(), WaterSuit.waterChestplate(), WaterSuit.waterLeggings(), WaterSuit.waterBoots());
+            player.getInventory().addItem(DarknessSuit.darknessHelmet(), DarknessSuit.darknessChestplate(), DarknessSuit.darknessLeggings(), DarknessSuit.darknessBoots());
         }
     }
 

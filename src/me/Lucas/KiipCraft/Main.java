@@ -24,7 +24,9 @@ import me.Lucas.KiipCraft.servertour.ServertourMenuClick;
 import me.Lucas.KiipCraft.storyline.listeners.*;
 import me.Lucas.KiipCraft.texturepack.abilities.HoneySuitAbility;
 import me.Lucas.KiipCraft.texturepack.abilities.ZwembrilAbility;
+import me.Lucas.KiipCraft.texturepack.elements.effects.DarknessSuitAbility;
 import me.Lucas.KiipCraft.texturepack.elements.effects.FireSuitAbility;
+import me.Lucas.KiipCraft.texturepack.elements.effects.LightningSuitAbility;
 import me.Lucas.KiipCraft.texturepack.elements.effects.WaterSuitAbility;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -52,8 +54,10 @@ public class Main extends JavaPlugin {
         new SyncChests(this);
         new EventsToolClick(this);
 
+        new DarknessSuitAbility(this);
         new HoneySuitAbility(this);
         new FireSuitAbility(this);
+        new LightningSuitAbility(this);
         new WaterSuitAbility(this);
         new ZwembrilAbility(this);
 
